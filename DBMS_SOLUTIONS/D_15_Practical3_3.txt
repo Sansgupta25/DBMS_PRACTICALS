@@ -1,0 +1,1011 @@
+TASK-03 : Use HR schema to solve the following queries
+
+Name:- Sanskriti Gupta
+Roll no:- 15 
+Batch :- D1
+_______________________________________________________________________________________________
+
+
+
+SQL> desc employees;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPLOYEE_ID                               NOT NULL NUMBER(6)
+ FIRST_NAME                                         VARCHAR2(20)
+ LAST_NAME                                 NOT NULL VARCHAR2(25)
+ EMAIL                                     NOT NULL VARCHAR2(25)
+ PHONE_NUMBER                                       VARCHAR2(20)
+ HIRE_DATE                                 NOT NULL DATE
+ JOB_ID                                    NOT NULL VARCHAR2(10)
+ SALARY                                             NUMBER(8,2)
+ COMMISSION_PCT                                     NUMBER(2,2)
+ MANAGER_ID                                         NUMBER(6)
+ DEPARTMENT_ID                                      NUMBER(4)
+
+/*1) Create a report that produces the following for each employee: earns monthly but
+wants . Label the column Dream Salaries.*/
+
+SQL> select first_name,' Earns '||salary||' but wants '|| salary*10 as Dream_sal from employees;
+
+FIRST_NAME           DREAM_SAL
+-------------------- --------------------------------------------------------------------------------------------------
+Steven                Earns 24000 but wants 240000
+Neena                 Earns 17000 but wants 170000
+Lex                   Earns 17000 but wants 170000
+Alexander             Earns 9000 but wants 90000
+Bruce                 Earns 6000 but wants 60000
+David                 Earns 4800 but wants 48000
+Valli                 Earns 4800 but wants 48000
+Diana                 Earns 4200 but wants 42000
+Nancy                 Earns 12008 but wants 120080
+Daniel                Earns 9000 but wants 90000
+John                  Earns 8200 but wants 82000
+Ismael                Earns 7700 but wants 77000
+Jose Manuel           Earns 7800 but wants 78000
+Luis                  Earns 6900 but wants 69000
+Den                   Earns 11000 but wants 110000
+Alexander             Earns 3100 but wants 31000
+Shelli                Earns 2900 but wants 29000
+Sigal                 Earns 2800 but wants 28000
+Guy                   Earns 2600 but wants 26000
+Karen                 Earns 2500 but wants 25000
+Matthew               Earns 8000 but wants 80000
+Adam                  Earns 8200 but wants 82000
+Payam                 Earns 7900 but wants 79000
+Shanta                Earns 6500 but wants 65000
+Kevin                 Earns 5800 but wants 58000
+Julia                 Earns 3200 but wants 32000
+Irene                 Earns 2700 but wants 27000
+James                 Earns 2400 but wants 24000
+Steven                Earns 2200 but wants 22000
+Laura                 Earns 3300 but wants 33000
+Mozhe                 Earns 2800 but wants 28000
+James                 Earns 2500 but wants 25000
+TJ                    Earns 2100 but wants 21000
+Jason                 Earns 3300 but wants 33000
+Michael               Earns 2900 but wants 29000
+Ki                    Earns 2400 but wants 24000
+Hazel                 Earns 2200 but wants 22000
+Renske                Earns 3600 but wants 36000
+Stephen               Earns 3200 but wants 32000
+John                  Earns 2700 but wants 27000
+Joshua                Earns 2500 but wants 25000
+Trenna                Earns 3500 but wants 35000
+Curtis                Earns 3100 but wants 31000
+Randall               Earns 2600 but wants 26000
+Peter                 Earns 2500 but wants 25000
+John                  Earns 14000 but wants 140000
+Karen                 Earns 13500 but wants 135000
+Alberto               Earns 12000 but wants 120000
+Gerald                Earns 11000 but wants 110000
+Eleni                 Earns 10500 but wants 105000
+Peter                 Earns 10000 but wants 100000
+David                 Earns 9500 but wants 95000
+Peter                 Earns 9000 but wants 90000
+Christopher           Earns 8000 but wants 80000
+Nanette               Earns 7500 but wants 75000
+Oliver                Earns 7000 but wants 70000
+Janette               Earns 10000 but wants 100000
+Patrick               Earns 9500 but wants 95000
+Allan                 Earns 9000 but wants 90000
+Lindsey               Earns 8000 but wants 80000
+Louise                Earns 7500 but wants 75000
+Sarath                Earns 7000 but wants 70000
+Clara                 Earns 10500 but wants 105000
+Danielle              Earns 9500 but wants 95000
+Mattea                Earns 7200 but wants 72000
+David                 Earns 6800 but wants 68000
+Sundar                Earns 6400 but wants 64000
+Amit                  Earns 6200 but wants 62000
+Lisa                  Earns 11500 but wants 115000
+Harrison              Earns 10000 but wants 100000
+Tayler                Earns 9600 but wants 96000
+William               Earns 7400 but wants 74000
+Elizabeth             Earns 7300 but wants 73000
+Sundita               Earns 6100 but wants 61000
+Ellen                 Earns 11000 but wants 110000
+Alyssa                Earns 8800 but wants 88000
+Jonathon              Earns 8600 but wants 86000
+Jack                  Earns 8400 but wants 84000
+Kimberely             Earns 7000 but wants 70000
+Charles               Earns 6200 but wants 62000
+Winston               Earns 3200 but wants 32000
+Jean                  Earns 3100 but wants 31000
+Martha                Earns 2500 but wants 25000
+Girard                Earns 2800 but wants 28000
+Nandita               Earns 4200 but wants 42000
+Alexis                Earns 4100 but wants 41000
+Julia                 Earns 3400 but wants 34000
+Anthony               Earns 3000 but wants 30000
+Kelly                 Earns 3800 but wants 38000
+Jennifer              Earns 3600 but wants 36000
+Timothy               Earns 2900 but wants 29000
+Randall               Earns 2500 but wants 25000
+Sarah                 Earns 4000 but wants 40000
+Britney               Earns 3900 but wants 39000
+Samuel                Earns 3200 but wants 32000
+Vance                 Earns 2800 but wants 28000
+Alana                 Earns 3100 but wants 31000
+
+FIRST_NAME           DREAM_SAL
+-------------------- --------------------------------------------------------------------------------------------------
+Kevin                 Earns 3000 but wants 30000
+Donald                Earns 2600 but wants 26000
+Douglas               Earns 2600 but wants 26000
+Jennifer              Earns 4400 but wants 44000
+Michael               Earns 13000 but wants 130000
+Pat                   Earns 6000 but wants 60000
+Susan                 Earns 6500 but wants 65000
+Hermann               Earns 10000 but wants 100000
+Shelley               Earns 12008 but wants 120080
+William               Earns 8300 but wants 83000
+
+107 rows selected.
+
+
+/*2) Display each employee’s last name, hire date, and salary review date, which is the
+first Monday after six months of service. Label the column REVIEW. Format the
+dates to appear in the format similar to “Monday, the Thirty-First of July, 2000.”*/
+
+SQL> select last_name, hire_date, salary,to_char((next_day(add_months(hire_date,6),'Monday')),'"Monday," DDspth "of" Month YYYY') as Review from employees;
+
+LAST_NAME                 HIRE_DATE     SALARY REVIEW
+------------------------- --------- ---------- ----------------------------------------
+King                      17-JUN-03      24000 Monday, TWENTY-SECOND of December  2003
+Kochhar                   21-SEP-05      17000 Monday, TWENTY-SEVENTH of March     2006
+De Haan                   13-JAN-01      17000 Monday, SIXTEENTH of July      2001
+Hunold                    03-JAN-06       9000 Monday, TENTH of July      2006
+Ernst                     21-MAY-07       6000 Monday, TWENTY-SIXTH of November  2007
+Austin                    25-JUN-05       4800 Monday, TWENTY-SIXTH of December  2005
+Pataballa                 05-FEB-06       4800 Monday, SEVENTH of August    2006
+Lorentz                   07-FEB-07       4200 Monday, THIRTEENTH of August    2007
+Greenberg                 17-AUG-02      12008 Monday, TWENTY-FOURTH of February  2003
+Faviet                    16-AUG-02       9000 Monday, SEVENTEENTH of February  2003
+Chen                      28-SEP-05       8200 Monday, THIRD of April     2006
+Sciarra                   30-SEP-05       7700 Monday, THIRD of April     2006
+Urman                     07-MAR-06       7800 Monday, ELEVENTH of September 2006
+Popp                      07-DEC-07       6900 Monday, NINTH of June      2008
+Raphaely                  07-DEC-02      11000 Monday, NINTH of June      2003
+Khoo                      18-MAY-03       3100 Monday, TWENTY-FOURTH of November  2003
+Baida                     24-DEC-05       2900 Monday, TWENTY-SIXTH of June      2006
+Tobias                    24-JUL-05       2800 Monday, THIRTIETH of January   2006
+Himuro                    15-NOV-06       2600 Monday, TWENTY-FIRST of May       2007
+Colmenares                10-AUG-07       2500 Monday, ELEVENTH of February  2008
+Weiss                     18-JUL-04       8000 Monday, TWENTY-FOURTH of January   2005
+Fripp                     10-APR-05       8200 Monday, SEVENTEENTH of October   2005
+Kaufling                  01-MAY-03       7900 Monday, THIRD of November  2003
+Vollman                   10-OCT-05       6500 Monday, SEVENTEENTH of April     2006
+Mourgos                   16-NOV-07       5800 Monday, NINETEENTH of May       2008
+Nayer                     16-JUL-05       3200 Monday, TWENTY-THIRD of January   2006
+Mikkilineni               28-SEP-06       2700 Monday, SECOND of April     2007
+Landry                    14-JAN-07       2400 Monday, SIXTEENTH of July      2007
+Markle                    08-MAR-08       2200 Monday, FIFTEENTH of September 2008
+Bissot                    20-AUG-05       3300 Monday, TWENTY-SEVENTH of February  2006
+Atkinson                  30-OCT-05       2800 Monday, FIRST of May       2006
+Marlow                    16-FEB-05       2500 Monday, TWENTY-SECOND of August    2005
+Olson                     10-APR-07       2100 Monday, FIFTEENTH of October   2007
+Mallin                    14-JUN-04       3300 Monday, TWENTIETH of December  2004
+Rogers                    26-AUG-06       2900 Monday, FIFTH of March     2007
+Gee                       12-DEC-07       2400 Monday, SIXTEENTH of June      2008
+Philtanker                06-FEB-08       2200 Monday, ELEVENTH of August    2008
+Ladwig                    14-JUL-03       3600 Monday, NINETEENTH of January   2004
+Stiles                    26-OCT-05       3200 Monday, FIRST of May       2006
+Seo                       12-FEB-06       2700 Monday, FOURTEENTH of August    2006
+Patel                     06-APR-06       2500 Monday, NINTH of October   2006
+Rajs                      17-OCT-03       3500 Monday, NINETEENTH of April     2004
+Davies                    29-JAN-05       3100 Monday, FIRST of August    2005
+Matos                     15-MAR-06       2600 Monday, EIGHTEENTH of September 2006
+Vargas                    09-JUL-06       2500 Monday, FIFTEENTH of January   2007
+Russell                   01-OCT-04      14000 Monday, FOURTH of April     2005
+Partners                  05-JAN-05      13500 Monday, ELEVENTH of July      2005
+Errazuriz                 10-MAR-05      12000 Monday, TWELFTH of September 2005
+Cambrault                 15-OCT-07      11000 Monday, TWENTY-FIRST of April     2008
+Zlotkey                   29-JAN-08      10500 Monday, FOURTH of August    2008
+Tucker                    30-JAN-05      10000 Monday, FIRST of August    2005
+Bernstein                 24-MAR-05       9500 Monday, TWENTY-SIXTH of September 2005
+Hall                      20-AUG-05       9000 Monday, TWENTY-SEVENTH of February  2006
+Olsen                     30-MAR-06       8000 Monday, SECOND of October   2006
+Cambrault                 09-DEC-06       7500 Monday, ELEVENTH of June      2007
+Tuvault                   23-NOV-07       7000 Monday, TWENTY-SIXTH of May       2008
+King                      30-JAN-04      10000 Monday, SECOND of August    2004
+Sully                     04-MAR-04       9500 Monday, SIXTH of September 2004
+McEwen                    01-AUG-04       9000 Monday, SEVENTH of February  2005
+Smith                     10-MAR-05       8000 Monday, TWELFTH of September 2005
+Doran                     15-DEC-05       7500 Monday, NINETEENTH of June      2006
+Sewall                    03-NOV-06       7000 Monday, SEVENTH of May       2007
+Vishney                   11-NOV-05      10500 Monday, FIFTEENTH of May       2006
+Greene                    19-MAR-07       9500 Monday, TWENTY-FOURTH of September 2007
+Marvins                   24-JAN-08       7200 Monday, TWENTY-EIGHTH of July      2008
+Lee                       23-FEB-08       6800 Monday, TWENTY-FIFTH of August    2008
+Ande                      24-MAR-08       6400 Monday, TWENTY-NINTH of September 2008
+Banda                     21-APR-08       6200 Monday, TWENTY-SEVENTH of October   2008
+Ozer                      11-MAR-05      11500 Monday, TWELFTH of September 2005
+Bloom                     23-MAR-06      10000 Monday, TWENTY-FIFTH of September 2006
+Fox                       24-JAN-06       9600 Monday, THIRTY-FIRST of July      2006
+Smith                     23-FEB-07       7400 Monday, TWENTY-SEVENTH of August    2007
+Bates                     24-MAR-07       7300 Monday, FIRST of October   2007
+Kumar                     21-APR-08       6100 Monday, TWENTY-SEVENTH of October   2008
+Abel                      11-MAY-04      11000 Monday, FIFTEENTH of November  2004
+Hutton                    19-MAR-05       8800 Monday, TWENTY-SIXTH of September 2005
+Taylor                    24-MAR-06       8600 Monday, TWENTY-FIFTH of September 2006
+Livingston                23-APR-06       8400 Monday, THIRTIETH of October   2006
+Grant                     24-MAY-07       7000 Monday, TWENTY-SIXTH of November  2007
+Johnson                   04-JAN-08       6200 Monday, SEVENTH of July      2008
+Taylor                    24-JAN-06       3200 Monday, THIRTY-FIRST of July      2006
+Fleaur                    23-FEB-06       3100 Monday, TWENTY-EIGHTH of August    2006
+Sullivan                  21-JUN-07       2500 Monday, TWENTY-FOURTH of December  2007
+Geoni                     03-FEB-08       2800 Monday, FOURTH of August    2008
+Sarchand                  27-JAN-04       4200 Monday, SECOND of August    2004
+Bull                      20-FEB-05       4100 Monday, TWENTY-SECOND of August    2005
+Dellinger                 24-JUN-06       3400 Monday, TWENTY-FIFTH of December  2006
+Cabrio                    07-FEB-07       3000 Monday, THIRTEENTH of August    2007
+Chung                     14-JUN-05       3800 Monday, NINETEENTH of December  2005
+Dilly                     13-AUG-05       3600 Monday, TWENTIETH of February  2006
+Gates                     11-JUL-06       2900 Monday, FIFTEENTH of January   2007
+Perkins                   19-DEC-07       2500 Monday, TWENTY-THIRD of June      2008
+Bell                      04-FEB-04       4000 Monday, NINTH of August    2004
+Everett                   03-MAR-05       3900 Monday, FIFTH of September 2005
+McCain                    01-JUL-06       3200 Monday, EIGHTH of January   2007
+Jones                     17-MAR-07       2800 Monday, TWENTY-FOURTH of September 2007
+Walsh                     24-APR-06       3100 Monday, THIRTIETH of October   2006
+
+LAST_NAME                 HIRE_DATE     SALARY REVIEW
+------------------------- --------- ---------- ----------------------------------------
+Feeney                    23-MAY-06       3000 Monday, TWENTY-SEVENTH of November  2006
+OConnell                  21-JUN-07       2600 Monday, TWENTY-FOURTH of December  2007
+Grant                     13-JAN-08       2600 Monday, FOURTEENTH of July      2008
+Whalen                    17-SEP-03       4400 Monday, TWENTY-SECOND of March     2004
+Hartstein                 17-FEB-04      13000 Monday, TWENTY-THIRD of August    2004
+Fay                       17-AUG-05       6000 Monday, TWENTIETH of February  2006
+Mavris                    07-JUN-02       6500 Monday, NINTH of December  2002
+Baer                      07-JUN-02      10000 Monday, NINTH of December  2002
+Higgins                   07-JUN-02      12008 Monday, NINTH of December  2002
+Gietz                     07-JUN-02       8300 Monday, NINTH of December  2002
+
+107 rows selected.
+
+/*3) Display the last name, hire date, and day of the week on which the employee
+started. Label the column DAY. Order the results by the day of the week, starting
+with Monday*/
+
+SQL> select last_name,hire_date,to_char(hire_date,'Day') as "DAY" from employees;
+
+LAST_NAME                 HIRE_DATE DAY                                         
+------------------------- --------- ---------                                   
+King                      17-JUN-03 Tuesday                                     
+Kochhar                   21-SEP-05 Wednesday                                   
+De Haan                   13-JAN-01 Saturday                                    
+Hunold                    03-JAN-06 Tuesday                                     
+Ernst                     21-MAY-07 Monday                                      
+Austin                    25-JUN-05 Saturday                                    
+Pataballa                 05-FEB-06 Sunday                                      
+Lorentz                   07-FEB-07 Wednesday                                   
+Greenberg                 17-AUG-02 Saturday                                    
+Faviet                    16-AUG-02 Friday                                      
+Chen                      28-SEP-05 Wednesday                                   
+
+LAST_NAME                 HIRE_DATE DAY                                         
+------------------------- --------- ---------                                   
+Sciarra                   30-SEP-05 Friday                                      
+Urman                     07-MAR-06 Tuesday                                     
+Popp                      07-DEC-07 Friday                                      
+Raphaely                  07-DEC-02 Saturday                                    
+Khoo                      18-MAY-03 Sunday                                      
+Baida                     24-DEC-05 Saturday                                    
+Tobias                    24-JUL-05 Sunday                                      
+Himuro                    15-NOV-06 Wednesday                                   
+Colmenares                10-AUG-07 Friday                                      
+Weiss                     18-JUL-04 Sunday                                      
+Fripp                     10-APR-05 Sunday                                      
+
+LAST_NAME                 HIRE_DATE DAY                                         
+------------------------- --------- ---------                                   
+Kaufling                  01-MAY-03 Thursday                                    
+Vollman                   10-OCT-05 Monday                                      
+Mourgos                   16-NOV-07 Friday                                      
+Nayer                     16-JUL-05 Saturday                                    
+Mikkilineni               28-SEP-06 Thursday                                    
+Landry                    14-JAN-07 Sunday                                      
+Markle                    08-MAR-08 Saturday                                    
+Bissot                    20-AUG-05 Saturday                                    
+Atkinson                  30-OCT-05 Sunday                                      
+Marlow                    16-FEB-05 Wednesday                                   
+Olson                     10-APR-07 Tuesday                                     
+
+LAST_NAME                 HIRE_DATE DAY                                         
+------------------------- --------- ---------                                   
+Mallin                    14-JUN-04 Monday                                      
+Rogers                    26-AUG-06 Saturday                                    
+Gee                       12-DEC-07 Wednesday                                   
+Philtanker                06-FEB-08 Wednesday                                   
+Ladwig                    14-JUL-03 Monday                                      
+Stiles                    26-OCT-05 Wednesday                                   
+Seo                       12-FEB-06 Sunday                                      
+Patel                     06-APR-06 Thursday                                    
+Rajs                      17-OCT-03 Friday                                      
+Davies                    29-JAN-05 Saturday                                    
+Matos                     15-MAR-06 Wednesday                                   
+
+LAST_NAME                 HIRE_DATE DAY                                         
+------------------------- --------- ---------                                   
+Vargas                    09-JUL-06 Sunday                                      
+Russell                   01-OCT-04 Friday                                      
+Partners                  05-JAN-05 Wednesday                                   
+Errazuriz                 10-MAR-05 Thursday                                    
+Cambrault                 15-OCT-07 Monday                                      
+Zlotkey                   29-JAN-08 Tuesday                                     
+Tucker                    30-JAN-05 Sunday                                      
+Bernstein                 24-MAR-05 Thursday                                    
+Hall                      20-AUG-05 Saturday                                    
+Olsen                     30-MAR-06 Thursday                                    
+Cambrault                 09-DEC-06 Saturday                                    
+
+LAST_NAME                 HIRE_DATE DAY                                         
+------------------------- --------- ---------                                   
+Tuvault                   23-NOV-07 Friday                                      
+King                      30-JAN-04 Friday                                      
+Sully                     04-MAR-04 Thursday                                    
+McEwen                    01-AUG-04 Sunday                                      
+Smith                     10-MAR-05 Thursday                                    
+Doran                     15-DEC-05 Thursday                                    
+Sewall                    03-NOV-06 Friday                                      
+Vishney                   11-NOV-05 Friday                                      
+Greene                    19-MAR-07 Monday                                      
+Marvins                   24-JAN-08 Thursday                                    
+Lee                       23-FEB-08 Saturday                                    
+
+LAST_NAME                 HIRE_DATE DAY                                         
+------------------------- --------- ---------                                   
+Ande                      24-MAR-08 Monday                                      
+Banda                     21-APR-08 Monday                                      
+Ozer                      11-MAR-05 Friday                                      
+Bloom                     23-MAR-06 Thursday                                    
+Fox                       24-JAN-06 Tuesday                                     
+Smith                     23-FEB-07 Friday                                      
+Bates                     24-MAR-07 Saturday                                    
+Kumar                     21-APR-08 Monday                                      
+Abel                      11-MAY-04 Tuesday                                     
+Hutton                    19-MAR-05 Saturday                                    
+Taylor                    24-MAR-06 Friday                                      
+
+LAST_NAME                 HIRE_DATE DAY                                         
+------------------------- --------- ---------                                   
+Livingston                23-APR-06 Sunday                                      
+Grant                     24-MAY-07 Thursday                                    
+Johnson                   04-JAN-08 Friday                                      
+Taylor                    24-JAN-06 Tuesday                                     
+Fleaur                    23-FEB-06 Thursday                                    
+Sullivan                  21-JUN-07 Thursday                                    
+Geoni                     03-FEB-08 Sunday                                      
+Sarchand                  27-JAN-04 Tuesday                                     
+Bull                      20-FEB-05 Sunday                                      
+Dellinger                 24-JUN-06 Saturday                                    
+Cabrio                    07-FEB-07 Wednesday                                   
+
+LAST_NAME                 HIRE_DATE DAY                                         
+------------------------- --------- ---------                                   
+Chung                     14-JUN-05 Tuesday                                     
+Dilly                     13-AUG-05 Saturday                                    
+Gates                     11-JUL-06 Tuesday                                     
+Perkins                   19-DEC-07 Wednesday                                   
+Bell                      04-FEB-04 Wednesday                                   
+Everett                   03-MAR-05 Thursday                                    
+McCain                    01-JUL-06 Saturday                                    
+Jones                     17-MAR-07 Saturday                                    
+Walsh                     24-APR-06 Monday                                      
+Feeney                    23-MAY-06 Tuesday                                     
+OConnell                  21-JUN-07 Thursday                                    
+
+LAST_NAME                 HIRE_DATE DAY                                         
+------------------------- --------- ---------                                   
+Grant                     13-JAN-08 Sunday                                      
+Whalen                    17-SEP-03 Wednesday                                   
+Hartstein                 17-FEB-04 Tuesday                                     
+Fay                       17-AUG-05 Wednesday                                   
+Mavris                    07-JUN-02 Friday                                      
+Baer                      07-JUN-02 Friday                                      
+Higgins                   07-JUN-02 Friday                                      
+Gietz                     07-JUN-02 Friday                                      
+
+107 rows selected.
+
+/*4) Create a query that displays the employees’ last names and commission amounts. If
+an employee does not earn commission, show “No Commission.” Label the column
+COMM.*/
+
+SQL> select last_name, hire_date, to_char(hire_date, 'fmDay') as "Day" from employees
+  2  order by decode (Day, 'Monday' ,1,
+  3  'Tuesday', 2,
+  4  'Wednesday', 3,
+  5  'Thursday' ,4,
+  6  'Friday', 5,
+  7  'Saturday',6,
+  8  'Sunday', 7);
+
+LAST_NAME                 HIRE_DATE DAY                                                                                 
+------------------------- --------- ---------                                                                           
+Ladwig                    14-JUL-03 Monday                                                                              
+Cambrault                 15-OCT-07 Monday                                                                              
+Mallin                    14-JUN-04 Monday                                                                              
+Ernst                     21-MAY-07 Monday                                                                              
+Greene                    19-MAR-07 Monday                                                                              
+Banda                     21-APR-08 Monday                                                                              
+Walsh                     24-APR-06 Monday                                                                              
+Ande                      24-MAR-08 Monday                                                                              
+Vollman                   10-OCT-05 Monday                                                                              
+Kumar                     21-APR-08 Monday                                                                              
+Olson                     10-APR-07 Tuesday                                                                             
+
+LAST_NAME                 HIRE_DATE DAY                                                                                 
+------------------------- --------- ---------                                                                           
+Urman                     07-MAR-06 Tuesday                                                                             
+Hunold                    03-JAN-06 Tuesday                                                                             
+King                      17-JUN-03 Tuesday                                                                             
+Hartstein                 17-FEB-04 Tuesday                                                                             
+Feeney                    23-MAY-06 Tuesday                                                                             
+Gates                     11-JUL-06 Tuesday                                                                             
+Chung                     14-JUN-05 Tuesday                                                                             
+Sarchand                  27-JAN-04 Tuesday                                                                             
+Taylor                    24-JAN-06 Tuesday                                                                             
+Abel                      11-MAY-04 Tuesday                                                                             
+Fox                       24-JAN-06 Tuesday                                                                             
+
+LAST_NAME                 HIRE_DATE DAY                                                                                 
+------------------------- --------- ---------                                                                           
+Zlotkey                   29-JAN-08 Tuesday                                                                             
+Whalen                    17-SEP-03 Wednesday                                                                           
+Philtanker                06-FEB-08 Wednesday                                                                           
+Perkins                   19-DEC-07 Wednesday                                                                           
+Bell                      04-FEB-04 Wednesday                                                                           
+Kochhar                   21-SEP-05 Wednesday                                                                           
+Cabrio                    07-FEB-07 Wednesday                                                                           
+Chen                      28-SEP-05 Wednesday                                                                           
+Himuro                    15-NOV-06 Wednesday                                                                           
+Marlow                    16-FEB-05 Wednesday                                                                           
+Fay                       17-AUG-05 Wednesday                                                                           
+
+LAST_NAME                 HIRE_DATE DAY                                                                                 
+------------------------- --------- ---------                                                                           
+Gee                       12-DEC-07 Wednesday                                                                           
+Partners                  05-JAN-05 Wednesday                                                                           
+Matos                     15-MAR-06 Wednesday                                                                           
+Stiles                    26-OCT-05 Wednesday                                                                           
+Lorentz                   07-FEB-07 Wednesday                                                                           
+Kaufling                  01-MAY-03 Thursday                                                                            
+Mikkilineni               28-SEP-06 Thursday                                                                            
+Patel                     06-APR-06 Thursday                                                                            
+Errazuriz                 10-MAR-05 Thursday                                                                            
+Bernstein                 24-MAR-05 Thursday                                                                            
+Olsen                     30-MAR-06 Thursday                                                                            
+
+LAST_NAME                 HIRE_DATE DAY                                                                                 
+------------------------- --------- ---------                                                                           
+Sully                     04-MAR-04 Thursday                                                                            
+Smith                     10-MAR-05 Thursday                                                                            
+Doran                     15-DEC-05 Thursday                                                                            
+Marvins                   24-JAN-08 Thursday                                                                            
+Bloom                     23-MAR-06 Thursday                                                                            
+Grant                     24-MAY-07 Thursday                                                                            
+Fleaur                    23-FEB-06 Thursday                                                                            
+Sullivan                  21-JUN-07 Thursday                                                                            
+Everett                   03-MAR-05 Thursday                                                                            
+OConnell                  21-JUN-07 Thursday                                                                            
+Tuvault                   23-NOV-07 Friday                                                                              
+
+LAST_NAME                 HIRE_DATE DAY                                                                                 
+------------------------- --------- ---------                                                                           
+Popp                      07-DEC-07 Friday                                                                              
+Gietz                     07-JUN-02 Friday                                                                              
+King                      30-JAN-04 Friday                                                                              
+Russell                   01-OCT-04 Friday                                                                              
+Sewall                    03-NOV-06 Friday                                                                              
+Baer                      07-JUN-02 Friday                                                                              
+Rajs                      17-OCT-03 Friday                                                                              
+Vishney                   11-NOV-05 Friday                                                                              
+Higgins                   07-JUN-02 Friday                                                                              
+Ozer                      11-MAR-05 Friday                                                                              
+Colmenares                10-AUG-07 Friday                                                                              
+
+LAST_NAME                 HIRE_DATE DAY                                                                                 
+------------------------- --------- ---------                                                                           
+Johnson                   04-JAN-08 Friday                                                                              
+Taylor                    24-MAR-06 Friday                                                                              
+Mourgos                   16-NOV-07 Friday                                                                              
+Faviet                    16-AUG-02 Friday                                                                              
+Smith                     23-FEB-07 Friday                                                                              
+Sciarra                   30-SEP-05 Friday                                                                              
+Mavris                    07-JUN-02 Friday                                                                              
+Cambrault                 09-DEC-06 Saturday                                                                            
+Hall                      20-AUG-05 Saturday                                                                            
+Davies                    29-JAN-05 Saturday                                                                            
+Rogers                    26-AUG-06 Saturday                                                                            
+
+LAST_NAME                 HIRE_DATE DAY                                                                                 
+------------------------- --------- ---------                                                                           
+Bissot                    20-AUG-05 Saturday                                                                            
+Markle                    08-MAR-08 Saturday                                                                            
+Nayer                     16-JUL-05 Saturday                                                                            
+Baida                     24-DEC-05 Saturday                                                                            
+Raphaely                  07-DEC-02 Saturday                                                                            
+Greenberg                 17-AUG-02 Saturday                                                                            
+De Haan                   13-JAN-01 Saturday                                                                            
+Austin                    25-JUN-05 Saturday                                                                            
+Jones                     17-MAR-07 Saturday                                                                            
+McCain                    01-JUL-06 Saturday                                                                            
+Dilly                     13-AUG-05 Saturday                                                                            
+
+LAST_NAME                 HIRE_DATE DAY                                                                                 
+------------------------- --------- ---------                                                                           
+Dellinger                 24-JUN-06 Saturday                                                                            
+Hutton                    19-MAR-05 Saturday                                                                            
+Bates                     24-MAR-07 Saturday                                                                            
+Lee                       23-FEB-08 Saturday                                                                            
+Pataballa                 05-FEB-06 Sunday                                                                              
+Tucker                    30-JAN-05 Sunday                                                                              
+Livingston                23-APR-06 Sunday                                                                              
+Weiss                     18-JUL-04 Sunday                                                                              
+Geoni                     03-FEB-08 Sunday                                                                              
+Bull                      20-FEB-05 Sunday                                                                              
+Grant                     13-JAN-08 Sunday                                                                              
+
+LAST_NAME                 HIRE_DATE DAY                                                                                 
+------------------------- --------- ---------                                                                           
+Khoo                      18-MAY-03 Sunday                                                                              
+Landry                    14-JAN-07 Sunday                                                                              
+Atkinson                  30-OCT-05 Sunday                                                                              
+Tobias                    24-JUL-05 Sunday                                                                              
+Seo                       12-FEB-06 Sunday                                                                              
+Vargas                    09-JUL-06 Sunday                                                                              
+McEwen                    01-AUG-04 Sunday                                                                              
+Fripp                     10-APR-05 Sunday                                                                              
+
+107 rows selected. 
+
+/*5) Using the DECODE function, write a query that displays the grade of all employees
+based on the value of the column JOB_ID, using the following data:
+Job Grade
+AD_PRES A
+ST_MAN B
+IT_PROG C
+SA_REP D
+ST_CLERK E
+None of the above 0*/
+
+SQL> Select last_name, nvl(to_char(commission_pct),'No Commission') as Comm from employees;
+
+LAST_NAME                 COMM                                                                                          
+------------------------- ----------------------------------------                                                      
+King                      No Commission                                                                                 
+Kochhar                   No Commission                                                                                 
+De Haan                   No Commission                                                                                 
+Hunold                    No Commission                                                                                 
+Ernst                     No Commission                                                                                 
+Austin                    No Commission                                                                                 
+Pataballa                 No Commission                                                                                 
+Lorentz                   No Commission                                                                                 
+Greenberg                 No Commission                                                                                 
+Faviet                    No Commission                                                                                 
+Chen                      No Commission                                                                                 
+
+LAST_NAME                 COMM                                                                                          
+------------------------- ----------------------------------------                                                      
+Sciarra                   No Commission                                                                                 
+Urman                     No Commission                                                                                 
+Popp                      No Commission                                                                                 
+Raphaely                  No Commission                                                                                 
+Khoo                      No Commission                                                                                 
+Baida                     No Commission                                                                                 
+Tobias                    No Commission                                                                                 
+Himuro                    No Commission                                                                                 
+Colmenares                No Commission                                                                                 
+Weiss                     No Commission                                                                                 
+Fripp                     No Commission                                                                                 
+
+LAST_NAME                 COMM                                                                                          
+------------------------- ----------------------------------------                                                      
+Kaufling                  No Commission                                                                                 
+Vollman                   No Commission                                                                                 
+Mourgos                   No Commission                                                                                 
+Nayer                     No Commission                                                                                 
+Mikkilineni               No Commission                                                                                 
+Landry                    No Commission                                                                                 
+Markle                    No Commission                                                                                 
+Bissot                    No Commission                                                                                 
+Atkinson                  No Commission                                                                                 
+Marlow                    No Commission                                                                                 
+Olson                     No Commission                                                                                 
+
+LAST_NAME                 COMM                                                                                          
+------------------------- ----------------------------------------                                                      
+Mallin                    No Commission                                                                                 
+Rogers                    No Commission                                                                                 
+Gee                       No Commission                                                                                 
+Philtanker                No Commission                                                                                 
+Ladwig                    No Commission                                                                                 
+Stiles                    No Commission                                                                                 
+Seo                       No Commission                                                                                 
+Patel                     No Commission                                                                                 
+Rajs                      No Commission                                                                                 
+Davies                    No Commission                                                                                 
+Matos                     No Commission                                                                                 
+
+LAST_NAME                 COMM                                                                                          
+------------------------- ----------------------------------------                                                      
+Vargas                    No Commission                                                                                 
+Russell                   .4                                                                                            
+Partners                  .3                                                                                            
+Errazuriz                 .3                                                                                            
+Cambrault                 .3                                                                                            
+Zlotkey                   .2                                                                                            
+Tucker                    .3                                                                                            
+Bernstein                 .25                                                                                           
+Hall                      .25                                                                                           
+Olsen                     .2                                                                                            
+Cambrault                 .2                                                                                            
+
+LAST_NAME                 COMM                                                                                          
+------------------------- ----------------------------------------                                                      
+Tuvault                   .15                                                                                           
+King                      .35                                                                                           
+Sully                     .35                                                                                           
+McEwen                    .35                                                                                           
+Smith                     .3                                                                                            
+Doran                     .3                                                                                            
+Sewall                    .25                                                                                           
+Vishney                   .25                                                                                           
+Greene                    .15                                                                                           
+Marvins                   .1                                                                                            
+Lee                       .1                                                                                            
+
+LAST_NAME                 COMM                                                                                          
+------------------------- ----------------------------------------                                                      
+Ande                      .1                                                                                            
+Banda                     .1                                                                                            
+Ozer                      .25                                                                                           
+Bloom                     .2                                                                                            
+Fox                       .2                                                                                            
+Smith                     .15                                                                                           
+Bates                     .15                                                                                           
+Kumar                     .1                                                                                            
+Abel                      .3                                                                                            
+Hutton                    .25                                                                                           
+Taylor                    .2                                                                                            
+
+LAST_NAME                 COMM                                                                                          
+------------------------- ----------------------------------------                                                      
+Livingston                .2                                                                                            
+Grant                     .15                                                                                           
+Johnson                   .1                                                                                            
+Taylor                    No Commission                                                                                 
+Fleaur                    No Commission                                                                                 
+Sullivan                  No Commission                                                                                 
+Geoni                     No Commission                                                                                 
+Sarchand                  No Commission                                                                                 
+Bull                      No Commission                                                                                 
+Dellinger                 No Commission                                                                                 
+Cabrio                    No Commission                                                                                 
+
+LAST_NAME                 COMM                                                                                          
+------------------------- ----------------------------------------                                                      
+Chung                     No Commission                                                                                 
+Dilly                     No Commission                                                                                 
+Gates                     No Commission                                                                                 
+Perkins                   No Commission                                                                                 
+Bell                      No Commission                                                                                 
+Everett                   No Commission                                                                                 
+McCain                    No Commission                                                                                 
+Jones                     No Commission                                                                                 
+Walsh                     No Commission                                                                                 
+Feeney                    No Commission                                                                                 
+OConnell                  No Commission                                                                                 
+
+LAST_NAME                 COMM                                                                                          
+------------------------- ----------------------------------------                                                      
+Grant                     No Commission                                                                                 
+Whalen                    No Commission                                                                                 
+Hartstein                 No Commission                                                                                 
+Fay                       No Commission                                                                                 
+Mavris                    No Commission                                                                                 
+Baer                      No Commission                                                                                 
+Higgins                   No Commission                                                                                 
+Gietz                     No Commission                                                                                 
+
+107 rows selected.
+
+SQL> Select first_name, last_name, job_id, decode(job_id, 'AD_PRES', 'A',
+  2  'ST_MAN', 'B',
+  3  'IT_PROG', 'C',
+  4  'SA_REP', 'D',
+  5  'ST_CLERK', 'E',
+  6  0) as Grade from employees;
+
+FIRST_NAME           LAST_NAME                 JOB_ID     G                                                             
+-------------------- ------------------------- ---------- -                                                             
+William              Gietz                     AC_ACCOUNT 0                                                             
+Shelley              Higgins                   AC_MGR     0                                                             
+Jennifer             Whalen                    AD_ASST    0                                                             
+Steven               King                      AD_PRES    A                                                             
+Neena                Kochhar                   AD_VP      0                                                             
+Lex                  De Haan                   AD_VP      0                                                             
+Daniel               Faviet                    FI_ACCOUNT 0                                                             
+John                 Chen                      FI_ACCOUNT 0                                                             
+Ismael               Sciarra                   FI_ACCOUNT 0                                                             
+Jose Manuel          Urman                     FI_ACCOUNT 0                                                             
+Luis                 Popp                      FI_ACCOUNT 0                                                             
+
+FIRST_NAME           LAST_NAME                 JOB_ID     G                                                             
+-------------------- ------------------------- ---------- -                                                             
+Nancy                Greenberg                 FI_MGR     0                                                             
+Susan                Mavris                    HR_REP     0                                                             
+Alexander            Hunold                    IT_PROG    C                                                             
+Bruce                Ernst                     IT_PROG    C                                                             
+David                Austin                    IT_PROG    C                                                             
+Valli                Pataballa                 IT_PROG    C                                                             
+Diana                Lorentz                   IT_PROG    C                                                             
+Michael              Hartstein                 MK_MAN     0                                                             
+Pat                  Fay                       MK_REP     0                                                             
+Hermann              Baer                      PR_REP     0                                                             
+Alexander            Khoo                      PU_CLERK   0                                                             
+
+FIRST_NAME           LAST_NAME                 JOB_ID     G                                                             
+-------------------- ------------------------- ---------- -                                                             
+Shelli               Baida                     PU_CLERK   0                                                             
+Sigal                Tobias                    PU_CLERK   0                                                             
+Guy                  Himuro                    PU_CLERK   0                                                             
+Karen                Colmenares                PU_CLERK   0                                                             
+Den                  Raphaely                  PU_MAN     0                                                             
+John                 Russell                   SA_MAN     0                                                             
+Karen                Partners                  SA_MAN     0                                                             
+Alberto              Errazuriz                 SA_MAN     0                                                             
+Gerald               Cambrault                 SA_MAN     0                                                             
+Eleni                Zlotkey                   SA_MAN     0                                                             
+Peter                Tucker                    SA_REP     D                                                             
+
+FIRST_NAME           LAST_NAME                 JOB_ID     G                                                             
+-------------------- ------------------------- ---------- -                                                             
+David                Bernstein                 SA_REP     D                                                             
+Peter                Hall                      SA_REP     D                                                             
+Christopher          Olsen                     SA_REP     D                                                             
+Nanette              Cambrault                 SA_REP     D                                                             
+Oliver               Tuvault                   SA_REP     D                                                             
+Janette              King                      SA_REP     D                                                             
+Patrick              Sully                     SA_REP     D                                                             
+Allan                McEwen                    SA_REP     D                                                             
+Lindsey              Smith                     SA_REP     D                                                             
+Louise               Doran                     SA_REP     D                                                             
+Sarath               Sewall                    SA_REP     D                                                             
+
+FIRST_NAME           LAST_NAME                 JOB_ID     G                                                             
+-------------------- ------------------------- ---------- -                                                             
+Clara                Vishney                   SA_REP     D                                                             
+Danielle             Greene                    SA_REP     D                                                             
+Mattea               Marvins                   SA_REP     D                                                             
+David                Lee                       SA_REP     D                                                             
+Sundar               Ande                      SA_REP     D                                                             
+Amit                 Banda                     SA_REP     D                                                             
+Lisa                 Ozer                      SA_REP     D                                                             
+Harrison             Bloom                     SA_REP     D                                                             
+Tayler               Fox                       SA_REP     D                                                             
+William              Smith                     SA_REP     D                                                             
+Elizabeth            Bates                     SA_REP     D                                                             
+
+FIRST_NAME           LAST_NAME                 JOB_ID     G                                                             
+-------------------- ------------------------- ---------- -                                                             
+Sundita              Kumar                     SA_REP     D                                                             
+Ellen                Abel                      SA_REP     D                                                             
+Alyssa               Hutton                    SA_REP     D                                                             
+Jonathon             Taylor                    SA_REP     D                                                             
+Jack                 Livingston                SA_REP     D                                                             
+Kimberely            Grant                     SA_REP     D                                                             
+Charles              Johnson                   SA_REP     D                                                             
+Winston              Taylor                    SH_CLERK   0                                                             
+Jean                 Fleaur                    SH_CLERK   0                                                             
+Martha               Sullivan                  SH_CLERK   0                                                             
+Girard               Geoni                     SH_CLERK   0                                                             
+
+FIRST_NAME           LAST_NAME                 JOB_ID     G                                                             
+-------------------- ------------------------- ---------- -                                                             
+Nandita              Sarchand                  SH_CLERK   0                                                             
+Alexis               Bull                      SH_CLERK   0                                                             
+Julia                Dellinger                 SH_CLERK   0                                                             
+Anthony              Cabrio                    SH_CLERK   0                                                             
+Kelly                Chung                     SH_CLERK   0                                                             
+Jennifer             Dilly                     SH_CLERK   0                                                             
+Timothy              Gates                     SH_CLERK   0                                                             
+Randall              Perkins                   SH_CLERK   0                                                             
+Sarah                Bell                      SH_CLERK   0                                                             
+Britney              Everett                   SH_CLERK   0                                                             
+Samuel               McCain                    SH_CLERK   0                                                             
+
+FIRST_NAME           LAST_NAME                 JOB_ID     G                                                             
+-------------------- ------------------------- ---------- -                                                             
+Vance                Jones                     SH_CLERK   0                                                             
+Alana                Walsh                     SH_CLERK   0                                                             
+Kevin                Feeney                    SH_CLERK   0                                                             
+Donald               OConnell                  SH_CLERK   0                                                             
+Douglas              Grant                     SH_CLERK   0                                                             
+Julia                Nayer                     ST_CLERK   E                                                             
+Irene                Mikkilineni               ST_CLERK   E                                                             
+James                Landry                    ST_CLERK   E                                                             
+Steven               Markle                    ST_CLERK   E                                                             
+Laura                Bissot                    ST_CLERK   E                                                             
+Mozhe                Atkinson                  ST_CLERK   E                                                             
+
+FIRST_NAME           LAST_NAME                 JOB_ID     G                                                             
+-------------------- ------------------------- ---------- -                                                             
+James                Marlow                    ST_CLERK   E                                                             
+TJ                   Olson                     ST_CLERK   E                                                             
+Jason                Mallin                    ST_CLERK   E                                                             
+Michael              Rogers                    ST_CLERK   E                                                             
+Ki                   Gee                       ST_CLERK   E                                                             
+Hazel                Philtanker                ST_CLERK   E                                                             
+Renske               Ladwig                    ST_CLERK   E                                                             
+Stephen              Stiles                    ST_CLERK   E                                                             
+John                 Seo                       ST_CLERK   E                                                             
+Joshua               Patel                     ST_CLERK   E                                                             
+Trenna               Rajs                      ST_CLERK   E                                                             
+
+FIRST_NAME           LAST_NAME                 JOB_ID     G                                                             
+-------------------- ------------------------- ---------- -                                                             
+Curtis               Davies                    ST_CLERK   E                                                             
+Randall              Matos                     ST_CLERK   E                                                             
+Peter                Vargas                    ST_CLERK   E                                                             
+Matthew              Weiss                     ST_MAN     B                                                             
+Adam                 Fripp                     ST_MAN     B                                                             
+Payam                Kaufling                  ST_MAN     B                                                             
+Shanta               Vollman                   ST_MAN     B                                                             
+Kevin                Mourgos                   ST_MAN     B                                                             
+
+107 rows selected.  
+
+
+/*6) Rewrite the above query using the CASE statement.*/
+
+SQL> Select first_name, last_name, job_id, (case when job_id = 'AD_PRES' then 'A'
+  2  when job_id = 'ST_MAN' then 'B'
+  3  when job_id = 'IT_PROG' then 'C'
+  4  when job_id = 'SA_REP' then 'D'
+  5  when job_id = 'ST_CLERK' then 'E'
+  6  else '0'
+  7  end) as Grade from employees;
+
+FIRST_NAME           LAST_NAME                 JOB_ID     G                                                             
+-------------------- ------------------------- ---------- -                                                             
+William              Gietz                     AC_ACCOUNT 0                                                             
+Shelley              Higgins                   AC_MGR     0                                                             
+Jennifer             Whalen                    AD_ASST    0                                                             
+Steven               King                      AD_PRES    A                                                             
+Neena                Kochhar                   AD_VP      0                                                             
+Lex                  De Haan                   AD_VP      0                                                             
+Daniel               Faviet                    FI_ACCOUNT 0                                                             
+John                 Chen                      FI_ACCOUNT 0                                                             
+Ismael               Sciarra                   FI_ACCOUNT 0                                                             
+Jose Manuel          Urman                     FI_ACCOUNT 0                                                             
+Luis                 Popp                      FI_ACCOUNT 0                                                             
+
+FIRST_NAME           LAST_NAME                 JOB_ID     G                                                             
+-------------------- ------------------------- ---------- -                                                             
+Nancy                Greenberg                 FI_MGR     0                                                             
+Susan                Mavris                    HR_REP     0                                                             
+Alexander            Hunold                    IT_PROG    C                                                             
+Bruce                Ernst                     IT_PROG    C                                                             
+David                Austin                    IT_PROG    C                                                             
+Valli                Pataballa                 IT_PROG    C                                                             
+Diana                Lorentz                   IT_PROG    C                                                             
+Michael              Hartstein                 MK_MAN     0                                                             
+Pat                  Fay                       MK_REP     0                                                             
+Hermann              Baer                      PR_REP     0                                                             
+Alexander            Khoo                      PU_CLERK   0                                                             
+
+FIRST_NAME           LAST_NAME                 JOB_ID     G                                                             
+-------------------- ------------------------- ---------- -                                                             
+Shelli               Baida                     PU_CLERK   0                                                             
+Sigal                Tobias                    PU_CLERK   0                                                             
+Guy                  Himuro                    PU_CLERK   0                                                             
+Karen                Colmenares                PU_CLERK   0                                                             
+Den                  Raphaely                  PU_MAN     0                                                             
+John                 Russell                   SA_MAN     0                                                             
+Karen                Partners                  SA_MAN     0                                                             
+Alberto              Errazuriz                 SA_MAN     0                                                             
+Gerald               Cambrault                 SA_MAN     0                                                             
+Eleni                Zlotkey                   SA_MAN     0                                                             
+Peter                Tucker                    SA_REP     D                                                             
+
+FIRST_NAME           LAST_NAME                 JOB_ID     G                                                             
+-------------------- ------------------------- ---------- -                                                             
+David                Bernstein                 SA_REP     D                                                             
+Peter                Hall                      SA_REP     D                                                             
+Christopher          Olsen                     SA_REP     D                                                             
+Nanette              Cambrault                 SA_REP     D                                                             
+Oliver               Tuvault                   SA_REP     D                                                             
+Janette              King                      SA_REP     D                                                             
+Patrick              Sully                     SA_REP     D                                                             
+Allan                McEwen                    SA_REP     D                                                             
+Lindsey              Smith                     SA_REP     D                                                             
+Louise               Doran                     SA_REP     D                                                             
+Sarath               Sewall                    SA_REP     D                                                             
+
+FIRST_NAME           LAST_NAME                 JOB_ID     G                                                             
+-------------------- ------------------------- ---------- -                                                             
+Clara                Vishney                   SA_REP     D                                                             
+Danielle             Greene                    SA_REP     D                                                             
+Mattea               Marvins                   SA_REP     D                                                             
+David                Lee                       SA_REP     D                                                             
+Sundar               Ande                      SA_REP     D                                                             
+Amit                 Banda                     SA_REP     D                                                             
+Lisa                 Ozer                      SA_REP     D                                                             
+Harrison             Bloom                     SA_REP     D                                                             
+Tayler               Fox                       SA_REP     D                                                             
+William              Smith                     SA_REP     D                                                             
+Elizabeth            Bates                     SA_REP     D                                                             
+
+FIRST_NAME           LAST_NAME                 JOB_ID     G                                                             
+-------------------- ------------------------- ---------- -                                                             
+Sundita              Kumar                     SA_REP     D                                                             
+Ellen                Abel                      SA_REP     D                                                             
+Alyssa               Hutton                    SA_REP     D                                                             
+Jonathon             Taylor                    SA_REP     D                                                             
+Jack                 Livingston                SA_REP     D                                                             
+Kimberely            Grant                     SA_REP     D                                                             
+Charles              Johnson                   SA_REP     D                                                             
+Winston              Taylor                    SH_CLERK   0                                                             
+Jean                 Fleaur                    SH_CLERK   0                                                             
+Martha               Sullivan                  SH_CLERK   0                                                             
+Girard               Geoni                     SH_CLERK   0                                                             
+
+FIRST_NAME           LAST_NAME                 JOB_ID     G                                                             
+-------------------- ------------------------- ---------- -                                                             
+Nandita              Sarchand                  SH_CLERK   0                                                             
+Alexis               Bull                      SH_CLERK   0                                                             
+Julia                Dellinger                 SH_CLERK   0                                                             
+Anthony              Cabrio                    SH_CLERK   0                                                             
+Kelly                Chung                     SH_CLERK   0                                                             
+Jennifer             Dilly                     SH_CLERK   0                                                             
+Timothy              Gates                     SH_CLERK   0                                                             
+Randall              Perkins                   SH_CLERK   0                                                             
+Sarah                Bell                      SH_CLERK   0                                                             
+Britney              Everett                   SH_CLERK   0                                                             
+Samuel               McCain                    SH_CLERK   0                                                             
+
+FIRST_NAME           LAST_NAME                 JOB_ID     G                                                             
+-------------------- ------------------------- ---------- -                                                             
+Vance                Jones                     SH_CLERK   0                                                             
+Alana                Walsh                     SH_CLERK   0                                                             
+Kevin                Feeney                    SH_CLERK   0                                                             
+Donald               OConnell                  SH_CLERK   0                                                             
+Douglas              Grant                     SH_CLERK   0                                                             
+Julia                Nayer                     ST_CLERK   E                                                             
+Irene                Mikkilineni               ST_CLERK   E                                                             
+James                Landry                    ST_CLERK   E                                                             
+Steven               Markle                    ST_CLERK   E                                                             
+Laura                Bissot                    ST_CLERK   E                                                             
+Mozhe                Atkinson                  ST_CLERK   E                                                             
+
+FIRST_NAME           LAST_NAME                 JOB_ID     G                                                             
+-------------------- ------------------------- ---------- -                                                             
+James                Marlow                    ST_CLERK   E                                                             
+TJ                   Olson                     ST_CLERK   E                                                             
+Jason                Mallin                    ST_CLERK   E                                                             
+Michael              Rogers                    ST_CLERK   E                                                             
+Ki                   Gee                       ST_CLERK   E                                                             
+Hazel                Philtanker                ST_CLERK   E                                                             
+Renske               Ladwig                    ST_CLERK   E                                                             
+Stephen              Stiles                    ST_CLERK   E                                                             
+John                 Seo                       ST_CLERK   E                                                             
+Joshua               Patel                     ST_CLERK   E                                                             
+Trenna               Rajs                      ST_CLERK   E                                                             
+
+FIRST_NAME           LAST_NAME                 JOB_ID     G                                                             
+-------------------- ------------------------- ---------- -                                                             
+Curtis               Davies                    ST_CLERK   E                                                             
+Randall              Matos                     ST_CLERK   E                                                             
+Peter                Vargas                    ST_CLERK   E                                                             
+Matthew              Weiss                     ST_MAN     B                                                             
+Adam                 Fripp                     ST_MAN     B                                                             
+Payam                Kaufling                  ST_MAN     B                                                             
+Shanta               Vollman                   ST_MAN     B                                                             
+Kevin                Mourgos                   ST_MAN     B                                                             
+
+107 rows selected.
+
+

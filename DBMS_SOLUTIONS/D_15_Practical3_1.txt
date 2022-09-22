@@ -1,0 +1,293 @@
+
+Tasks-01:
+
+Name:- Sanskriti Gupta
+Roll no:- 15
+Batch :- D1
+
+SQL> connect hr
+Connected.
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+COUNTRIES                      TABLE                                            
+DEPARTMENTS                    TABLE                                            
+EMPLOYEES                      TABLE                                            
+EMP_DETAILS_VIEW               VIEW                                             
+JOBS                           TABLE                                            
+JOB_HISTORY                    TABLE                                            
+LOCATIONS                      TABLE                                            
+REGIONS                        TABLE                                            
+
+8 rows selected.
+
+SQL> create table products
+  2  (
+  3  product_id number(2),
+  4  product_type_id number(2),
+  5  name varchar2(30),
+  6  price number(6,2),
+  7  constraint products_pk_product_id primary key(product_id)
+  8  );
+
+Table created.
+
+SQL> insert into products values(&product_id,&product_type_id,'&name',&price);
+Enter value for product_id: 1
+Enter value for product_type_id: 1
+Enter value for name: Simple TV
+Enter value for price: 1000.00
+old   1: insert into products values(&product_id,&product_type_id,'&name',&price)
+new   1: insert into products values(1,1,'Simple TV',1000.00)
+
+1 row created.
+
+SQL> /
+Enter value for product_id: 2
+Enter value for product_type_id: 1
+Enter value for name: LED TV
+Enter value for price: 1500.00
+old   1: insert into products values(&product_id,&product_type_id,'&name',&price)
+new   1: insert into products values(2,1,'LED TV',1500.00)
+
+1 row created.
+
+SQL> /
+Enter value for product_id: 3
+Enter value for product_type_id: 1
+Enter value for name: LCD TV
+Enter value for price: 2000.00
+old   1: insert into products values(&product_id,&product_type_id,'&name',&price)
+new   1: insert into products values(3,1,'LCD TV',2000.00)
+
+1 row created.
+
+SQL> /
+Enter value for product_id: 4
+Enter value for product_type_id: 1
+Enter value for name: Mobile Phone
+Enter value for price: 1000.00
+old   1: insert into products values(&product_id,&product_type_id,'&name',&price)
+new   1: insert into products values(4,1,'Mobile Phone',1000.00)
+
+1 row created.
+
+SQL> /
+Enter value for product_id: 5
+Enter value for product_type_id: 2
+Enter value for name: Smart Phone
+Enter value for price: 2000.00
+old   1: insert into products values(&product_id,&product_type_id,'&name',&price)
+new   1: insert into products values(5,2,'Smart Phone',2000.00)
+
+1 row created.
+
+SQL> /
+Enter value for product_id: 6
+Enter value for product_type_id: 2
+Enter value for name: Jio Phone
+Enter value for price: 3000.00
+old   1: insert into products values(&product_id,&product_type_id,'&name',&price)
+new   1: insert into products values(6,2,'Jio Phone',3000.00)
+
+1 row created.
+
+
+
+
+SQL> /
+Enter value for product_id: 7
+Enter value for product_type_id: 3
+Enter value for name: Simple WM
+Enter value for price: 1500.00
+old   1: insert into products values(&product_id,&product_type_id,'&name',&price)
+new   1: insert into products values(7,3,'Simple WM',1500.00)
+
+1 row created.
+
+SQL> /
+Enter value for product_id: 8
+Enter value for product_type_id: 3
+Enter value for name: Automated WM
+Enter value for price: 2000
+old   1: insert into products values(&product_id,&product_type_id,'&name',&price)
+new   1: insert into products values(8,3,'Automated WM',2000)
+
+1 row created.
+
+SQL> /
+Enter value for product_id: 9
+Enter value for product_type_id: 3
+Enter value for name: Semi WM
+Enter value for price: 2500.00	
+old   1: insert into products values(&product_id,&product_type_id,'&name',&price)
+new   1: insert into products values(9,3,'Semi WM',2500.00	)
+
+1 row created.
+
+SQL> select * from products;
+
+PRODUCT_ID PRODUCT_TYPE_ID NAME                                PRICE            
+---------- --------------- ------------------------------ ----------            
+         1               1 Simple TV                            1000            
+         2               1 LED TV                               1500            
+         3               1 LCD TV                               2000            
+         4               1 Mobile Phone                         1000            
+         5               2 Smart Phone                          2000            
+         6               2 Jio Phone                            3000            
+         7               3 Simple WM                            1500            
+         8               3 Automated WM                         2000            
+         9               3 Semi WM                              2500            
+
+9 rows selected.
+/*1. Count the number of products*/
+
+/*2. Count the number of products and sum of price of products*/
+SQL> select count(product_id),sum(price) from products;
+
+COUNT(PRODUCT_ID) SUM(PRICE)                                                    
+----------------- ----------                                                    
+                9      16500                                                    
+/*3. Count the number of products_type_id*/
+SQL> select count(product_type_id) from products;
+
+COUNT(PRODUCT_TYPE_ID)                                                          
+----------------------                                                          
+                     9                                                          
+/*4. Count the number of distinct products_type_id*/
+SQL> select count(distinct product_type_id) from products;
+
+COUNT(DISTINCTPRODUCT_TYPE_ID)                                                  
+------------------------------                                                  
+                             3                                                  
+/*5. Calculate the average price of the product*/
+SQL> select avg(price) from products;
+
+AVG(PRICE)                                                                      
+----------                                                                      
+1833.33333                                                                      
+
+
+/*6. Calculate the average price of the distinct product*/
+SQL> select product_type_id,avg(price) from products group by product_type_id;
+
+PRODUCT_TYPE_ID AVG(PRICE)                                                      
+--------------- ----------                                                      
+              1       1375                                                      
+              2       2500                                                      
+              3       2000                                                      
+
+
+
+SQL> select distinct product_id , avg(price) from products group by product_id;
+
+PRODUCT_ID AVG(PRICE)                                                           
+---------- ----------                                                           
+         1       1000                                                           
+         6       3000                                                           
+         2       1500                                                           
+         4       1000                                                           
+         5       2000                                                           
+         8       2000                                                           
+         3       2000                                                           
+         7       1500                                                           
+         9       2500                                                           
+
+9 rows selected.
+
+/*7. Calculate maximum and minimum price of the product*/
+SQL> select max(price) as "Max",min(price) as "Min" from products;
+
+       Max        Min                                                           
+---------- ----------                                                           
+      3000       1000                                                           
+/*8. Find the count of number of ROWID*/
+SQL> select count(rowid) from products;
+
+COUNT(ROWID)                                                                    
+------------                                                                    
+           9                                                                    
+
+/*9. Find maximum and minimum product name*/
+SQL> select max(name),min(name) from products;
+
+MAX(NAME)                      MIN(NAME)                                        
+------------------------------ ------------------------------                   
+Smart Phone                    Automated WM                                     
+
+/*10. Calculate standard deviation of price*/
+SQL> select stddev(price) from products;
+
+STDDEV(PRICE)                                                                   
+-------------                                                                   
+   661.437828    
+
+/*11. Calculate variance of price*/                                
+SQL> select variance(price) from products;
+
+VARIANCE(PRICE)                                                                 
+---------------                                                                 
+         437500                                
+
+/*12. Calculate average price group by product_type_id*/
+SQL> select distinct product_id , avg(price) from products group by product_id;
+
+PRODUCT_ID AVG(PRICE)                                                           
+---------- ----------                                                           
+         1       1000                                                           
+         6       3000                                                           
+         2       1500                                                           
+         4       1000                                                           
+         5       2000                                                           
+         8       2000                                                           
+         3       2000                                                           
+         7       1500                                                           
+         9       2500                                                           
+
+9 rows selected.
+
+/*13. Calculate Variance on price group by product_type_id*/
+
+SQL>  select product_type_id,avg(price) from products group by product_type_id;
+
+PRODUCT_TYPE_ID AVG(PRICE)                                                      
+--------------- ----------                                                      
+              1       1375                                                      
+              2       2500                                                      
+              3       2000                                                      
+
+                                                                
+
+/*14. Calculate Variance on price group by product_type_id order by Variance*/
+
+SQL> select product_type_id,variance(price) from products group by product_type_id order by variance(price);
+
+PRODUCT_TYPE_ID VARIANCE(PRICE)                                                 
+--------------- ---------------                                                 
+              1      229166.667                                                 
+              3          250000                                                 
+              2          500000                                                 
+
+/*15. Calculate average price group by product_type_id and having average price greater
+than 1500.*/
+SQL> select product_type_id,avg(price) from products group by product_type_id having avg(price) > 1500;
+
+PRODUCT_TYPE_ID AVG(PRICE)                                                      
+--------------- ----------                                                      
+              2       2500                                                      
+              3       2000                                                      
+
+
+/*16. Calculate average price of the products whose price is less that Rs.2000 and group
+by product_type_id and having average price greater than 1500.*/
+
+SQL> select product_type_id,avg(price) from products where price < 2000 group by product_type_id;
+
+PRODUCT_TYPE_ID AVG(PRICE)                                                      
+--------------- ----------                                                      
+              1 1166.66667                                                      
+              3       1500                                                      
+
+SQL> spool off

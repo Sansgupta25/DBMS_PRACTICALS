@@ -1,0 +1,1003 @@
+PRACTICAL – 06
+Aim : Creation of indexes, views, and sequences in Oracle.
+
+NAME:- SANSKRITI GUPTA
+ROLL NO :- 15 
+BATCH :- D1 
+
+
+
+1. Create the EMPVU80 view, which contains details of the employees in department 80.
+
+SQL> CREATE VIEW EMPVU80 AS SELECT employee_id,FIRST_NAME,LAST_NAME ,DEPARTMENT_ID FROM EMPLOYEES  WHERE DEPARTMENT_ID=80;
+
+View created.
+
+SQL> SELECT * FROM EMPVU80;
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME                 DEPARTMENT_ID                                                
+----------- -------------------- ------------------------- -------------                                                
+        145 John                 Russell                              80                                                
+        146 Karen                Partners                             80                                                
+        147 Alberto              Errazuriz                            80                                                
+        148 Gerald               Cambrault                            80                                                
+        149 Eleni                Zlotkey                              80                                                
+        150 Peter                Tucker                               80                                                
+        151 David                Bernstein                            80                                                
+        152 Peter                Hall                                 80                                                
+        153 Christopher          Olsen                                80                                                
+        154 Nanette              Cambrault                            80                                                
+        155 Oliver               Tuvault                              80                                                
+        156 Janette              King                                 80                                                
+        157 Patrick              Sully                                80                                                
+        158 Allan                McEwen                               80                                                
+        159 Lindsey              Smith                                80                                                
+        160 Louise               Doran                                80                                                
+        161 Sarath               Sewall                               80                                                
+        162 Clara                Vishney                              80                                                
+        163 Danielle             Greene                               80                                                
+        164 Mattea               Marvins                              80                                                
+        165 David                Lee                                  80                                                
+        166 Sundar               Ande                                 80                                                
+        167 Amit                 Banda                                80                                                
+        168 Lisa                 Ozer                                 80                                                
+        169 Harrison             Bloom                                80                                                
+        170 Tayler               Fox                                  80                                                
+        171 William              Smith                                80                                                
+        172 Elizabeth            Bates                                80                                                
+        173 Sundita              Kumar                                80                                                
+        174 Ellen                Abel                                 80                                                
+        175 Alyssa               Hutton                               80                                                
+        176 Jonathon             Taylor                               80                                                
+        177 Jack                 Livingston                           80                                                
+        179 Charles              Johnson                              80                                                
+
+34 rows selected.
+
+2. Modify the EMPVU80 view by using a CREATE OR REPLACE VIEW clause. Add an alias for each column name.
+
+SQL> CREATE OR REPLACE VIEW EMPVU80 AS (SELECT EMPLOYEE_ID , FIRST_NAME || ' ' || LAST_NAME FULLNAME , SALARY , SALARY*12 ANNUAL_SAL FROM EMPLOYEES);
+
+View created.
+
+SQL> SELECT * FROM EMPVU80;
+
+EMPLOYEE_ID FULLNAME                                           SALARY ANNUAL_SAL                                        
+----------- ---------------------------------------------- ---------- ----------                                        
+        100 Steven King                                         24000     288000                                        
+        101 Neena Kochhar                                       17000     204000                                        
+        102 Lex De Haan                                         17000     204000                                        
+        103 Alexander Hunold                                     9000     108000                                        
+        104 Bruce Ernst                                          6000      72000                                        
+        105 David Austin                                         4800      57600                                        
+        106 Valli Pataballa                                      4800      57600                                        
+        107 Diana Lorentz                                        4200      50400                                        
+        108 Nancy Greenberg                                     12008     144096                                        
+        109 Daniel Faviet                                        9000     108000                                        
+        110 John Chen                                            8200      98400                                        
+        111 Ismael Sciarra                                       7700      92400                                        
+        112 Jose Manuel Urman                                    7800      93600                                        
+        113 Luis Popp                                            6900      82800                                        
+        114 Den Raphaely                                        11000     132000                                        
+        115 Alexander Khoo                                       3100      37200                                        
+        116 Shelli Baida                                         2900      34800                                        
+        117 Sigal Tobias                                         2800      33600                                        
+        118 Guy Himuro                                           2600      31200                                        
+        119 Karen Colmenares                                     2500      30000                                        
+        120 Matthew Weiss                                        8000      96000                                        
+        121 Adam Fripp                                           8200      98400                                        
+        122 Payam Kaufling                                       7900      94800                                        
+        123 Shanta Vollman                                       6500      78000                                        
+        124 Kevin Mourgos                                        5800      69600                                        
+        125 Julia Nayer                                          3200      38400                                        
+        126 Irene Mikkilineni                                    2700      32400                                        
+        127 James Landry                                         2400      28800                                        
+        128 Steven Markle                                        2200      26400                                        
+        129 Laura Bissot                                         3300      39600                                        
+        130 Mozhe Atkinson                                       2800      33600                                        
+        131 James Marlow                                         2500      30000                                        
+        132 TJ Olson                                             2100      25200                                        
+        133 Jason Mallin                                         3300      39600                                        
+        134 Michael Rogers                                       2900      34800                                        
+        135 Ki Gee                                               2400      28800                                        
+        136 Hazel Philtanker                                     2200      26400                                        
+        137 Renske Ladwig                                        3600      43200                                        
+        138 Stephen Stiles                                       3200      38400                                        
+        139 John Seo                                             2700      32400                                        
+        140 Joshua Patel                                         2500      30000                                        
+        141 Trenna Rajs                                          3500      42000                                        
+        142 Curtis Davies                                        3100      37200                                        
+        143 Randall Matos                                        2600      31200                                        
+        144 Peter Vargas                                         2500      30000                                        
+        145 John Russell                                        14000     168000                                        
+        146 Karen Partners                                      13500     162000                                        
+
+EMPLOYEE_ID FULLNAME                                           SALARY ANNUAL_SAL                                        
+----------- ---------------------------------------------- ---------- ----------                                        
+        147 Alberto Errazuriz                                   12000     144000                                        
+        148 Gerald Cambrault                                    11000     132000                                        
+        149 Eleni Zlotkey                                       10500     126000                                        
+        150 Peter Tucker                                        10000     120000                                        
+        151 David Bernstein                                      9500     114000                                        
+        152 Peter Hall                                           9000     108000                                        
+        153 Christopher Olsen                                    8000      96000                                        
+        154 Nanette Cambrault                                    7500      90000                                        
+        155 Oliver Tuvault                                       7000      84000                                        
+        156 Janette King                                        10000     120000                                        
+        157 Patrick Sully                                        9500     114000                                        
+        158 Allan McEwen                                         9000     108000                                        
+        159 Lindsey Smith                                        8000      96000                                        
+        160 Louise Doran                                         7500      90000                                        
+        161 Sarath Sewall                                        7000      84000                                        
+        162 Clara Vishney                                       10500     126000                                        
+        163 Danielle Greene                                      9500     114000                                        
+        164 Mattea Marvins                                       7200      86400                                        
+        165 David Lee                                            6800      81600                                        
+        166 Sundar Ande                                          6400      76800                                        
+        167 Amit Banda                                           6200      74400                                        
+        168 Lisa Ozer                                           11500     138000                                        
+        169 Harrison Bloom                                      10000     120000                                        
+        170 Tayler Fox                                           9600     115200                                        
+        171 William Smith                                        7400      88800                                        
+        172 Elizabeth Bates                                      7300      87600                                        
+        173 Sundita Kumar                                        6100      73200                                        
+        174 Ellen Abel                                          11000     132000                                        
+        175 Alyssa Hutton                                        8800     105600                                        
+        176 Jonathon Taylor                                      8600     103200                                        
+        177 Jack Livingston                                      8400     100800                                        
+        178 Kimberely Grant                                      7000      84000                                        
+        179 Charles Johnson                                      6200      74400                                        
+        180 Winston Taylor                                       3200      38400                                        
+        181 Jean Fleaur                                          3100      37200                                        
+        182 Martha Sullivan                                      2500      30000                                        
+        183 Girard Geoni                                         2800      33600                                        
+        184 Nandita Sarchand                                     4200      50400                                        
+        185 Alexis Bull                                          4100      49200                                        
+        186 Julia Dellinger                                      3400      40800                                        
+        187 Anthony Cabrio                                       3000      36000                                        
+        188 Kelly Chung                                          3800      45600                                        
+        189 Jennifer Dilly                                       3600      43200                                        
+        190 Timothy Gates                                        2900      34800                                        
+        191 Randall Perkins                                      2500      30000                                        
+        192 Sarah Bell                                           4000      48000                                        
+        193 Britney Everett                                      3900      46800                                        
+
+EMPLOYEE_ID FULLNAME                                           SALARY ANNUAL_SAL                                        
+----------- ---------------------------------------------- ---------- ----------                                        
+        194 Samuel McCain                                        3200      38400                                        
+        195 Vance Jones                                          2800      33600                                        
+        196 Alana Walsh                                          3100      37200                                        
+        197 Kevin Feeney                                         3000      36000                                        
+        198 Donald OConnell                                      2600      31200                                        
+        199 Douglas Grant                                        2600      31200                                        
+        200 Jennifer Whalen                                      4400      52800                                        
+        201 Michael Hartstein                                   13000     156000                                        
+        202 Pat Fay                                              6000      72000                                        
+        203 Susan Mavris                                         6500      78000                                        
+        204 Hermann Baer                                        10000     120000                                        
+        205 Shelley Higgins                                     12008     144096                                        
+        206 William Gietz                                        8300      99600                                        
+
+107 rows selected.
+
+3. Create a complex view of department names, minimum salaries, maximum salaries, and the average salaries by department.
+
+SQL> CREATE VIEW EMPVU AS(SELECT DEPARTMENT_ID , MIN(SALARY) MINSAL , MAX(SALARY) MAXSAL ,AVG(SALARY) AVGSAL FROM EMPLOYEES  GROUP BY DEPARTMENT_ID);
+
+View created.
+
+SQL> SELECT * FROM EMPVU;
+
+DEPARTMENT_ID     MINSAL     MAXSAL     AVGSAL                                                                          
+------------- ---------- ---------- ----------                                                                          
+          100       6900      12008 8601.33333                                                                          
+           30       2500      11000       4150                                                                          
+                    7000       7000       7000                                                                          
+           90      17000      24000 19333.3333                                                                          
+           20       6000      13000       9500                                                                          
+           70      10000      10000      10000                                                                          
+          110       8300      12008      10154                                                                          
+           50       2100       8200 3475.55556                                                                          
+           80       6100      14000 8955.88235                                                                          
+           40       6500       6500       6500                                                                          
+           60       4200       9000       5760                                                                          
+           10       4400       4400       4400                                                                          
+
+12 rows selected.
+
+
+
+4. Demonstrate the use of WITH CHECK OPTION.
+
+SQL> CREATE VIEW EMPVU1 AS SELECT FIRST_NAME , LAST_NAME , DEPARTMENT_ID , SALARY FROM EMPLOYEES WITH CHECK OPTION ;
+
+View created.
+
+SQL> SELECT * FROM EMPVU1;
+
+FIRST_NAME           LAST_NAME                 DEPARTMENT_ID     SALARY                                                 
+-------------------- ------------------------- ------------- ----------                                                 
+Steven               King                                 90      24000                                                 
+Neena                Kochhar                              90      17000                                                 
+Lex                  De Haan                              90      17000                                                 
+Alexander            Hunold                               60       9000                                                 
+Bruce                Ernst                                60       6000                                                 
+David                Austin                               60       4800                                                 
+Valli                Pataballa                            60       4800                                                 
+Diana                Lorentz                              60       4200                                                 
+Nancy                Greenberg                           100      12008                                                 
+Daniel               Faviet                              100       9000                                                 
+John                 Chen                                100       8200                                                 
+Ismael               Sciarra                             100       7700                                                 
+Jose Manuel          Urman                               100       7800                                                 
+Luis                 Popp                                100       6900                                                 
+Den                  Raphaely                             30      11000                                                 
+Alexander            Khoo                                 30       3100                                                 
+Shelli               Baida                                30       2900                                                 
+Sigal                Tobias                               30       2800                                                 
+Guy                  Himuro                               30       2600                                                 
+Karen                Colmenares                           30       2500                                                 
+Matthew              Weiss                                50       8000                                                 
+Adam                 Fripp                                50       8200                                                 
+Payam                Kaufling                             50       7900                                                 
+Shanta               Vollman                              50       6500                                                 
+Kevin                Mourgos                              50       5800                                                 
+Julia                Nayer                                50       3200                                                 
+Irene                Mikkilineni                          50       2700                                                 
+James                Landry                               50       2400                                                 
+Steven               Markle                               50       2200                                                 
+Laura                Bissot                               50       3300                                                 
+Mozhe                Atkinson                             50       2800                                                 
+James                Marlow                               50       2500                                                 
+TJ                   Olson                                50       2100                                                 
+Jason                Mallin                               50       3300                                                 
+Michael              Rogers                               50       2900                                                 
+Ki                   Gee                                  50       2400                                                 
+Hazel                Philtanker                           50       2200                                                 
+Renske               Ladwig                               50       3600                                                 
+Stephen              Stiles                               50       3200                                                 
+John                 Seo                                  50       2700                                                 
+Joshua               Patel                                50       2500                                                 
+Trenna               Rajs                                 50       3500                                                 
+Curtis               Davies                               50       3100                                                 
+Randall              Matos                                50       2600                                                 
+Peter                Vargas                               50       2500                                                 
+John                 Russell                              80      14000                                                 
+Karen                Partners                             80      13500                                                 
+
+FIRST_NAME           LAST_NAME                 DEPARTMENT_ID     SALARY                                                 
+-------------------- ------------------------- ------------- ----------                                                 
+Alberto              Errazuriz                            80      12000                                                 
+Gerald               Cambrault                            80      11000                                                 
+Eleni                Zlotkey                              80      10500                                                 
+Peter                Tucker                               80      10000                                                 
+David                Bernstein                            80       9500                                                 
+Peter                Hall                                 80       9000                                                 
+Christopher          Olsen                                80       8000                                                 
+Nanette              Cambrault                            80       7500                                                 
+Oliver               Tuvault                              80       7000                                                 
+Janette              King                                 80      10000                                                 
+Patrick              Sully                                80       9500                                                 
+Allan                McEwen                               80       9000                                                 
+Lindsey              Smith                                80       8000                                                 
+Louise               Doran                                80       7500                                                 
+Sarath               Sewall                               80       7000                                                 
+Clara                Vishney                              80      10500                                                 
+Danielle             Greene                               80       9500                                                 
+Mattea               Marvins                              80       7200                                                 
+David                Lee                                  80       6800                                                 
+Sundar               Ande                                 80       6400                                                 
+Amit                 Banda                                80       6200                                                 
+Lisa                 Ozer                                 80      11500                                                 
+Harrison             Bloom                                80      10000                                                 
+Tayler               Fox                                  80       9600                                                 
+William              Smith                                80       7400                                                 
+Elizabeth            Bates                                80       7300                                                 
+Sundita              Kumar                                80       6100                                                 
+Ellen                Abel                                 80      11000                                                 
+Alyssa               Hutton                               80       8800                                                 
+Jonathon             Taylor                               80       8600                                                 
+Jack                 Livingston                           80       8400                                                 
+Kimberely            Grant                                         7000                                                 
+Charles              Johnson                              80       6200                                                 
+Winston              Taylor                               50       3200                                                 
+Jean                 Fleaur                               50       3100                                                 
+Martha               Sullivan                             50       2500                                                 
+Girard               Geoni                                50       2800                                                 
+Nandita              Sarchand                             50       4200                                                 
+Alexis               Bull                                 50       4100                                                 
+Julia                Dellinger                            50       3400                                                 
+Anthony              Cabrio                               50       3000                                                 
+Kelly                Chung                                50       3800                                                 
+Jennifer             Dilly                                50       3600                                                 
+Timothy              Gates                                50       2900                                                 
+Randall              Perkins                              50       2500                                                 
+Sarah                Bell                                 50       4000                                                 
+Britney              Everett                              50       3900                                                 
+
+FIRST_NAME           LAST_NAME                 DEPARTMENT_ID     SALARY                                                 
+-------------------- ------------------------- ------------- ----------                                                 
+Samuel               McCain                               50       3200                                                 
+Vance                Jones                                50       2800                                                 
+Alana                Walsh                                50       3100                                                 
+Kevin                Feeney                               50       3000                                                 
+Donald               OConnell                             50       2600                                                 
+Douglas              Grant                                50       2600                                                 
+Jennifer             Whalen                               10       4400                                                 
+Michael              Hartstein                            20      13000                                                 
+Pat                  Fay                                  20       6000                                                 
+Susan                Mavris                               40       6500                                                 
+Hermann              Baer                                 70      10000                                                 
+Shelley              Higgins                             110      12008                                                 
+William              Gietz                               110       8300                                                 
+
+107 rows selected.
+
+SQL> UPDATE VIEW EMPVU1 SET DEPARTMENT_ID = 50 WHERE LAST_NAME = 'BAER' ;
+UPDATE VIEW EMPVU1 SET DEPARTMENT_ID = 50 WHERE LAST_NAME = 'BAER' 
+       *
+ERROR at line 1:
+ORA-01402: view WITH CHECK OPTION where-clause violation
+
+5. Demonstrate the use of WITH READ ONLY. 
+
+SQL> CREATE VIEW EMPVU3 AS SELECT FIRST_NAME , LAST_NAME , DEPARTMENT_ID , SALARY FROM EMPLOYEES WITH READ ONLY ;
+
+View created.
+
+SQL> SELECT * FROM EMPVU3;
+
+FIRST_NAME           LAST_NAME                 DEPARTMENT_ID     SALARY                                                 
+-------------------- ------------------------- ------------- ----------                                                 
+Steven               King                                 90      24000                                                 
+Neena                Kochhar                              90      17000                                                 
+Lex                  De Haan                              90      17000                                                 
+Alexander            Hunold                               60       9000                                                 
+Bruce                Ernst                                60       6000                                                 
+David                Austin                               60       4800                                                 
+Valli                Pataballa                            60       4800                                                 
+Diana                Lorentz                              60       4200                                                 
+Nancy                Greenberg                           100      12008                                                 
+Daniel               Faviet                              100       9000                                                 
+John                 Chen                                100       8200                                                 
+Ismael               Sciarra                             100       7700                                                 
+Jose Manuel          Urman                               100       7800                                                 
+Luis                 Popp                                100       6900                                                 
+Den                  Raphaely                             30      11000                                                 
+Alexander            Khoo                                 30       3100                                                 
+Shelli               Baida                                30       2900                                                 
+Sigal                Tobias                               30       2800                                                 
+Guy                  Himuro                               30       2600                                                 
+Karen                Colmenares                           30       2500                                                 
+Matthew              Weiss                                50       8000                                                 
+Adam                 Fripp                                50       8200                                                 
+Payam                Kaufling                             50       7900                                                 
+Shanta               Vollman                              50       6500                                                 
+Kevin                Mourgos                              50       5800                                                 
+Julia                Nayer                                50       3200                                                 
+Irene                Mikkilineni                          50       2700                                                 
+James                Landry                               50       2400                                                 
+Steven               Markle                               50       2200                                                 
+Laura                Bissot                               50       3300                                                 
+Mozhe                Atkinson                             50       2800                                                 
+James                Marlow                               50       2500                                                 
+TJ                   Olson                                50       2100                                                 
+Jason                Mallin                               50       3300                                                 
+Michael              Rogers                               50       2900                                                 
+Ki                   Gee                                  50       2400                                                 
+Hazel                Philtanker                           50       2200                                                 
+Renske               Ladwig                               50       3600                                                 
+Stephen              Stiles                               50       3200                                                 
+John                 Seo                                  50       2700                                                 
+Joshua               Patel                                50       2500                                                 
+Trenna               Rajs                                 50       3500                                                 
+Curtis               Davies                               50       3100                                                 
+Randall              Matos                                50       2600                                                 
+Peter                Vargas                               50       2500                                                 
+John                 Russell                              80      14000                                                 
+Karen                Partners                             80      13500                                                 
+
+FIRST_NAME           LAST_NAME                 DEPARTMENT_ID     SALARY                                                 
+-------------------- ------------------------- ------------- ----------                                                 
+Alberto              Errazuriz                            80      12000                                                 
+Gerald               Cambrault                            80      11000                                                 
+Eleni                Zlotkey                              80      10500                                                 
+Peter                Tucker                               80      10000                                                 
+David                Bernstein                            80       9500                                                 
+Peter                Hall                                 80       9000                                                 
+Christopher          Olsen                                80       8000                                                 
+Nanette              Cambrault                            80       7500                                                 
+Oliver               Tuvault                              80       7000                                                 
+Janette              King                                 80      10000                                                 
+Patrick              Sully                                80       9500                                                 
+Allan                McEwen                               80       9000                                                 
+Lindsey              Smith                                80       8000                                                 
+Louise               Doran                                80       7500                                                 
+Sarath               Sewall                               80       7000                                                 
+Clara                Vishney                              80      10500                                                 
+Danielle             Greene                               80       9500                                                 
+Mattea               Marvins                              80       7200                                                 
+David                Lee                                  80       6800                                                 
+Sundar               Ande                                 80       6400                                                 
+Amit                 Banda                                80       6200                                                 
+Lisa                 Ozer                                 80      11500                                                 
+Harrison             Bloom                                80      10000                                                 
+Tayler               Fox                                  80       9600                                                 
+William              Smith                                80       7400                                                 
+Elizabeth            Bates                                80       7300                                                 
+Sundita              Kumar                                80       6100                                                 
+Ellen                Abel                                 80      11000                                                 
+Alyssa               Hutton                               80       8800                                                 
+Jonathon             Taylor                               80       8600                                                 
+Jack                 Livingston                           80       8400                                                 
+Kimberely            Grant                                         7000                                                 
+Charles              Johnson                              80       6200                                                 
+Winston              Taylor                               50       3200                                                 
+Jean                 Fleaur                               50       3100                                                 
+Martha               Sullivan                             50       2500                                                 
+Girard               Geoni                                50       2800                                                 
+Nandita              Sarchand                             50       4200                                                 
+Alexis               Bull                                 50       4100                                                 
+Julia                Dellinger                            50       3400                                                 
+Anthony              Cabrio                               50       3000                                                 
+Kelly                Chung                                50       3800                                                 
+Jennifer             Dilly                                50       3600                                                 
+Timothy              Gates                                50       2900                                                 
+Randall              Perkins                              50       2500                                                 
+Sarah                Bell                                 50       4000                                                 
+Britney              Everett                              50       3900                                                 
+
+FIRST_NAME           LAST_NAME                 DEPARTMENT_ID     SALARY                                                 
+-------------------- ------------------------- ------------- ----------                                                 
+Samuel               McCain                               50       3200                                                 
+Vance                Jones                                50       2800                                                 
+Alana                Walsh                                50       3100                                                 
+Kevin                Feeney                               50       3000                                                 
+Donald               OConnell                             50       2600                                                 
+Douglas              Grant                                50       2600                                                 
+Jennifer             Whalen                               10       4400                                                 
+Michael              Hartstein                            20      13000                                                 
+Pat                  Fay                                  20       6000                                                 
+Susan                Mavris                               40       6500                                                 
+Hermann              Baer                                 70      10000                                                 
+Shelley              Higgins                             110      12008                                                 
+William              Gietz                               110       8300                                                 
+
+107 rows selected.
+
+SQL> UPDATE EMPVU3 SET SALARY = 8500 WHERE LAST_NAME ='GIETZ';
+UPDATE EMPVU3 SET SALARY = 8500 WHERE LAST_NAME ='GIETZ'
+                  *
+ERROR at line 1:
+ORA-42399: cannot perform a DML operation on a read-only view 
+
+6. The staff in the HR department wants to hide some of the data in the EMPLOYEES table.They want a view called EMPLOYEES_VU based on the employee numbers, employee
+names, and department numbers from the EMPLOYEES table. They want the heading for the employee name to be EMPLOYEE.
+
+SQL> CREATE VIEW EMPLOYEES_VU AS (SELECT EMPLOYEE_ID ,FIRST_NAME || ' ' || LAST_NAME EMPLOYEENAME, DEPARTMENT_ID FROM EMPLOYEES);
+
+View created.
+
+7. Confirm that the view works. Display the contents of the EMPLOYEES_VU view.
+
+SQL> SELECT * FROM EMPLOYEES_VU;
+
+EMPLOYEE_ID EMPLOYEENAME                                   DEPARTMENT_ID                                                
+----------- ---------------------------------------------- -------------                                                
+        100 Steven King                                               90                                                
+        101 Neena Kochhar                                             90                                                
+        102 Lex De Haan                                               90                                                
+        103 Alexander Hunold                                          60                                                
+        104 Bruce Ernst                                               60                                                
+        105 David Austin                                              60                                                
+        106 Valli Pataballa                                           60                                                
+        107 Diana Lorentz                                             60                                                
+        108 Nancy Greenberg                                          100                                                
+        109 Daniel Faviet                                            100                                                
+        110 John Chen                                                100                                                
+        111 Ismael Sciarra                                           100                                                
+        112 Jose Manuel Urman                                        100                                                
+        113 Luis Popp                                                100                                                
+        114 Den Raphaely                                              30                                                
+        115 Alexander Khoo                                            30                                                
+        116 Shelli Baida                                              30                                                
+        117 Sigal Tobias                                              30                                                
+        118 Guy Himuro                                                30                                                
+        119 Karen Colmenares                                          30                                                
+        120 Matthew Weiss                                             50                                                
+        121 Adam Fripp                                                50                                                
+        122 Payam Kaufling                                            50                                                
+        123 Shanta Vollman                                            50                                                
+        124 Kevin Mourgos                                             50                                                
+        125 Julia Nayer                                               50                                                
+        126 Irene Mikkilineni                                         50                                                
+        127 James Landry                                              50                                                
+        128 Steven Markle                                             50                                                
+        129 Laura Bissot                                              50                                                
+        130 Mozhe Atkinson                                            50                                                
+        131 James Marlow                                              50                                                
+        132 TJ Olson                                                  50                                                
+        133 Jason Mallin                                              50                                                
+        134 Michael Rogers                                            50                                                
+        135 Ki Gee                                                    50                                                
+        136 Hazel Philtanker                                          50                                                
+        137 Renske Ladwig                                             50                                                
+        138 Stephen Stiles                                            50                                                
+        139 John Seo                                                  50                                                
+        140 Joshua Patel                                              50                                                
+        141 Trenna Rajs                                               50                                                
+        142 Curtis Davies                                             50                                                
+        143 Randall Matos                                             50                                                
+        144 Peter Vargas                                              50                                                
+        145 John Russell                                              80                                                
+        146 Karen Partners                                            80                                                
+
+EMPLOYEE_ID EMPLOYEENAME                                   DEPARTMENT_ID                                                
+----------- ---------------------------------------------- -------------                                                
+        147 Alberto Errazuriz                                         80                                                
+        148 Gerald Cambrault                                          80                                                
+        149 Eleni Zlotkey                                             80                                                
+        150 Peter Tucker                                              80                                                
+        151 David Bernstein                                           80                                                
+        152 Peter Hall                                                80                                                
+        153 Christopher Olsen                                         80                                                
+        154 Nanette Cambrault                                         80                                                
+        155 Oliver Tuvault                                            80                                                
+        156 Janette King                                              80                                                
+        157 Patrick Sully                                             80                                                
+        158 Allan McEwen                                              80                                                
+        159 Lindsey Smith                                             80                                                
+        160 Louise Doran                                              80                                                
+        161 Sarath Sewall                                             80                                                
+        162 Clara Vishney                                             80                                                
+        163 Danielle Greene                                           80                                                
+        164 Mattea Marvins                                            80                                                
+        165 David Lee                                                 80                                                
+        166 Sundar Ande                                               80                                                
+        167 Amit Banda                                                80                                                
+        168 Lisa Ozer                                                 80                                                
+        169 Harrison Bloom                                            80                                                
+        170 Tayler Fox                                                80                                                
+        171 William Smith                                             80                                                
+        172 Elizabeth Bates                                           80                                                
+        173 Sundita Kumar                                             80                                                
+        174 Ellen Abel                                                80                                                
+        175 Alyssa Hutton                                             80                                                
+        176 Jonathon Taylor                                           80                                                
+        177 Jack Livingston                                           80                                                
+        178 Kimberely Grant                                                                                             
+        179 Charles Johnson                                           80                                                
+        180 Winston Taylor                                            50                                                
+        181 Jean Fleaur                                               50                                                
+        182 Martha Sullivan                                           50                                                
+        183 Girard Geoni                                              50                                                
+        184 Nandita Sarchand                                          50                                                
+        185 Alexis Bull                                               50                                                
+        186 Julia Dellinger                                           50                                                
+        187 Anthony Cabrio                                            50                                                
+        188 Kelly Chung                                               50                                                
+        189 Jennifer Dilly                                            50                                                
+        190 Timothy Gates                                             50                                                
+        191 Randall Perkins                                           50                                                
+        192 Sarah Bell                                                50                                                
+        193 Britney Everett                                           50                                                
+
+EMPLOYEE_ID EMPLOYEENAME                                   DEPARTMENT_ID                                                
+----------- ---------------------------------------------- -------------                                                
+        194 Samuel McCain                                             50                                                
+        195 Vance Jones                                               50                                                
+        196 Alana Walsh                                               50                                                
+        197 Kevin Feeney                                              50                                                
+        198 Donald OConnell                                           50                                                
+        199 Douglas Grant                                             50                                                
+        200 Jennifer Whalen                                           10                                                
+        201 Michael Hartstein                                         20                                                
+        202 Pat Fay                                                   20                                                
+        203 Susan Mavris                                              40                                                
+        204 Hermann Baer                                              70                                                
+        205 Shelley Higgins                                          110                                                
+        206 William Gietz                                            110                                                
+
+107 rows selected.
+
+8. Using your EMPLOYEES_VU view, write a query for the HR department to display all
+employee names and department numbers.
+
+
+SQL> SELECT EMPLOYEENAME , DEPARTMENT_ID FROM EMPLOYEES_VU ;
+
+EMPLOYEENAME                                   DEPARTMENT_ID                                                            
+---------------------------------------------- -------------                                                            
+Steven King                                               90                                                            
+Neena Kochhar                                             90                                                            
+Lex De Haan                                               90                                                            
+Alexander Hunold                                          60                                                            
+Bruce Ernst                                               60                                                            
+David Austin                                              60                                                            
+Valli Pataballa                                           60                                                            
+Diana Lorentz                                             60                                                            
+Nancy Greenberg                                          100                                                            
+Daniel Faviet                                            100                                                            
+John Chen                                                100                                                            
+Ismael Sciarra                                           100                                                            
+Jose Manuel Urman                                        100                                                            
+Luis Popp                                                100                                                            
+Den Raphaely                                              30                                                            
+Alexander Khoo                                            30                                                            
+Shelli Baida                                              30                                                            
+Sigal Tobias                                              30                                                            
+Guy Himuro                                                30                                                            
+Karen Colmenares                                          30                                                            
+Matthew Weiss                                             50                                                            
+Adam Fripp                                                50                                                            
+Payam Kaufling                                            50                                                            
+Shanta Vollman                                            50                                                            
+Kevin Mourgos                                             50                                                            
+Julia Nayer                                               50                                                            
+Irene Mikkilineni                                         50                                                            
+James Landry                                              50                                                            
+Steven Markle                                             50                                                            
+Laura Bissot                                              50                                                            
+Mozhe Atkinson                                            50                                                            
+James Marlow                                              50                                                            
+TJ Olson                                                  50                                                            
+Jason Mallin                                              50                                                            
+Michael Rogers                                            50                                                            
+Ki Gee                                                    50                                                            
+Hazel Philtanker                                          50                                                            
+Renske Ladwig                                             50                                                            
+Stephen Stiles                                            50                                                            
+John Seo                                                  50                                                            
+Joshua Patel                                              50                                                            
+Trenna Rajs                                               50                                                            
+Curtis Davies                                             50                                                            
+Randall Matos                                             50                                                            
+Peter Vargas                                              50                                                            
+John Russell                                              80                                                            
+Karen Partners                                            80                                                            
+
+EMPLOYEENAME                                   DEPARTMENT_ID                                                            
+---------------------------------------------- -------------                                                            
+Alberto Errazuriz                                         80                                                            
+Gerald Cambrault                                          80                                                            
+Eleni Zlotkey                                             80                                                            
+Peter Tucker                                              80                                                            
+David Bernstein                                           80                                                            
+Peter Hall                                                80                                                            
+Christopher Olsen                                         80                                                            
+Nanette Cambrault                                         80                                                            
+Oliver Tuvault                                            80                                                            
+Janette King                                              80                                                            
+Patrick Sully                                             80                                                            
+Allan McEwen                                              80                                                            
+Lindsey Smith                                             80                                                            
+Louise Doran                                              80                                                            
+Sarath Sewall                                             80                                                            
+Clara Vishney                                             80                                                            
+Danielle Greene                                           80                                                            
+Mattea Marvins                                            80                                                            
+David Lee                                                 80                                                            
+Sundar Ande                                               80                                                            
+Amit Banda                                                80                                                            
+Lisa Ozer                                                 80                                                            
+Harrison Bloom                                            80                                                            
+Tayler Fox                                                80                                                            
+William Smith                                             80                                                            
+Elizabeth Bates                                           80                                                            
+Sundita Kumar                                             80                                                            
+Ellen Abel                                                80                                                            
+Alyssa Hutton                                             80                                                            
+Jonathon Taylor                                           80                                                            
+Jack Livingston                                           80                                                            
+Kimberely Grant                                                                                                         
+Charles Johnson                                           80                                                            
+Winston Taylor                                            50                                                            
+Jean Fleaur                                               50                                                            
+Martha Sullivan                                           50                                                            
+Girard Geoni                                              50                                                            
+Nandita Sarchand                                          50                                                            
+Alexis Bull                                               50                                                            
+Julia Dellinger                                           50                                                            
+Anthony Cabrio                                            50                                                            
+Kelly Chung                                               50                                                            
+Jennifer Dilly                                            50                                                            
+Timothy Gates                                             50                                                            
+Randall Perkins                                           50                                                            
+Sarah Bell                                                50                                                            
+Britney Everett                                           50                                                            
+
+EMPLOYEENAME                                   DEPARTMENT_ID                                                            
+---------------------------------------------- -------------                                                            
+Samuel McCain                                             50                                                            
+Vance Jones                                               50                                                            
+Alana Walsh                                               50                                                            
+Kevin Feeney                                              50                                                            
+Donald OConnell                                           50                                                            
+Douglas Grant                                             50                                                            
+Jennifer Whalen                                           10                                                            
+Michael Hartstein                                         20                                                            
+Pat Fay                                                   20                                                            
+Susan Mavris                                              40                                                            
+Hermann Baer                                              70                                                            
+Shelley Higgins                                          110                                                            
+William Gietz                                            110                                                            
+
+107 rows selected.
+
+9. Department 50 needs access to its employee data. Create a view named DEPT50 that
+contains the employee numbers, employee last names, and department numbers for all
+employees in department 50. You have been asked to label the view columns EMPNO,
+EMPLOYEE, and DEPTNO. For security purposes, do not allow an employee to be
+reassigned to another department through the view. 
+
+
+SQL> CREATE VIEW DEPT50 AS (SELECT EMPLOYEE_ID EMPNO , FIRST_NAME || ' '   || LAST_NAME EMPLOYEE , DEPARTMENT_ID AS DEPTNO FROM EMPLOYEES WHERE DEPARTMENT_ID = 50) WITH READ ONLY  ;
+
+View created.
+
+10. Display the structure and contents of the DEPT50 view.
+
+SQL> SELECT * FROM DEPT50;
+
+     EMPNO EMPLOYEE                                           DEPTNO
+---------- ---------------------------------------------- ----------
+       120 Matthew Weiss                                          50
+       121 Adam Fripp                                             50
+       122 Payam Kaufling                                         50
+       123 Shanta Vollman                                         50
+       124 Kevin Mourgos                                          50
+       125 Julia Nayer                                            50
+       126 Irene Mikkilineni                                      50
+       127 James Landry                                           50
+       128 Steven Markle                                          50
+       129 Laura Bissot                                           50
+       130 Mozhe Atkinson                                         50
+       131 James Marlow                                           50
+       132 TJ Olson                                               50
+       133 Jason Mallin                                           50
+       134 Michael Rogers                                         50
+       135 Ki Gee                                                 50
+       136 Hazel Philtanker                                       50
+       137 Renske Ladwig                                          50
+       138 Stephen Stiles                                         50
+       139 John Seo                                               50
+       140 Joshua Patel                                           50
+       141 Trenna Rajs                                            50
+       142 Curtis Davies                                          50
+       143 Randall Matos                                          50
+       144 Peter Vargas                                           50
+       180 Winston Taylor                                         50
+       181 Jean Fleaur                                            50
+       182 Martha Sullivan                                        50
+       183 Girard Geoni                                           50
+       184 Nandita Sarchand                                       50
+       185 Alexis Bull                                            50
+       186 Julia Dellinger                                        50
+       187 Anthony Cabrio                                         50
+       188 Kelly Chung                                            50
+       189 Jennifer Dilly                                         50
+       190 Timothy Gates                                          50
+       191 Randall Perkins                                        50
+       192 Sarah Bell                                             50
+       193 Britney Everett                                        50
+       194 Samuel McCain                                          50
+       195 Vance Jones                                            50
+       196 Alana Walsh                                            50
+       197 Kevin Feeney                                           50
+       198 Donald OConnell                                        50
+       199 Douglas Grant                                          50
+
+45 rows selected.
+
+11. Test your view. Attempt to reassign Matos to department 80.
+
+SQL> UPDATE DEPT50 SET DEPTNO = 80 WHERE EMPLOYEE = 'Matos' ;
+UPDATE DEPT50 SET DEPTNO = 80 WHERE EMPLOYEE = 'Matos' 
+                  *
+ERROR at line 1:
+ORA-42399: cannot perform a DML operation on a read-only view 
+
+12. You need a sequence that can be used with the PRIMARY KEY column of the DEPT table.
+The sequence should start at 200 and have a maximum value of 1,000. Have your sequence
+increment by 10. Name the sequence DEPT_ID_SEQ.
+
+SQL> CREATE SEQUENCE DEPT_ID_SEQ
+  2  INCREMENT BY 10
+  3  START WITH 200
+  4  ;
+
+Sequence created.
+
+
+13. To test your sequence, write a script to insert two rows in the DEPT table. Name your script
+lab_06_13.sql. Be sure to use the sequence that you created for the ID column. Add two
+departments: Education and Administration. Confirm your additions. Run the commands in
+your script.
+
+SQL> create table dept(
+  2  dept_id integer ,
+  3  dept_name varchar2(20));
+
+Table created.
+
+SQL> insert into dept values(&dept_id , '&dept_name');
+Enter value for dept_id: 101
+Enter value for dept_name: cse
+old   1: insert into dept values(&dept_id , '&dept_name')
+new   1: insert into dept values(101 , 'cse')
+
+1 row created.
+
+SQL> insert into dept values(&dept_id , '&dept_name');
+Enter value for dept_id: 102
+Enter value for dept_name: ec
+old   1: insert into dept values(&dept_id , '&dept_name')
+new   1: insert into dept values(102 , 'ec')
+
+1 row created.
+
+SQL> select * from dept
+  2  ;
+
+   DEPT_ID DEPT_NAME
+---------- --------------------
+       101 cse
+       102 ec
+
+SQL> create sequence seq1
+  2  increment by 1
+  3  start with 102;
+
+Sequence created.
+
+SQL> insert into dept values(seq1.nextval , 'education');
+
+1 row created.
+
+SQL> insert into dept values(seq1.nextval , 'administration');
+
+1 row created.
+
+SQL> select * from dept;
+
+   DEPT_ID DEPT_NAME
+---------- --------------------
+       101 cse
+       102 ec
+       102 education
+       103 administration
+
+
+
+
+14. Create a nonunique index on the NAME column in the DEPT table.
+
+SQL>  create index idx1 on DEPARTMENtS(DEPARTMENT_NAME) ;
+
+Index created.
+
+15. Create a synonym for your EMPLOYEES table. Call it EMP.
+
+SQL> create synonym EMP for hr.employees;
+
+Synonym created.
+
+
+SQL> select * from EMP;
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME                 EMAIL                     PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+----------- -------------------- ------------------------- ------------------------- -------------------- --------- ---------- ---------- -------------- ---------- -------------
+        100 Steven               King                      SKING                     515.123.4567         17-JUN-03 AD_PRES         24000                                      90
+        101 Neena                Kochhar                   NKOCHHAR                  515.123.4568         21-SEP-05 AD_VP           17000                       100            90
+        102 Lex                  De Haan                   LDEHAAN                   515.123.4569         13-JAN-01 AD_VP           17000                       100            90
+        103 Alexander            Hunold                    AHUNOLD                   590.423.4567         03-JAN-06 IT_PROG          9000                       102            60
+        104 Bruce                Ernst                     BERNST                    590.423.4568         21-MAY-07 IT_PROG          6000                       103            60
+        105 David                Austin                    DAUSTIN                   590.423.4569         25-JUN-05 IT_PROG          4800                       103            60
+        106 Valli                Pataballa                 VPATABAL                  590.423.4560         05-FEB-06 IT_PROG          4800                       103            60
+        107 Diana                Lorentz                   DLORENTZ                  590.423.5567         07-FEB-07 IT_PROG          4200                       103            60
+        108 Nancy                Greenberg                 NGREENBE                  515.124.4569         17-AUG-02 FI_MGR          12008                       101           100
+        109 Daniel               Faviet                    DFAVIET                   515.124.4169         16-AUG-02 FI_ACCOUNT       9000                       108           100
+        110 John                 Chen                      JCHEN                     515.124.4269         28-SEP-05 FI_ACCOUNT       8200                       108           100
+        111 Ismael               Sciarra                   ISCIARRA                  515.124.4369         30-SEP-05 FI_ACCOUNT       7700                       108           100
+        112 Jose Manuel          Urman                     JMURMAN                   515.124.4469         07-MAR-06 FI_ACCOUNT       7800                       108           100
+        113 Luis                 Popp                      LPOPP                     515.124.4567         07-DEC-07 FI_ACCOUNT       6900                       108           100
+        114 Den                  Raphaely                  DRAPHEAL                  515.127.4561         07-DEC-02 PU_MAN          11000                       100            30
+        115 Alexander            Khoo                      AKHOO                     515.127.4562         18-MAY-03 PU_CLERK         3100                       114            30
+        116 Shelli               Baida                     SBAIDA                    515.127.4563         24-DEC-05 PU_CLERK         2900                       114            30
+        117 Sigal                Tobias                    STOBIAS                   515.127.4564         24-JUL-05 PU_CLERK         2800                       114            30
+        118 Guy                  Himuro                    GHIMURO                   515.127.4565         15-NOV-06 PU_CLERK         2600                       114            30
+        119 Karen                Colmenares                KCOLMENA                  515.127.4566         10-AUG-07 PU_CLERK         2500                       114            30
+        120 Matthew              Weiss                     MWEISS                    650.123.1234         18-JUL-04 ST_MAN           8000                       100            50
+        121 Adam                 Fripp                     AFRIPP                    650.123.2234         10-APR-05 ST_MAN           8200                       100            50
+        122 Payam                Kaufling                  PKAUFLIN                  650.123.3234         01-MAY-03 ST_MAN           7900                       100            50
+        123 Shanta               Vollman                   SVOLLMAN                  650.123.4234         10-OCT-05 ST_MAN           6500                       100            50
+        124 Kevin                Mourgos                   KMOURGOS                  650.123.5234         16-NOV-07 ST_MAN           5800                       100            50
+        125 Julia                Nayer                     JNAYER                    650.124.1214         16-JUL-05 ST_CLERK         3200                       120            50
+        126 Irene                Mikkilineni               IMIKKILI                  650.124.1224         28-SEP-06 ST_CLERK         2700                       120            50
+        127 James                Landry                    JLANDRY                   650.124.1334         14-JAN-07 ST_CLERK         2400                       120            50
+        128 Steven               Markle                    SMARKLE                   650.124.1434         08-MAR-08 ST_CLERK         2200                       120            50
+        129 Laura                Bissot                    LBISSOT                   650.124.5234         20-AUG-05 ST_CLERK         3300                       121            50
+        130 Mozhe                Atkinson                  MATKINSO                  650.124.6234         30-OCT-05 ST_CLERK         2800                       121            50
+        131 James                Marlow                    JAMRLOW                   650.124.7234         16-FEB-05 ST_CLERK         2500                       121            50
+        132 TJ                   Olson                     TJOLSON                   650.124.8234         10-APR-07 ST_CLERK         2100                       121            50
+        133 Jason                Mallin                    JMALLIN                   650.127.1934         14-JUN-04 ST_CLERK         3300                       122            50
+        134 Michael              Rogers                    MROGERS                   650.127.1834         26-AUG-06 ST_CLERK         2900                       122            50
+        135 Ki                   Gee                       KGEE                      650.127.1734         12-DEC-07 ST_CLERK         2400                       122            50
+        136 Hazel                Philtanker                HPHILTAN                  650.127.1634         06-FEB-08 ST_CLERK         2200                       122            50
+        137 Renske               Ladwig                    RLADWIG                   650.121.1234         14-JUL-03 ST_CLERK         3600                       123            50
+        138 Stephen              Stiles                    SSTILES                   650.121.2034         26-OCT-05 ST_CLERK         3200                       123            50
+        139 John                 Seo                       JSEO                      650.121.2019         12-FEB-06 ST_CLERK         2700                       123            50
+        140 Joshua               Patel                     JPATEL                    650.121.1834         06-APR-06 ST_CLERK         2500                       123            50
+        141 Trenna               Rajs                      TRAJS                     650.121.8009         17-OCT-03 ST_CLERK         3500                       124            50
+        142 Curtis               Davies                    CDAVIES                   650.121.2994         29-JAN-05 ST_CLERK         3100                       124            50
+        143 Randall              Matos                     RMATOS                    650.121.2874         15-MAR-06 ST_CLERK         2600                       124            50
+        144 Peter                Vargas                    PVARGAS                   650.121.2004         09-JUL-06 ST_CLERK         2500                       124            50
+        145 John                 Russell                   JRUSSEL                   011.44.1344.429268   01-OCT-04 SA_MAN          14000             .4        100            80
+        146 Karen                Partners                  KPARTNER                  011.44.1344.467268   05-JAN-05 SA_MAN          13500             .3        100            80
+        147 Alberto              Errazuriz                 AERRAZUR                  011.44.1344.429278   10-MAR-05 SA_MAN          12000             .3        100            80
+        148 Gerald               Cambrault                 GCAMBRAU                  011.44.1344.619268   15-OCT-07 SA_MAN          11000             .3        100            80
+        149 Eleni                Zlotkey                   EZLOTKEY                  011.44.1344.429018   29-JAN-08 SA_MAN          10500             .2        100            80
+        150 Peter                Tucker                    PTUCKER                   011.44.1344.129268   30-JAN-05 SA_REP          10000             .3        145            80
+        151 David                Bernstein                 DBERNSTE                  011.44.1344.345268   24-MAR-05 SA_REP           9500            .25        145            80
+        152 Peter                Hall                      PHALL                     011.44.1344.478968   20-AUG-05 SA_REP           9000            .25        145            80
+        153 Christopher          Olsen                     COLSEN                    011.44.1344.498718   30-MAR-06 SA_REP           8000             .2        145            80
+        154 Nanette              Cambrault                 NCAMBRAU                  011.44.1344.987668   09-DEC-06 SA_REP           7500             .2        145            80
+        155 Oliver               Tuvault                   OTUVAULT                  011.44.1344.486508   23-NOV-07 SA_REP           7000            .15        145            80
+        156 Janette              King                      JKING                     011.44.1345.429268   30-JAN-04 SA_REP          10000            .35        146            80
+        157 Patrick              Sully                     PSULLY                    011.44.1345.929268   04-MAR-04 SA_REP           9500            .35        146            80
+        158 Allan                McEwen                    AMCEWEN                   011.44.1345.829268   01-AUG-04 SA_REP           9000            .35        146            80
+        159 Lindsey              Smith                     LSMITH                    011.44.1345.729268   10-MAR-05 SA_REP           8000             .3        146            80
+        160 Louise               Doran                     LDORAN                    011.44.1345.629268   15-DEC-05 SA_REP           7500             .3        146            80
+        161 Sarath               Sewall                    SSEWALL                   011.44.1345.529268   03-NOV-06 SA_REP           7000            .25        146            80
+        162 Clara                Vishney                   CVISHNEY                  011.44.1346.129268   11-NOV-05 SA_REP          10500            .25        147            80
+        163 Danielle             Greene                    DGREENE                   011.44.1346.229268   19-MAR-07 SA_REP           9500            .15        147            80
+        164 Mattea               Marvins                   MMARVINS                  011.44.1346.329268   24-JAN-08 SA_REP           7200             .1        147            80
+        165 David                Lee                       DLEE                      011.44.1346.529268   23-FEB-08 SA_REP           6800             .1        147            80
+        166 Sundar               Ande                      SANDE                     011.44.1346.629268   24-MAR-08 SA_REP           6400             .1        147            80
+        167 Amit                 Banda                     ABANDA                    011.44.1346.729268   21-APR-08 SA_REP           6200             .1        147            80
+        168 Lisa                 Ozer                      LOZER                     011.44.1343.929268   11-MAR-05 SA_REP          11500            .25        148            80
+        169 Harrison             Bloom                     HBLOOM                    011.44.1343.829268   23-MAR-06 SA_REP          10000             .2        148            80
+        170 Tayler               Fox                       TFOX                      011.44.1343.729268   24-JAN-06 SA_REP           9600             .2        148            80
+        171 William              Smith                     WSMITH                    011.44.1343.629268   23-FEB-07 SA_REP           7400            .15        148            80
+        172 Elizabeth            Bates                     EBATES                    011.44.1343.529268   24-MAR-07 SA_REP           7300            .15        148            80
+        173 Sundita              Kumar                     SKUMAR                    011.44.1343.329268   21-APR-08 SA_REP           6100             .1        148            80
+        174 Ellen                Abel                      EABEL                     011.44.1644.429267   11-MAY-04 SA_REP          11000             .3        149            80
+        175 Alyssa               Hutton                    AHUTTON                   011.44.1644.429266   19-MAR-05 SA_REP           8800            .25        149            80
+        176 Jonathon             Taylor                    JTAYLOR                   011.44.1644.429265   24-MAR-06 SA_REP           8600             .2        149            80
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME                 EMAIL                     PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+----------- -------------------- ------------------------- ------------------------- -------------------- --------- ---------- ---------- -------------- ---------- -------------
+        177 Jack                 Livingston                JLIVINGS                  011.44.1644.429264   23-APR-06 SA_REP           8400             .2        149            80
+        178 Kimberely            Grant                     KGRANT                    011.44.1644.429263   24-MAY-07 SA_REP           7000            .15        149
+        179 Charles              Johnson                   CJOHNSON                  011.44.1644.429262   04-JAN-08 SA_REP           6200             .1        149            80
+        180 Winston              Taylor                    WTAYLOR                   650.507.9876         24-JAN-06 SH_CLERK         3200                       120            50
+        181 Jean                 Fleaur                    JFLEAUR                   650.507.9877         23-FEB-06 SH_CLERK         3100                       120            50
+        182 Martha               Sullivan                  MSULLIVA                  650.507.9878         21-JUN-07 SH_CLERK         2500                       120            50
+        183 Girard               Geoni                     GGEONI                    650.507.9879         03-FEB-08 SH_CLERK         2800                       120            50
+        184 Nandita              Sarchand                  NSARCHAN                  650.509.1876         27-JAN-04 SH_CLERK         4200                       121            50
+        185 Alexis               Bull                      ABULL                     650.509.2876         20-FEB-05 SH_CLERK         4100                       121            50
+        186 Julia                Dellinger                 JDELLING                  650.509.3876         24-JUN-06 SH_CLERK         3400                       121            50
+        187 Anthony              Cabrio                    ACABRIO                   650.509.4876         07-FEB-07 SH_CLERK         3000                       121            50
+        188 Kelly                Chung                     KCHUNG                    650.505.1876         14-JUN-05 SH_CLERK         3800                       122            50
+        189 Jennifer             Dilly                     JDILLY                    650.505.2876         13-AUG-05 SH_CLERK         3600                       122            50
+        190 Timothy              Gates                     TGATES                    650.505.3876         11-JUL-06 SH_CLERK         2900                       122            50
+        191 Randall              Perkins                   RPERKINS                  650.505.4876         19-DEC-07 SH_CLERK         2500                       122            50
+        192 Sarah                Bell                      SBELL                     650.501.1876         04-FEB-04 SH_CLERK         4000                       123            50
+        193 Britney              Everett                   BEVERETT                  650.501.2876         03-MAR-05 SH_CLERK         3900                       123            50
+        194 Samuel               McCain                    SMCCAIN                   650.501.3876         01-JUL-06 SH_CLERK         3200                       123            50
+        195 Vance                Jones                     VJONES                    650.501.4876         17-MAR-07 SH_CLERK         2800                       123            50
+        196 Alana                Walsh                     AWALSH                    650.507.9811         24-APR-06 SH_CLERK         3100                       124            50
+        197 Kevin                Feeney                    KFEENEY                   650.507.9822         23-MAY-06 SH_CLERK         3000                       124            50
+        198 Donald               OConnell                  DOCONNEL                  650.507.9833         21-JUN-07 SH_CLERK         2600                       124            50
+        199 Douglas              Grant                     DGRANT                    650.507.9844         13-JAN-08 SH_CLERK         2600                       124            50
+        200 Jennifer             Whalen                    JWHALEN                   515.123.4444         17-SEP-03 AD_ASST          4400                       101            10
+        201 Michael              Hartstein                 MHARTSTE                  515.123.5555         17-FEB-04 MK_MAN          13000                       100            20
+        202 Pat                  Fay                       PFAY                      603.123.6666         17-AUG-05 MK_REP           6000                       201            20
+        203 Susan                Mavris                    SMAVRIS                   515.123.7777         07-JUN-02 HR_REP           6500                       101            40
+        204 Hermann              Baer                      HBAER                     515.123.8888         07-JUN-02 PR_REP          10000                       101            70
+        205 Shelley              Higgins                   SHIGGINS                  515.123.8080         07-JUN-02 AC_MGR          12008                       101           110
+        206 William              Gietz                     WGIETZ                    515.123.8181         07-JUN-02 AC_ACCOUNT       8300                       205           110
+
+107 rows selected.
+
+SQL> SPOOL OFF

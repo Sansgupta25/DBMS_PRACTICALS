@@ -1,0 +1,779 @@
+Name:- Sanskriti Gupta
+Roll no:- 15 
+Batch:- D1
+
+PRACTICAL – 04
+
+Aim : Execution of various types of joins operations on multiple tables in a database
+Tasks-01: Use HE schema
+
+
+1) Write a query for the HR department to produce the addresses of all the departments. Use the
+LOCATIONS and COUNTRIES tables. Show the location ID, street address, city, state or province,
+and country in the output. Use a NATURAL JOIN to produce the results.
+
+SQL> SELECT location_id, street_address, city, state_province, country_name
+  2  FROM locations
+  3  NATURAL JOIN countries;
+
+LOCATION_ID STREET_ADDRESS                           CITY                           STATE_PROVINCE            COUNTRY_NAME
+----------- ---------------------------------------- ------------------------------ ------------------------- ----------------------------------------
+       1000 1297 Via Cola di Rie                     Roma                                                     Italy
+       1100 93091 Calle della Testa                  Venice                                                   Italy
+       1200 2017 Shinjuku-ku                         Tokyo                          Tokyo Prefecture          Japan
+       1300 9450 Kamiya-cho                          Hiroshima                                                Japan
+       1400 2014 Jabberwocky Rd                      Southlake                      Texas                     United States of America
+       1500 2011 Interiors Blvd                      South San Francisco            California                United States of America
+       1600 2007 Zagora St                           South Brunswick                New Jersey                United States of America
+       1700 2004 Charade Rd                          Seattle                        Washington                United States of America
+       1800 147 Spadina Ave                          Toronto                        Ontario                   Canada
+       1900 6092 Boxwood St                          Whitehorse                     Yukon                     Canada
+       2000 40-5-12 Laogianggen                      Beijing                                                  China
+       2100 1298 Vileparle (E)                       Bombay                         Maharashtra               India
+       2200 12-98 Victoria Street                    Sydney                         New South Wales           Australia
+       2300 198 Clementi North                       Singapore                                                Singapore
+       2400 8204 Arthur St                           London                                                   United Kingdom
+       2500 Magdalen Centre, The Oxford Science Park Oxford                         Oxford                    United Kingdom
+       2600 9702 Chester Road                        Stretford                      Manchester                United Kingdom
+       2700 Schwanthalerstr. 7031                    Munich                         Bavaria                   Germany
+       2800 Rua Frei Caneca 1360                     Sao Paulo                      Sao Paulo                 Brazil
+       2900 20 Rue des Corps-Saints                  Geneva                         Geneve                    Switzerland
+       3000 Murtenstrasse 921                        Bern                           BE                        Switzerland
+       3100 Pieter Breughelstraat 837                Utrecht                        Utrecht                   Netherlands
+       3200 Mariano Escobedo 9991                    Mexico City                    Distrito Federal,         Mexico
+
+23 rows selected.
+
+
+2) The HR department needs a report of all employees. Write a query to display the last name,
+department number, and department name for all the employees.
+
+SQL> SELECT last_name, department_id, department_name FROM employees JOIN departments USING (department_id);
+
+LAST_NAME                 DEPARTMENT_ID DEPARTMENT_NAME
+------------------------- ------------- ------------------------------
+Whalen                               10 Administration
+Fay                                  20 Marketing
+Hartstein                            20 Marketing
+Tobias                               30 Purchasing
+Colmenares                           30 Purchasing
+Baida                                30 Purchasing
+Raphaely                             30 Purchasing
+Khoo                                 30 Purchasing
+Himuro                               30 Purchasing
+Mavris                               40 Human Resources
+Feeney                               50 Shipping
+Fleaur                               50 Shipping
+Fripp                                50 Shipping
+Gates                                50 Shipping
+Gee                                  50 Shipping
+Geoni                                50 Shipping
+Grant                                50 Shipping
+Jones                                50 Shipping
+Kaufling                             50 Shipping
+Ladwig                               50 Shipping
+Everett                              50 Shipping
+Dilly                                50 Shipping
+Dellinger                            50 Shipping
+Davies                               50 Shipping
+Chung                                50 Shipping
+Cabrio                               50 Shipping
+Bull                                 50 Shipping
+
+LAST_NAME                 DEPARTMENT_ID DEPARTMENT_NAME
+------------------------- ------------- ------------------------------
+Bissot                               50 Shipping
+Bell                                 50 Shipping
+Atkinson                             50 Shipping
+Landry                               50 Shipping
+Weiss                                50 Shipping
+Walsh                                50 Shipping
+Vollman                              50 Shipping
+Vargas                               50 Shipping
+Taylor                               50 Shipping
+Mallin                               50 Shipping
+Markle                               50 Shipping
+Marlow                               50 Shipping
+Matos                                50 Shipping
+McCain                               50 Shipping
+Mikkilineni                          50 Shipping
+Mourgos                              50 Shipping
+Nayer                                50 Shipping
+OConnell                             50 Shipping
+Olson                                50 Shipping
+Patel                                50 Shipping
+Perkins                              50 Shipping
+Philtanker                           50 Shipping
+Rajs                                 50 Shipping
+Rogers                               50 Shipping
+Sarchand                             50 Shipping
+Seo                                  50 Shipping
+Stiles                               50 Shipping
+
+LAST_NAME                 DEPARTMENT_ID DEPARTMENT_NAME
+------------------------- ------------- ------------------------------
+Sullivan                             50 Shipping
+Austin                               60 IT
+Pataballa                            60 IT
+Ernst                                60 IT
+Lorentz                              60 IT
+Hunold                               60 IT
+Baer                                 70 Public Relations
+Abel                                 80 Sales
+Ande                                 80 Sales
+Banda                                80 Sales
+Bates                                80 Sales
+Bernstein                            80 Sales
+Bloom                                80 Sales
+Cambrault                            80 Sales
+Cambrault                            80 Sales
+Doran                                80 Sales
+Errazuriz                            80 Sales
+Fox                                  80 Sales
+Greene                               80 Sales
+Hall                                 80 Sales
+Hutton                               80 Sales
+Johnson                              80 Sales
+King                                 80 Sales
+Kumar                                80 Sales
+Lee                                  80 Sales
+Livingston                           80 Sales
+Marvins                              80 Sales
+
+LAST_NAME                 DEPARTMENT_ID DEPARTMENT_NAME
+------------------------- ------------- ------------------------------
+McEwen                               80 Sales
+Olsen                                80 Sales
+Ozer                                 80 Sales
+Partners                             80 Sales
+Russell                              80 Sales
+Sewall                               80 Sales
+Smith                                80 Sales
+Smith                                80 Sales
+Sully                                80 Sales
+Taylor                               80 Sales
+Tucker                               80 Sales
+Tuvault                              80 Sales
+Vishney                              80 Sales
+Zlotkey                              80 Sales
+Kochhar                              90 Executive
+King                                 90 Executive
+De Haan                              90 Executive
+Popp                                100 Finance
+Urman                               100 Finance
+Chen                                100 Finance
+Faviet                              100 Finance
+Sciarra                             100 Finance
+Greenberg                           100 Finance
+Gietz                               110 Accounting
+Higgins                             110 Accounting
+
+106 rows selected.
+
+
+3) The HR department needs a report of employees in Toronto. Display the last name, job, department
+number, and the department name for all employees who work in Toronto.
+
+SQL> SELECT e.last_name, e.job_id, e.department_id, d.department_name FROM employees e JOIN departments d ON (e.department_id = d.department_id)JOIN locations l ON (d.location_id = l.location_id) WHERE LOWER(l.city) = 'toronto';
+
+LAST_NAME                 JOB_ID     DEPARTMENT_ID DEPARTMENT_NAME
+------------------------- ---------- ------------- ------------------------------
+Hartstein                 MK_MAN                20 Marketing
+Fay                       MK_REP                20 Marketing
+
+4) Create a report to display employees’ last name and employee number along with their manager’s
+last name and manager number. Label the columns Employee, Emp#, Manager, and Mgr#,
+respectively. Save your SQL statement as lab_04_04.sql. Run the query.
+
+SQL> SELECT w.last_name "Employee", w.employee_id "EMP#",m.last_name "Manager", m.employee_id "Mgr#" FROM employees w join employees m ON (w.manager_id = m.employee_id);
+
+Employee                        EMP# Manager                         Mgr#
+------------------------- ---------- ------------------------- ----------
+Kumar                            173 Cambrault                        148
+Bates                            172 Cambrault                        148
+Smith                            171 Cambrault                        148
+Fox                              170 Cambrault                        148
+Bloom                            169 Cambrault                        148
+Ozer                             168 Cambrault                        148
+Hunold                           103 De Haan                          102
+Banda                            167 Errazuriz                        147
+Ande                             166 Errazuriz                        147
+Lee                              165 Errazuriz                        147
+Marvins                          164 Errazuriz                        147
+Greene                           163 Errazuriz                        147
+Vishney                          162 Errazuriz                        147
+Cabrio                           187 Fripp                            121
+Dellinger                        186 Fripp                            121
+Bull                             185 Fripp                            121
+Sarchand                         184 Fripp                            121
+Olson                            132 Fripp                            121
+Marlow                           131 Fripp                            121
+Atkinson                         130 Fripp                            121
+Bissot                           129 Fripp                            121
+Popp                             113 Greenberg                        108
+Urman                            112 Greenberg                        108
+Sciarra                          111 Greenberg                        108
+Chen                             110 Greenberg                        108
+Faviet                           109 Greenberg                        108
+Fay                              202 Hartstein                        201
+
+Employee                        EMP# Manager                         Mgr#
+------------------------- ---------- ------------------------- ----------
+Gietz                            206 Higgins                          205
+Lorentz                          107 Hunold                           103
+Pataballa                        106 Hunold                           103
+Austin                           105 Hunold                           103
+Ernst                            104 Hunold                           103
+Perkins                          191 Kaufling                         122
+Gates                            190 Kaufling                         122
+Dilly                            189 Kaufling                         122
+Chung                            188 Kaufling                         122
+Philtanker                       136 Kaufling                         122
+Gee                              135 Kaufling                         122
+Rogers                           134 Kaufling                         122
+Mallin                           133 Kaufling                         122
+Hartstein                        201 King                             100
+Zlotkey                          149 King                             100
+Cambrault                        148 King                             100
+Errazuriz                        147 King                             100
+Partners                         146 King                             100
+Russell                          145 King                             100
+Mourgos                          124 King                             100
+Vollman                          123 King                             100
+Kaufling                         122 King                             100
+Fripp                            121 King                             100
+Weiss                            120 King                             100
+Raphaely                         114 King                             100
+De Haan                          102 King                             100
+Kochhar                          101 King                             100
+
+Employee                        EMP# Manager                         Mgr#
+------------------------- ---------- ------------------------- ----------
+Higgins                          205 Kochhar                          101
+Baer                             204 Kochhar                          101
+Mavris                           203 Kochhar                          101
+Whalen                           200 Kochhar                          101
+Greenberg                        108 Kochhar                          101
+Grant                            199 Mourgos                          124
+OConnell                         198 Mourgos                          124
+Feeney                           197 Mourgos                          124
+Walsh                            196 Mourgos                          124
+Vargas                           144 Mourgos                          124
+Matos                            143 Mourgos                          124
+Davies                           142 Mourgos                          124
+Rajs                             141 Mourgos                          124
+Sewall                           161 Partners                         146
+Doran                            160 Partners                         146
+Smith                            159 Partners                         146
+McEwen                           158 Partners                         146
+Sully                            157 Partners                         146
+King                             156 Partners                         146
+Colmenares                       119 Raphaely                         114
+Himuro                           118 Raphaely                         114
+Tobias                           117 Raphaely                         114
+Baida                            116 Raphaely                         114
+Khoo                             115 Raphaely                         114
+Tuvault                          155 Russell                          145
+Cambrault                        154 Russell                          145
+Olsen                            153 Russell                          145
+
+Employee                        EMP# Manager                         Mgr#
+------------------------- ---------- ------------------------- ----------
+Hall                             152 Russell                          145
+Bernstein                        151 Russell                          145
+Tucker                           150 Russell                          145
+Jones                            195 Vollman                          123
+McCain                           194 Vollman                          123
+Everett                          193 Vollman                          123
+Bell                             192 Vollman                          123
+Patel                            140 Vollman                          123
+Seo                              139 Vollman                          123
+Stiles                           138 Vollman                          123
+Ladwig                           137 Vollman                          123
+Geoni                            183 Weiss                            120
+Sullivan                         182 Weiss                            120
+Fleaur                           181 Weiss                            120
+Taylor                           180 Weiss                            120
+Markle                           128 Weiss                            120
+Landry                           127 Weiss                            120
+Mikkilineni                      126 Weiss                            120
+Nayer                            125 Weiss                            120
+Johnson                          179 Zlotkey                          149
+Grant                            178 Zlotkey                          149
+Livingston                       177 Zlotkey                          149
+Taylor                           176 Zlotkey                          149
+Hutton                           175 Zlotkey                          149
+Abel                             174 Zlotkey                          149
+
+106 rows selected.
+5) Modify lab_04_04.sql to display all employees including King, who has no manager. Order the results
+by the employee number. Save your SQL statement as lab_04_05.sql. Run the query in
+lab_04_05.sql
+
+SQL> SELECT w.last_name "Employee", w.employee_id "EMP#",m.last_name "Manager", m.employee_id "Mgr#" FROM employees w LEFT OUTER JOIN employees m ON (w.manager_id = m.employee_id);
+
+Employee                        EMP# Manager                         Mgr#
+------------------------- ---------- ------------------------- ----------
+Kumar                            173 Cambrault                        148
+Bates                            172 Cambrault                        148
+Smith                            171 Cambrault                        148
+Fox                              170 Cambrault                        148
+Bloom                            169 Cambrault                        148
+Ozer                             168 Cambrault                        148
+Hunold                           103 De Haan                          102
+Banda                            167 Errazuriz                        147
+Ande                             166 Errazuriz                        147
+Lee                              165 Errazuriz                        147
+Marvins                          164 Errazuriz                        147
+Greene                           163 Errazuriz                        147
+Vishney                          162 Errazuriz                        147
+Cabrio                           187 Fripp                            121
+Dellinger                        186 Fripp                            121
+Bull                             185 Fripp                            121
+Sarchand                         184 Fripp                            121
+Olson                            132 Fripp                            121
+Marlow                           131 Fripp                            121
+Atkinson                         130 Fripp                            121
+Bissot                           129 Fripp                            121
+Popp                             113 Greenberg                        108
+Urman                            112 Greenberg                        108
+Sciarra                          111 Greenberg                        108
+Chen                             110 Greenberg                        108
+Faviet                           109 Greenberg                        108
+Fay                              202 Hartstein                        201
+
+Employee                        EMP# Manager                         Mgr#
+------------------------- ---------- ------------------------- ----------
+Gietz                            206 Higgins                          205
+Lorentz                          107 Hunold                           103
+Pataballa                        106 Hunold                           103
+Austin                           105 Hunold                           103
+Ernst                            104 Hunold                           103
+Perkins                          191 Kaufling                         122
+Gates                            190 Kaufling                         122
+Dilly                            189 Kaufling                         122
+Chung                            188 Kaufling                         122
+Philtanker                       136 Kaufling                         122
+Gee                              135 Kaufling                         122
+Rogers                           134 Kaufling                         122
+Mallin                           133 Kaufling                         122
+Hartstein                        201 King                             100
+Zlotkey                          149 King                             100
+Cambrault                        148 King                             100
+Errazuriz                        147 King                             100
+Partners                         146 King                             100
+Russell                          145 King                             100
+Mourgos                          124 King                             100
+Vollman                          123 King                             100
+Kaufling                         122 King                             100
+Fripp                            121 King                             100
+Weiss                            120 King                             100
+Raphaely                         114 King                             100
+De Haan                          102 King                             100
+Kochhar                          101 King                             100
+
+Employee                        EMP# Manager                         Mgr#
+------------------------- ---------- ------------------------- ----------
+Higgins                          205 Kochhar                          101
+Baer                             204 Kochhar                          101
+Mavris                           203 Kochhar                          101
+Whalen                           200 Kochhar                          101
+Greenberg                        108 Kochhar                          101
+Grant                            199 Mourgos                          124
+OConnell                         198 Mourgos                          124
+Feeney                           197 Mourgos                          124
+Walsh                            196 Mourgos                          124
+Vargas                           144 Mourgos                          124
+Matos                            143 Mourgos                          124
+Davies                           142 Mourgos                          124
+Rajs                             141 Mourgos                          124
+Sewall                           161 Partners                         146
+Doran                            160 Partners                         146
+Smith                            159 Partners                         146
+McEwen                           158 Partners                         146
+Sully                            157 Partners                         146
+King                             156 Partners                         146
+Colmenares                       119 Raphaely                         114
+Himuro                           118 Raphaely                         114
+Tobias                           117 Raphaely                         114
+Baida                            116 Raphaely                         114
+Khoo                             115 Raphaely                         114
+Tuvault                          155 Russell                          145
+Cambrault                        154 Russell                          145
+Olsen                            153 Russell                          145
+
+Employee                        EMP# Manager                         Mgr#
+------------------------- ---------- ------------------------- ----------
+Hall                             152 Russell                          145
+Bernstein                        151 Russell                          145
+Tucker                           150 Russell                          145
+Jones                            195 Vollman                          123
+McCain                           194 Vollman                          123
+Everett                          193 Vollman                          123
+Bell                             192 Vollman                          123
+Patel                            140 Vollman                          123
+Seo                              139 Vollman                          123
+Stiles                           138 Vollman                          123
+Ladwig                           137 Vollman                          123
+Geoni                            183 Weiss                            120
+Sullivan                         182 Weiss                            120
+Fleaur                           181 Weiss                            120
+Taylor                           180 Weiss                            120
+Markle                           128 Weiss                            120
+Landry                           127 Weiss                            120
+Mikkilineni                      126 Weiss                            120
+Nayer                            125 Weiss                            120
+Johnson                          179 Zlotkey                          149
+Grant                            178 Zlotkey                          149
+Livingston                       177 Zlotkey                          149
+Taylor                           176 Zlotkey                          149
+Hutton                           175 Zlotkey                          149
+Abel                             174 Zlotkey                          149
+King                             100
+
+107 rows selected.
+
+
+6) Create a report for the HR department that displays employee last names, department numbers, and
+all the employees who work in the same department as a given employee. Give each column an
+appropriate label.
+
+SELECT e.department_id department, e.last_name employee,
+	c.last_name colleague
+	FROM employees e JOIN employees c
+	ON (e.department_id = c.department_id)
+	WHERE e.employee_id <> c.employee_id
+	ORDER BY e.department_id, e.last_name, c.last_name;
+
+DEPARTMENT EMPLOYEE                  COLLEAGUE
+---------- ------------------------- -------------------------
+        90 Kochhar                   King
+       100 Chen                      Faviet
+       100 Chen                      Greenberg
+       100 Chen                      Popp
+       100 Chen                      Sciarra
+       100 Chen                      Urman
+       100 Faviet                    Chen
+       100 Faviet                    Greenberg
+       100 Faviet                    Popp
+       100 Faviet                    Sciarra
+       100 Faviet                    Urman
+       100 Greenberg                 Chen
+       100 Greenberg                 Faviet
+       100 Greenberg                 Popp
+       100 Greenberg                 Sciarra
+       100 Greenberg                 Urman
+       100 Popp                      Chen
+       100 Popp                      Faviet
+       100 Popp                      Greenberg
+       100 Popp                      Sciarra
+       100 Popp                      Urman
+       100 Sciarra                   Chen
+       100 Sciarra                   Faviet
+       100 Sciarra                   Greenberg
+       100 Sciarra                   Popp
+       100 Sciarra                   Urman
+       100 Urman                     Chen
+
+DEPARTMENT EMPLOYEE                  COLLEAGUE
+---------- ------------------------- -------------------------
+       100 Urman                     Faviet
+       100 Urman                     Greenberg
+       100 Urman                     Popp
+       100 Urman                     Sciarra
+       110 Gietz                     Higgins
+       110 Higgins                   Gietz
+
+3192 rows selected.
+
+
+7) The HR department needs a report on job grades and salaries. To familiarize yourself with the
+JOB_GRADES table, first show the structure of the JOB_GRADES table. Then create a query that
+displays the name, job, department name, salary, and grade for all employees.
+
+SQL> create table job_grades as (select distinct job_id, (case when job_id = 'AD_PRES' then 'A'
+ when job_id = 'ST_MAN' then 'B'
+ when job_id = 'IT_PROG' then 'C'
+ when job_id = 'SA_REP' then 'D' 
+ when job_id = 'ST_CLERK' then 'E' else '0' end) 
+as Grade from employees);
+
+Table created.
+SQL> select e.first_name, e.last_name, e.job_id, d.department_name, e.salary, g.grade
+  2    from employees e, departments d, job_grades g
+  3    where e.department_id = d.department_id
+  4    and e.job_id = g.job_id
+  5    order by grade;
+
+FIRST_NAME           LAST_NAME                 JOB_ID     DEPARTMENT_NAME                    SALARY G
+-------------------- ------------------------- ---------- ------------------------------ ---------- -
+Michael              Hartstein                 MK_MAN     Marketing                           13000 0
+William              Gietz                     AC_ACCOUNT Accounting                           8300 0
+Shelley              Higgins                   AC_MGR     Accounting                          12008 0
+Nancy                Greenberg                 FI_MGR     Finance                             12008 0
+Pat                  Fay                       MK_REP     Marketing                            6000 0
+Eleni                Zlotkey                   SA_MAN     Sales                               10500 0
+Gerald               Cambrault                 SA_MAN     Sales                               11000 0
+Alberto              Errazuriz                 SA_MAN     Sales                               12000 0
+Karen                Partners                  SA_MAN     Sales                               13500 0
+John                 Russell                   SA_MAN     Sales                               14000 0
+Jennifer             Whalen                    AD_ASST    Administration                       4400 0
+Hermann              Baer                      PR_REP     Public Relations                    10000 0
+Douglas              Grant                     SH_CLERK   Shipping                             2600 0
+Donald               OConnell                  SH_CLERK   Shipping                             2600 0
+Kevin                Feeney                    SH_CLERK   Shipping                             3000 0
+Alana                Walsh                     SH_CLERK   Shipping                             3100 0
+Vance                Jones                     SH_CLERK   Shipping                             2800 0
+Samuel               McCain                    SH_CLERK   Shipping                             3200 0
+Britney              Everett                   SH_CLERK   Shipping                             3900 0
+Sarah                Bell                      SH_CLERK   Shipping                             4000 0
+Randall              Perkins                   SH_CLERK   Shipping                             2500 0
+Timothy              Gates                     SH_CLERK   Shipping                             2900 0
+Jennifer             Dilly                     SH_CLERK   Shipping                             3600 0
+Kelly                Chung                     SH_CLERK   Shipping                             3800 0
+Anthony              Cabrio                    SH_CLERK   Shipping                             3000 0
+Julia                Dellinger                 SH_CLERK   Shipping                             3400 0
+Alexis               Bull                      SH_CLERK   Shipping                             4100 0
+
+FIRST_NAME           LAST_NAME                 JOB_ID     DEPARTMENT_NAME                    SALARY G
+-------------------- ------------------------- ---------- ------------------------------ ---------- -
+Nandita              Sarchand                  SH_CLERK   Shipping                             4200 0
+Girard               Geoni                     SH_CLERK   Shipping                             2800 0
+Martha               Sullivan                  SH_CLERK   Shipping                             2500 0
+Jean                 Fleaur                    SH_CLERK   Shipping                             3100 0
+Winston              Taylor                    SH_CLERK   Shipping                             3200 0
+Susan                Mavris                    HR_REP     Human Resources                      6500 0
+Lex                  De Haan                   AD_VP      Executive                           17000 0
+Neena                Kochhar                   AD_VP      Executive                           17000 0
+Luis                 Popp                      FI_ACCOUNT Finance                              6900 0
+Jose Manuel          Urman                     FI_ACCOUNT Finance                              7800 0
+Ismael               Sciarra                   FI_ACCOUNT Finance                              7700 0
+John                 Chen                      FI_ACCOUNT Finance                              8200 0
+Daniel               Faviet                    FI_ACCOUNT Finance                              9000 0
+Karen                Colmenares                PU_CLERK   Purchasing                           2500 0
+Guy                  Himuro                    PU_CLERK   Purchasing                           2600 0
+Sigal                Tobias                    PU_CLERK   Purchasing                           2800 0
+Shelli               Baida                     PU_CLERK   Purchasing                           2900 0
+Alexander            Khoo                      PU_CLERK   Purchasing                           3100 0
+Den                  Raphaely                  PU_MAN     Purchasing                          11000 0
+Steven               King                      AD_PRES    Executive                           24000 A
+Shanta               Vollman                   ST_MAN     Shipping                             6500 B
+Payam                Kaufling                  ST_MAN     Shipping                             7900 B
+Adam                 Fripp                     ST_MAN     Shipping                             8200 B
+Matthew              Weiss                     ST_MAN     Shipping                             8000 B
+Kevin                Mourgos                   ST_MAN     Shipping                             5800 B
+Diana                Lorentz                   IT_PROG    IT                                   4200 C
+Valli                Pataballa                 IT_PROG    IT                                   4800 C
+
+FIRST_NAME           LAST_NAME                 JOB_ID     DEPARTMENT_NAME                    SALARY G
+-------------------- ------------------------- ---------- ------------------------------ ---------- -
+David                Austin                    IT_PROG    IT                                   4800 C
+Bruce                Ernst                     IT_PROG    IT                                   6000 C
+Alexander            Hunold                    IT_PROG    IT                                   9000 C
+David                Bernstein                 SA_REP     Sales                                9500 D
+Peter                Tucker                    SA_REP     Sales                               10000 D
+Peter                Hall                      SA_REP     Sales                                9000 D
+Christopher          Olsen                     SA_REP     Sales                                8000 D
+Nanette              Cambrault                 SA_REP     Sales                                7500 D
+Oliver               Tuvault                   SA_REP     Sales                                7000 D
+Janette              King                      SA_REP     Sales                               10000 D
+Patrick              Sully                     SA_REP     Sales                                9500 D
+Allan                McEwen                    SA_REP     Sales                                9000 D
+Lindsey              Smith                     SA_REP     Sales                                8000 D
+Louise               Doran                     SA_REP     Sales                                7500 D
+Sarath               Sewall                    SA_REP     Sales                                7000 D
+Clara                Vishney                   SA_REP     Sales                               10500 D
+Danielle             Greene                    SA_REP     Sales                                9500 D
+Mattea               Marvins                   SA_REP     Sales                                7200 D
+David                Lee                       SA_REP     Sales                                6800 D
+Sundar               Ande                      SA_REP     Sales                                6400 D
+Amit                 Banda                     SA_REP     Sales                                6200 D
+Lisa                 Ozer                      SA_REP     Sales                               11500 D
+Harrison             Bloom                     SA_REP     Sales                               10000 D
+Charles              Johnson                   SA_REP     Sales                                6200 D
+Jack                 Livingston                SA_REP     Sales                                8400 D
+Jonathon             Taylor                    SA_REP     Sales                                8600 D
+Alyssa               Hutton                    SA_REP     Sales                                8800 D
+
+FIRST_NAME           LAST_NAME                 JOB_ID     DEPARTMENT_NAME                    SALARY G
+-------------------- ------------------------- ---------- ------------------------------ ---------- -
+Ellen                Abel                      SA_REP     Sales                               11000 D
+Sundita              Kumar                     SA_REP     Sales                                6100 D
+Elizabeth            Bates                     SA_REP     Sales                                7300 D
+William              Smith                     SA_REP     Sales                                7400 D
+Tayler               Fox                       SA_REP     Sales                                9600 D
+Peter                Vargas                    ST_CLERK   Shipping                             2500 E
+Jason                Mallin                    ST_CLERK   Shipping                             3300 E
+Curtis               Davies                    ST_CLERK   Shipping                             3100 E
+Trenna               Rajs                      ST_CLERK   Shipping                             3500 E
+Joshua               Patel                     ST_CLERK   Shipping                             2500 E
+John                 Seo                       ST_CLERK   Shipping                             2700 E
+Stephen              Stiles                    ST_CLERK   Shipping                             3200 E
+Renske               Ladwig                    ST_CLERK   Shipping                             3600 E
+Hazel                Philtanker                ST_CLERK   Shipping                             2200 E
+Ki                   Gee                       ST_CLERK   Shipping                             2400 E
+Michael              Rogers                    ST_CLERK   Shipping                             2900 E
+Julia                Nayer                     ST_CLERK   Shipping                             3200 E
+Irene                Mikkilineni               ST_CLERK   Shipping                             2700 E
+James                Landry                    ST_CLERK   Shipping                             2400 E
+Steven               Markle                    ST_CLERK   Shipping                             2200 E
+Laura                Bissot                    ST_CLERK   Shipping                             3300 E
+Mozhe                Atkinson                  ST_CLERK   Shipping                             2800 E
+James                Marlow                    ST_CLERK   Shipping                             2500 E
+TJ                   Olson                     ST_CLERK   Shipping                             2100 E
+Randall              Matos                     ST_CLERK   Shipping                             2600 E
+
+106 rows selected.
+8) The HR department wants to determine the names of all the employees who were hired after Davies.
+Create a query to display the name and hire date of any employee hired after employee Davies.
+
+SQL> SELECT e.last_name, e.hire_date
+  2  FROM employees e, employees davies
+  3  WHERE davies.last_name = ’Davies’
+  4  AND davies.hire_date < e.hire_date;
+
+LAST_NAME                 HIRE_DATE
+------------------------- ---------
+Kochhar                   21-SEP-05
+Hunold                    03-JAN-06
+Ernst                     21-MAY-07
+Austin                    25-JUN-05
+Pataballa                 05-FEB-06
+Lorentz                   07-FEB-07
+Chen                      28-SEP-05
+Sciarra                   30-SEP-05
+Urman                     07-MAR-06
+Popp                      07-DEC-07
+Baida                     24-DEC-05
+Tobias                    24-JUL-05
+Himuro                    15-NOV-06
+Colmenares                10-AUG-07
+Fripp                     10-APR-05
+Vollman                   10-OCT-05
+Mourgos                   16-NOV-07
+Nayer                     16-JUL-05
+Mikkilineni               28-SEP-06
+Landry                    14-JAN-07
+Markle                    08-MAR-08
+Bissot                    20-AUG-05
+Atkinson                  30-OCT-05
+Marlow                    16-FEB-05
+Olson                     10-APR-07
+Rogers                    26-AUG-06
+Gee                       12-DEC-07
+
+LAST_NAME                 HIRE_DATE
+------------------------- ---------
+Philtanker                06-FEB-08
+Stiles                    26-OCT-05
+Seo                       12-FEB-06
+Patel                     06-APR-06
+Matos                     15-MAR-06
+Vargas                    09-JUL-06
+Errazuriz                 10-MAR-05
+Cambrault                 15-OCT-07
+Zlotkey                   29-JAN-08
+Tucker                    30-JAN-05
+Bernstein                 24-MAR-05
+Hall                      20-AUG-05
+Olsen                     30-MAR-06
+Cambrault                 09-DEC-06
+Tuvault                   23-NOV-07
+Smith                     10-MAR-05
+Doran                     15-DEC-05
+Sewall                    03-NOV-06
+Vishney                   11-NOV-05
+Greene                    19-MAR-07
+Marvins                   24-JAN-08
+Lee                       23-FEB-08
+Ande                      24-MAR-08
+Banda                     21-APR-08
+Ozer                      11-MAR-05
+Bloom                     23-MAR-06
+Fox                       24-JAN-06
+
+LAST_NAME                 HIRE_DATE
+------------------------- ---------
+Smith                     23-FEB-07
+Bates                     24-MAR-07
+Kumar                     21-APR-08
+Hutton                    19-MAR-05
+Taylor                    24-MAR-06
+Livingston                23-APR-06
+Grant                     24-MAY-07
+Johnson                   04-JAN-08
+Taylor                    24-JAN-06
+Fleaur                    23-FEB-06
+Sullivan                  21-JUN-07
+Geoni                     03-FEB-08
+Bull                      20-FEB-05
+Dellinger                 24-JUN-06
+Cabrio                    07-FEB-07
+Chung                     14-JUN-05
+Dilly                     13-AUG-05
+Gates                     11-JUL-06
+Perkins                   19-DEC-07
+Everett                   03-MAR-05
+McCain                    01-JUL-06
+Jones                     17-MAR-07
+Walsh                     24-APR-06
+Feeney                    23-MAY-06
+OConnell                  21-JUN-07
+Grant                     13-JAN-08
+Fay                       17-AUG-05
+
+81 rows selected.
+
+
+9) The HR department needs to find the names and hire dates of all the employees who were hired
+before their managers, along with their managers’ names and hire dates.'
+
+SQL> SELECT w.last_name, w.hire_date, m.last_name, m.hire_date
+  2  FROM employees w, employees m
+  3  WHERE w.manager_id = m.employee_id
+  4  AND w.hire_date < m.hire_date;
+
+LAST_NAME                 HIRE_DATE LAST_NAME                 HIRE_DATE
+------------------------- --------- ------------------------- ---------
+Kaufling                  01-MAY-03 King                      17-JUN-03
+Raphaely                  07-DEC-02 King                      17-JUN-03
+De Haan                   13-JAN-01 King                      17-JUN-03
+Higgins                   07-JUN-02 Kochhar                   21-SEP-05
+Baer                      07-JUN-02 Kochhar                   21-SEP-05
+Mavris                    07-JUN-02 Kochhar                   21-SEP-05
+Whalen                    17-SEP-03 Kochhar                   21-SEP-05
+Greenberg                 17-AUG-02 Kochhar                   21-SEP-05
+Austin                    25-JUN-05 Hunold                    03-JAN-06
+Faviet                    16-AUG-02 Greenberg                 17-AUG-02
+Bull                      20-FEB-05 Fripp                     10-APR-05
+Sarchand                  27-JAN-04 Fripp                     10-APR-05
+Marlow                    16-FEB-05 Fripp                     10-APR-05
+Everett                   03-MAR-05 Vollman                   10-OCT-05
+Bell                      04-FEB-04 Vollman                   10-OCT-05
+Ladwig                    14-JUL-03 Vollman                   10-OCT-05
+OConnell                  21-JUN-07 Mourgos                   16-NOV-07
+Feeney                    23-MAY-06 Mourgos                   16-NOV-07
+Walsh                     24-APR-06 Mourgos                   16-NOV-07
+Vargas                    09-JUL-06 Mourgos                   16-NOV-07
+Matos                     15-MAR-06 Mourgos                   16-NOV-07
+Davies                    29-JAN-05 Mourgos                   16-NOV-07
+Rajs                      17-OCT-03 Mourgos                   16-NOV-07
+McEwen                    01-AUG-04 Partners                  05-JAN-05
+Sully                     04-MAR-04 Partners                  05-JAN-05
+King                      30-JAN-04 Partners                  05-JAN-05
+Bates                     24-MAR-07 Cambrault                 15-OCT-07
+
+LAST_NAME                 HIRE_DATE LAST_NAME                 HIRE_DATE
+------------------------- --------- ------------------------- ---------
+Smith                     23-FEB-07 Cambrault                 15-OCT-07
+Fox                       24-JAN-06 Cambrault                 15-OCT-07
+Bloom                     23-MAR-06 Cambrault                 15-OCT-07
+Ozer                      11-MAR-05 Cambrault                 15-OCT-07
+Johnson                   04-JAN-08 Zlotkey                   29-JAN-08
+Grant                     24-MAY-07 Zlotkey                   29-JAN-08
+Livingston                23-APR-06 Zlotkey                   29-JAN-08
+Taylor                    24-MAR-06 Zlotkey                   29-JAN-08
+Hutton                    19-MAR-05 Zlotkey                   29-JAN-08
+Abel                      11-MAY-04 Zlotkey                   29-JAN-08
+
+37 rows selected.

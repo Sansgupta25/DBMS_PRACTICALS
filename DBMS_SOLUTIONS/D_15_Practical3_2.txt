@@ -1,0 +1,419 @@
+Task :- 2 
+
+Name:- Sanskriti Gupta
+Roll no:- 15
+Batch :- D1
+
+SQL> spool
+currently spooling to C:\DBMS_lab\practical3_2.sql
+
+SQL> connect scott
+Connected.
+SQL> clear screen
+
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+
+14 rows selected.
+
+/*1. Find the highest sal of EMP table*/
+SQL> select max(sal) from emp;
+
+  MAX(SAL)                                                                      
+----------                                                                      
+      5000                                                                      
+
+SQL> select max(sal) from emp where sal = (select max(sal) from emp);
+
+  MAX(SAL)                                                                      
+----------                                                                      
+      5000                                                                      
+
+/*2. Find details of highest paid employee.*/
+SQL> select *  from emp where sal = (select max(sal) from emp);
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+
+                                                                
+/*3. Find the highest paid employee of sales department*/
+SQL> select Empno,ename,sal from emp where sal = (select max(sal) from emp where job = 'SALESMAN');
+
+     EMPNO ENAME             SAL                                                
+---------- ---------- ----------                                                
+      7499 ALLEN            1600                                                
+/*4. Find the total sal given to the MGR*/
+SQL> select mgr,sum(sal) from emp group by mgr;
+
+       MGR   SUM(SAL)                                                           
+---------- ----------                                                           
+      7839       8275                                                           
+                 5000                                                           
+      7782       1300                                                           
+      7698       6550                                                           
+      7902        800                                                           
+      7566       6000                                                           
+      7788       1100                                                           
+
+7 rows selected.
+
+/*5. Find the total annual sal to distribute job wise in the year 81.*/
+SQL> select job,sum(12*sal) from emp where hiredate like '%81' group by job;
+
+JOB       SUM(12*SAL)                                                           
+--------- -----------                                                           
+SALESMAN        67200                                                           
+CLERK           11400                                                           
+PRESIDENT       60000                                                           
+MANAGER         99300                                                           
+ANALYST         36000                                                           
+
+SQL> select job,sum(12*sal) as "Total sal" from emp where hiredate like '%81' group by job;
+
+JOB        Total sal                                                            
+--------- ----------                                                            
+SALESMAN       67200                                                            
+CLERK          11400                                                            
+PRESIDENT      60000                                                            
+MANAGER        99300                                                            
+ANALYST        36000                                                            
+
+/*6. Display the average salaries of all the clerks.*/
+SQL> select avg(sal) from emp where job like 'CLERK';
+
+  AVG(SAL)                                                                      
+----------                                                                      
+    1037.5       
+/*7. List the employeein dept 20 whose sal is &gt;the average sal 0f dept 10 emps*/                                                               
+
+SQL> select * from emp where deptno = 20 and sal > (select avg(sal) from emp where deptno=10 );
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+
+/*8. Display the number of employee for each job group deptno wise*/
+SQL> select job,count(*),deptno from emp group by job,deptno;
+
+JOB         COUNT(*)     DEPTNO                                                 
+--------- ---------- ----------                                                 
+MANAGER            1         20                                                 
+PRESIDENT          1         10                                                 
+CLERK              1         10                                                 
+SALESMAN           4         30                                                 
+ANALYST            2         20                                                 
+MANAGER            1         30                                                 
+MANAGER            1         10                                                 
+CLERK              1         30                                                 
+CLERK              2         20                                                 
+
+9 rows selected.
+
+/*9. List the manage rno and the number of employees working for those mgrs in the
+ascending Mgrno.*/
+SQL> select empno from emp where job like 'MANAGER';
+
+     EMPNO                                                                      
+----------                                                                      
+      7566                                                                      
+      7698                                                                      
+      7782                                                                      
+
+SQL> select ename,empno from emp where job like 'MANAGER';
+
+ENAME           EMPNO                                                           
+---------- ----------                                                           
+JONES            7566                                                           
+BLAKE            7698                                                           
+CLARK            7782      
+
+/*10. List departmentwise employee count*/                                                     
+
+SQL> select deptno,count(*) from emp group by deptno;
+
+    DEPTNO   COUNT(*)                                                           
+---------- ----------                                                           
+        30          6                                                           
+        20          5                                                           
+        10          3                                                           
+
+
+
+SQL> select deptno from emp group by deptno having count(*)>=2;
+
+    DEPTNO                                                                      
+----------                                                                      
+        30                                                                      
+        20                                                                      
+        10                                                                      
+/*11. List the department, details where at least two emps are working*/
+SQL> select deptno,count(*) from emp group by deptno having count(*)>=2;
+
+    DEPTNO   COUNT(*)                                                           
+---------- ----------                                                           
+        30          6                                                           
+        20          5                                                           
+        10          3                                                           
+
+/*12. List the names of the emps who are getting the highest sal dept wise.*/
+SQL> select max(sal),deptno from emp group by deptno;
+
+  MAX(SAL)     DEPTNO                                                           
+---------- ----------                                                           
+      2850         30                                                           
+      3000         20                                                           
+      5000         10                                                           
+
+/*13. List the emps whose sal is greater than or equal to the average of max and minimum*/
+SQL> select * from emp where sal in (select max(sal) from emp group by deptno);
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+
+
+SQL> select * from emp where sal >= (select max(sal)+min(sal)/2 from emp) ;
+
+no rows selected
+
+SQL> select * from emp where sal >= (select (max(sal)+min(sal))/2 from emp) ;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7566 JONES      MANAGER         7839 02-APR-81       2975                 
+        20                                                                      
+                                                                                
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                 
+        20                                                                      
+                                                                                
+      7839 KING       PRESIDENT            17-NOV-81       5000                 
+        10                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                 
+        20                                                                      
+                                                                                
+/*14. List the no. of emps in each department where the no. is more than 3.*/
+SQL> select deptno,count(empno) from emp group by deptno having count(empno)>=3;
+
+    DEPTNO COUNT(EMPNO)                                                         
+---------- ------------                                                         
+        30            6                                                         
+        20            5                                                         
+        10            3                                                         
+
+
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                             
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                             
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20                                             
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                             
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30                                             
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                             
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30                                             
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                             
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                             
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                             
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                             
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30                                             
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20                                             
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                             
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                             
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10                                             
+
+14 rows selected.
+
+/*15. Find out how may Managers are their in the company.*/
+SQL> select count(empno),job from emp group by job having job like 'MANAGER';
+
+COUNT(EMPNO) JOB                                                                                                                  
+------------ ---------                                                                                                            
+           3 MANAGER                                                                                                              
+/*16. Check whether all the emps numbers are indeed unique*/
+SQL> select unique(empno) from emp;
+
+     EMPNO                                                                                                                        
+----------                                                                                                                        
+      7369                                                                                                                        
+      7499                                                                                                                        
+      7521                                                                                                                        
+      7566                                                                                                                        
+      7654                                                                                                                        
+      7698                                                                                                                        
+      7782                                                                                                                        
+      7788                                                                                                                        
+      7839                                                                                                                        
+      7844                                                                                                                        
+      7876                                                                                                                        
+      7900                                                                                                                        
+      7902                                                                                                                        
+      7934                                                                                                                        
+
+14 rows selected.
+
+/*17. Find all the emps who earn the minimum Salary for each job wise in ascending
+order.*/
+SQL> select * from emp where sal in (select max(sal) from emp group by job) order by sal desc;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                             
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                             
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                             
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                             
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                             
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                             
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                             
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10                                             
+
+6 rows selected.
+
+
+/*17. Find all the emps who earn the minimum Salary for each job wise in ascending
+order.*/
+SELECT * FROM EMP EMP WHERE SAL IN(SELECT MIN (SAL) FROM EMP GROUP BY JOB) ORDER BY SAL ASC;
+
+ EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+
+7 rows selected.
+
+/*18. Find out all the emps who earn highest salary in each job type. Sort in descending salary order.*/
+
+SELECT * FROM EMP EMP WHERE SAL IN(SELECT MAX(SAL) FROM EMP GROUP BY JOB) ORDER BY SAL desc;
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+
+6 rows selected.
+
+/*19. List the Deptno where there are no emps.*/
+SQL> select job,avg(sal) from emp group by job having job not like 'PRESIDENT';
+JOB         AVG(SAL)
+--------- ----------
+CLERK         1037.5
+SALESMAN        1400
+MANAGER   2758.33333
+ANALYST         3000
+
+/*20. List the No.of emp’s and Avg salary within each department for each job.*/
+
+
+SELECT DEPTNO,AVG(SAL),COUNT(*),JOB FROM EMP GROUP BY DEPTNO,JOB;
+
+    DEPTNO   AVG(SAL)   COUNT(*) JOB
+---------- ---------- ---------- ---------
+        20        950          2 CLERK
+        30       1400          4 SALESMAN
+        20       2975          1 MANAGER
+        30        950          1 CLERK
+        10       5000          1 PRESIDENT
+        30       2850          1 MANAGER
+        10       1300          1 CLERK
+        10       2450          1 MANAGER
+        20       3000          2 ANALYST
+
+9 rows selected.
+
+/*21. Find the maximum average salary drawn for each job except for ‘President’.*/
+SQL> select avg(sal) from emp group by job having job not like 'PRESIDENT';
+
+  AVG(SAL)                                                                                                                        
+----------                                                                                                                        
+    1037.5                                                                                                                        
+      1400                                                                                                                        
+2758.33333                                                                                                                        
+      3000      
+
+/*22. List the highest paid emp.*/
+SQL> select * from emp where sal in (select max(sal) from emp);
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                             
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                             
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                             
+/*23. List the details of most recently hired emp of dept 30.*/
+SQL> select * from emp where hiredate in (select max(hiredate) from emp where deptno=30);
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                             
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                             
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                             
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20   
+
+
+
+/*24. Find the count of employee, average salary and sum of the salary*/
+SQL> select count(ename), avg(sal) , sum(sal) from emp;
+
+COUNT(ENAME)   AVG(SAL)   SUM(SAL)                                              
+------------ ---------- ----------                                              
+          14 2073.21429      29025                                              
+
+/*25. Find the count of employee, average salary and sum of the salary and group by
+department number wise in the ascending order*/
+SQL> select deptno,count(*),avg(sal),sum(sal) from emp group by deptno order by deptno;
+
+    DEPTNO   COUNT(*)   AVG(SAL)   SUM(SAL)                                     
+---------- ---------- ---------- ----------                                     
+        10          3 2916.66667       8750                                     
+        20          5       2175      10875                                     
+        30          6 1566.66667       9400           
+/*26. Find the count of employee, average salary and sum of the salary and group by
+department number wise and job wise and in the ascending order of dept number
+and Job.*/
+SQL> select job,deptno,count(*),avg(sal),sum(sal) from emp group by deptno,job order by deptno,job;
+
+JOB           DEPTNO   COUNT(*)   AVG(SAL)   SUM(SAL)                           
+--------- ---------- ---------- ---------- ----------                           
+CLERK             10          1       1300       1300                           
+MANAGER           10          1       2450       2450                           
+PRESIDENT         10          1       5000       5000                           
+ANALYST           20          2       3000       6000                           
+CLERK             20          2        950       1900                           
+MANAGER           20          1       2975       2975                           
+CLERK             30          1        950        950                           
+MANAGER           30          1       2850       2850                           
+SALESMAN          30          4       1400       5600                           
+
+9 rows selected.
+
+SQL> spool off

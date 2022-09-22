@@ -1,0 +1,221 @@
+NAME:- SANSKRITI GUPTA
+ROLL NO :- 15 
+BATCH :- D2
+
+PRACTICAL – 10
+
+Aim : Execution of database triggers on the database tables for automatically generating the values and maintaining the referential integrity constraints.
+
+1. Write a trigger which display a message “Row will be updated” before any updation of salary of employee table.
+
+CREATE OR REPLACE TRIGGER T_EMP_COPY 
+BEFORE UPDATE 
+OF SALARY 
+ON EMP_COPY
+FOR EACH ROW 
+WHEN(NEW.EMPLOYEE_ID > 0) 
+BEGIN 
+DBMS_OUTPUT.PUT_LINE('SALARY WILL BE UPDATED ' ) ;
+END ; 
+/ 
+
+SQL> @d:/plsql.sql;
+
+Trigger created.
+
+SQL> UPDATE EMP_COPY SET SALARY = 1000 WHERE EMPLOYEE_ID = 202 ;
+SALARY WILL BE UPDATED
+
+1 rows updated.
+
+
+
+2. Write a trigger that will display the difference between salaries after a row is inserted or updated in the emp_copy table.
+
+CREATE OR REPLACE TRIGGER T_EMP_COPY 
+AFTER UPDATE 
+OF SALARY 
+ON EMP_COPY
+FOR EACH ROW 
+WHEN(NEW.EMPLOYEE_ID > 0) 
+BEGIN 
+DBMS_OUTPUT.PUT_LINE('OLD SALARY WAS -  ' || :OLD.SALARY ) ;
+DBMS_OUTPUT.PUT_LINE('NEW SALARY WAS -  ' || :NEW.SALARY ) ;
+END ; 
+/ 
+SQL> UPDATE EMP_COPY SET SALARY = 1000 WHERE EMPLOYEE_ID = 199 ;
+OLD SALARY WAS -  2600
+NEW SALARY WAS -  1000
+
+1 row updated.
+
+SQL>
+SQL> UPDATE EMP_COPY SET SALARY = 1000 WHERE EMPLOYEE_ID = 204 ;
+OLD SALARY WAS -  10000
+NEW SALARY WAS -  1000
+
+1 row updated.
+
+
+
+3. Write a trigger to warn the user if row of King is being deleted.
+
+CREATE OR REPLACE TRIGGER t2_emp_copy
+BEFORE DELETE
+ON emp_copy
+FOR EACH ROW
+BEGIN
+dbms_output.put_line('Row of king is being deleted');
+END;
+/
+OUTPUT:
+SQL> @C:\Users\HP\Documents\d9prac103.sql;
+Trigger created.
+SQL> delete from emp_copy where last_name='King';
+Row of king is being deleted
+Row of king is being deleted
+
+2 rows deleted.
+
+
+4. Create a view v1 that displays employee_id, last_name, department_id, and department_name.
+
+create view v2 as select e.employee_id , d.department_id,d.department_name,e.last_name from departments d, employees e where d.department_id=e.department_id;
+
+View created.
+SQL> select * from v2;
+
+EMPLOYEE_ID DEPARTMENT_ID DEPARTMENT_NAME                LAST_NAME
+----------- ------------- ------------------------------ -------------------------
+        100            90 Executive                      King
+        101            90 Executive                      Kochhar
+        102            90 Executive                      De Haan
+        103            60 IT                             Hunold
+        104            60 IT                             Ernst
+        105            60 IT                             Austin
+        106            60 IT                             Pataballa
+        107            60 IT                             Lorentz
+        108           100 Finance                        Greenberg
+        109           100 Finance                        Faviet
+        110           100 Finance                        Chen
+        111           100 Finance                        Sciarra
+        112           100 Finance                        Urman
+        113           100 Finance                        Popp
+        114            30 Purchasing                     Raphaely
+        115            30 Purchasing                     Khoo
+        116            30 Purchasing                     Baida
+        117            30 Purchasing                     Tobias
+        118            30 Purchasing                     Himuro
+        119            30 Purchasing                     Colmenares
+        120            50 Shipping                       Weiss
+        121            50 Shipping                       Fripp
+        122            50 Shipping                       Kaufling
+        123            50 Shipping                       Vollman
+        124            50 Shipping                       Mourgos
+        125            50 Shipping                       Nayer
+        126            50 Shipping                       Mikkilineni
+        127            50 Shipping                       Landry
+        128            50 Shipping                       Markle
+        129            50 Shipping                       Bissot
+        130            50 Shipping                       Atkinson
+        131            50 Shipping                       Marlow
+        132            50 Shipping                       Olson
+        133            50 Shipping                       Mallin
+        134            50 Shipping                       Rogers
+        135            50 Shipping                       Gee
+        136            50 Shipping                       Philtanker
+        137            50 Shipping                       Ladwig
+        138            50 Shipping                       Stiles
+        139            50 Shipping                       Seo
+        140            50 Shipping                       Patel
+        141            50 Shipping                       Rajs
+        142            50 Shipping                       Davies
+        143            50 Shipping                       Matos
+        144            50 Shipping                       Vargas
+        145            80 Sales                          Russell
+        146            80 Sales                          Partners
+
+EMPLOYEE_ID DEPARTMENT_ID DEPARTMENT_NAME                LAST_NAME
+----------- ------------- ------------------------------ -------------------------
+        147            80 Sales                          Errazuriz
+        148            80 Sales                          Cambrault
+        149            80 Sales                          Zlotkey
+        150            80 Sales                          Tucker
+        151            80 Sales                          Bernstein
+        152            80 Sales                          Hall
+        153            80 Sales                          Olsen
+        154            80 Sales                          Cambrault
+        155            80 Sales                          Tuvault
+        156            80 Sales                          King
+        157            80 Sales                          Sully
+        158            80 Sales                          McEwen
+        159            80 Sales                          Smith
+        160            80 Sales                          Doran
+        161            80 Sales                          Sewall
+        162            80 Sales                          Vishney
+        163            80 Sales                          Greene
+        164            80 Sales                          Marvins
+        165            80 Sales                          Lee
+        166            80 Sales                          Ande
+        167            80 Sales                          Banda
+        168            80 Sales                          Ozer
+        169            80 Sales                          Bloom
+        170            80 Sales                          Fox
+        171            80 Sales                          Smith
+        172            80 Sales                          Bates
+        173            80 Sales                          Kumar
+        174            80 Sales                          Abel
+        175            80 Sales                          Hutton
+        176            80 Sales                          Taylor
+        177            80 Sales                          Livingston
+        179            80 Sales                          Johnson
+        180            50 Shipping                       Taylor
+        181            50 Shipping                       Fleaur
+        182            50 Shipping                       Sullivan
+        183            50 Shipping                       Geoni
+        184            50 Shipping                       Sarchand
+        185            50 Shipping                       Bull
+        186            50 Shipping                       Dellinger
+        187            50 Shipping                       Cabrio
+        188            50 Shipping                       Chung
+        189            50 Shipping                       Dilly
+        190            50 Shipping                       Gates
+        191            50 Shipping                       Perkins
+        192            50 Shipping                       Bell
+        193            50 Shipping                       Everett
+        194            50 Shipping                       McCain
+
+EMPLOYEE_ID DEPARTMENT_ID DEPARTMENT_NAME                LAST_NAME
+----------- ------------- ------------------------------ -------------------------
+        195            50 Shipping                       Jones
+        196            50 Shipping                       Walsh
+        197            50 Shipping                       Feeney
+        198            50 Shipping                       OConnell
+        199            50 Shipping                       Grant
+        200            10 Administration                 Whalen
+        201            20 Marketing                      Hartstein
+        202            20 Marketing                      Fay
+        203            40 Human Resources                Mavris
+        204            70 Public Relations               Baer
+        205           110 Accounting                     Higgins
+        206           110 Accounting                     Gietz
+
+106 rows selected.
+
+
+5. Write a INSTEAD OF UPDATE trigger to update department_name of department_id 50.
+
+CREATE OR REPLACE TRIGGER t4_emp_copy
+INSTEAD OF UPDATE
+ON v2
+FOR EACH ROW
+BEGIN
+dbms_output.put_line('Row updated');
+END;
+/
+OUTPUT:
+SQL> @C:\Users\HP\Documents\d9prac105.sql;
+Trigger created.
+SQL> update v2 set department_name='newd' where department_id=50;
+Row updated
+1 row updated

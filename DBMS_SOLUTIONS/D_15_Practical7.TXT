@@ -1,0 +1,492 @@
+NAME :- SANSKRITI GUPTA
+ROLL NO :- 15 
+
+1. Write a PL/SQL block to find the maximum number from given three numbers.
+
+DECLARE 
+num1 number(5) := '&num1'; 
+num2 number(5) := '&num2';
+num3 number(5) := '&num3'; 
+ 
+BEGIN 
+IF NUM1 > NUM2  AND NUM1>NUM3 THEN
+dbms_output.Put_line('Greatest number is ' ||NUM1);
+ELSIF NUM2 > NUM1  AND NUM2>NUM3 THEN
+dbms_output.Put_line('Greatest number is ' ||NUM2);
+else 
+dbms_output.Put_line('Greatest number is ' ||NUM3);
+END IF ; 
+END ;
+/
+
+
+
+SQL> set serveroutput on
+SQL> @d:/plsql1.sql
+Enter value for num1: 5
+old   2: num1 number(5) := '&num1';
+new   2: num1 number(5) := '5';
+Enter value for num2: 8
+old   3: num2 number(5) := '&num2';
+new   3: num2 number(5) := '8';
+Enter value for num3: 7
+old   4: num3 number(5) := '&num3';
+new   4: num3 number(5) := '7';
+Greatest number is 8
+
+PL/SQL procedure successfully completed.
+
+
+
+2. Write a PL/SQL program for swapping 2 numbers.
+
+
+DECLARE 
+num1 number(5) := '&num1'; 
+num2 number(5) := '&num2';
+temp number;
+BEGIN 
+ dbms_output.put_line('before');
+ dbms_output.put_line('number1 = '|| num1 ||' number2 = '|| num2);
+
+temp := num1;
+    num1 := num2;
+    num2 := temp;
+dbms_output.put_line('after');
+    dbms_output.put_line('num1 = '|| num1 ||' num2 = '|| num2);
+      
+
+END ;
+/
+
+
+
+SQL> @d:/plsql1.sql
+Enter value for num1: 8
+old   2: num1 number(5) := '&num1';
+new   2: num1 number(5) := '8';
+Enter value for num2: 10
+old   3: num2 number(5) := '&num2';
+new   3: num2 number(5) := '10';
+before
+number1 = 8 number2 = 10
+after
+num1 = 10 num2 = 8
+
+PL/SQL procedure successfully completed.
+
+
+
+
+3. Write a PL/SQL program to find the total and average of 4 subjects and display the grade.
+
+
+DECLARE 
+eng number(5):= '&eng';
+math number(5):= '&math';
+chem number(5):= '&chem'; 
+phy number(5):= '&phy' ;
+TOTAL NUMBER(5);
+AVG1 NUMBER(5,2) ;
+grade varchar2(10);
+BEGIN 
+ TOTAL := ENG + MATH + CHEM + PHY;
+ dbms_output.put_line('TOTAL OF ALL THE SUBJECTS IS - ' || TOTAL );
+AVG1 := TOTAL/4;
+dbms_output.put_line('AVERAGE OF ALL SUBJECTS IS - '|| AVG1);
+    
+IF AVG1<70 THEN 
+grade:='FAIL';
+dbms_output.put_line('grade is  ' || grade );
+
+ELSE 
+grade:='PASS';
+dbms_output.put_line('grade is  ' || grade );
+
+END IF;      
+END ;
+/
+
+SQL> @e:/plsql.sql
+Enter value for eng: 85
+old   2: eng number(5):= '&eng';
+new   2: eng number(5):= '85';
+Enter value for math: 75
+old   3: math number(5):= '&math';
+new   3: math number(5):= '75';
+Enter value for chem: 95
+old   4: chem number(5):= '&chem';
+new   4: chem number(5):= '95';
+Enter value for phy: 89
+old   5: phy number(5):= '&phy' ;
+new   5: phy number(5):= '89' ;
+TOTAL OF ALL THE SUBJECTS IS - 344
+AVERAGE OF ALL SUBJECTS IS - 86
+grade is  PASS
+
+PL/SQL procedure successfully completed.
+
+4. Write a program to accept a number and find the sum of the digits.
+
+DECLARE 
+
+    n number(7):=&num; 
+    temp_sum INTEGER; 
+    r        INTEGER; 
+BEGIN  
+    temp_sum := 0; 
+  
+    WHILE n <> 0 LOOP 
+        r := MOD(n, 10); 
+        temp_sum := temp_sum + r; 
+        n := Trunc(n / 10); 
+    END LOOP; 
+    dbms_output.Put_line('sum of digits = ' || temp_sum); 
+END;
+/
+
+
+
+SQL> @e:/plsql.sql
+Enter value for num: 123456
+old   3:     n number(7):=&num;
+new   3:     n number(7):=123456;
+sum of digits = 21
+
+PL/SQL procedure successfully completed.
+
+
+5. PL/SQL Program to accept a number and print it’s reverse.
+
+DECLARE 
+num number(5) := '&num'; 
+reverse NUMBER:=0; 
+BEGIN
+WHILE num>0 LOOP
+reverse:=(reverse*10) + mod(num,10);
+num:=floor(num/10);
+END LOOP;
+DBMS_OUTPUT.PUT_LINE('Reverse of the number is: ' || reverse);
+END;
+/                        
+
+
+
+SQL> @d:/plsql1.sql
+Enter value for num: 1547
+old   2: num number(5) := '&num';
+new   2: num number(5) := '1547';
+Reverse of the number is: 7451
+
+PL/SQL procedure successfully completed.
+
+SQL>
+
+6. Write a PL / SQL program to check whether the given number is prime or not.
+
+declare
+       num number:=&num;
+       i number:=1;
+       temp number:=0;
+  begin
+      
+       for i in 1..num
+       loop
+          if((mod(num,i))=0)
+           then
+              temp:=temp+1;
+         end if;
+      end loop;
+     if(temp>2)
+     then
+         dbms_output.put_line(num||' not a prime');
+     else
+        dbms_output.put_line(num||' is prime');
+     end if;
+  end;
+   /
+
+
+
+PL/SQL procedure successfully completed.
+
+SQL> @d:/plsql1.sql
+Enter value for num: 15
+old   2:        num number:=&num;
+new   2:        num number:=15;
+15 not a prime
+
+PL/SQL procedure successfully completed.
+
+
+
+7. Write a PL/SQL program to find the factorial of a given number.
+
+declare
+fac number :=1;  
+n number := &num;  
+begin            
+while n > 0 loop  
+fac:=n*fac;        
+n:=n-1;          
+end loop;        
+dbms_output.put_line(fac);  
+end;
+/   
+
+SQL> @d:/plsql2.sql;
+Enter value for num: 6
+old   3: n number := &num;
+new   3: n number := 6;
+720
+
+PL/SQL procedure successfully completed.
+
+8. Calculate the area of a circle for a value of radius varying from 3 to 7. Store the radius and
+the corresponding values of calculated area in table areas consisting of two columns radius and
+area.    
+
+
+
+SQL> create table areas (
+  2  r number(2),
+  3  area number (14,2)
+  4  );
+
+
+declare
+r number(5);
+area number(14,2);
+pi constant number (4,2):=3.14;
+begin
+for r in 3..7
+loop
+area:=pi*power(r,2);
+insert into areas(r,AREA) values(r,area );
+end loop;
+end;
+/
+
+
+
+SQL> @d:/plsql2.sql;
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from areas ;
+
+         R       AREA
+---------- ----------
+         3      28.26
+         4      50.24
+         5       78.5
+         6     113.04
+         7     153.86
+
+
+9. Create an anonymous block.
+(a) Add a declarative section to this PL/SQL block. In the declarative section, declare the
+following variables:
+Variable v_today of type DATE. Initialize today with SYSDATE
+Variable v_tomorrow of type today. Use %TYPE attribute to declare this variable.
+(b) In the executable section, initialize the tomorrow variable with an expression, which
+calculates tomorrow’s date (add one to the value in today). Print the value of today and
+tomorrow after printing “Hello World.”
+
+
+
+DECLARE
+v_today DATE := SYSDATE;
+v_tomorow v_today%TYPE := SYSDATE +1;
+BEGIN
+DBMS_OUTPUT.PUT_LINE('Hello World');
+DBMS_OUTPUT.PUT_LINE(v_today);
+DBMS_OUTPUT.PUT_LINE(v_tomorow);
+END;
+/
+
+
+SQL> @d:/plsql2.sql;
+Hello World
+28-JUN-22
+29-JUN-22
+
+PL/SQL procedure successfully completed.
+
+10. Add code to Q9 to create two bind variables. Create bind variables b_basic_percent and
+b_pf_percent of type NUMBER. In the executable section of the PL/SQL block, assign the
+values 45 and 12 to b_basic_percent and b_pf_percent, respectively. Display the value of the
+bind variables by using the PRINT command.
+
+variable b_basic_percent number;
+variable b_pf_percent number;
+
+declare
+b_basic_percent number :=45;
+b_pf_percent number :=12;
+BEGIN
+dbms_output.put_line('value of b_basic_percent number is '||b_basic_percent );
+dbms_output.put_line('value of b_pf_percent number is '||b_pf_percent );
+END;
+/
+
+
+
+SQL> @"E:\plsql.sql";
+value of b_basic_percent number is 45
+value of b_pf_percent number is 12
+
+PL/SQL procedure successfully completed.
+
+11. Create two bind variables v_fname and v_emp_sal. Display first name and salary of
+employee id 110 using these bind variables. Sample output is :
+Hello John
+Your salary is : 8200
+
+DECLARE
+    v_fname VARCHAR2(15);
+    v_emp_sal NUMBER(10);
+    
+BEGIN
+    
+    
+    SELECT first_name, salary
+    INTO v_fname, v_emp_sal
+    FROM employees
+    WHERE employee_id = 110;
+    
+ 
+    DBMS_OUTPUT.put_line('Hello '||v_fname);
+    DBMS_OUTPUT.put_line('Salary: '||v_emp_sal);
+  
+END;
+/
+
+
+SQL> @e:/plsql.sql
+Hello John
+Salary: 8200
+
+PL/SQL procedure successfully completed.
+
+
+12. Calculate the contribution of the employee toward provident fund (PF). PF is 12% of the
+basic salary and basic salary is 45% of the salary. Use the local variables for the calculation. Try
+and use only one expression to calculate the PF. Print the employee’s salary and his
+contribution toward PF.
+
+declare 
+PF NUMBER(7) ;
+FNAME VARCHAR(20);
+SAL NUMBER(7);
+BEGIN 
+SELECT FIRST_NAME , SALARY INTO FNAME , SAL FROM EMPLOYEES WHERE EMPLOYEE_ID = 100;
+PF := (0.45 *SAL ) *0.12 ;
+DBMS_OUTPUT . PUT_LINE('HELLO ' || FNAME);
+DBMS_OUTPUT . PUT_LINE('YOUR SALARY IS - ' || SAL);
+DBMS_OUTPUT . PUT_LINE('YOUR CONTIBUTION TOWARDS PF -  ' || FNAME || ' IS ' || PF);
+END;
+/
+
+SQL> @E:/plsql.sql
+HELLO Steven
+YOUR SALARY IS - 24000
+YOUR CONTIBUTION TOWARDS PF -  Steven IS 1296
+
+PL/SQL procedure successfully completed.
+
+
+13. Create a copy of employees table names emp_copy. Add a column stars to this table. For
+every $1000 salary, your PL/SQL script should add a star in the stars column. Sample output:
+First_name Salary Stars
+John 1000 *
+Smith 5000 *****
+
+
+
+DECLARE
+v_asterisk EMP_copy.STARS%TYPE := '';
+v_sal EMP_copy.SALARY%TYPE;
+BEGIN
+SELECT NVL(ROUND(salary/1000),0) INTO v_sal
+FROM EMP_copy
+WHERE employee_id = 100;
+dbms_output .put_line ('salary in every $1000 is - ' || v_sal );
+
+FOR i IN 1..v_sal 
+LOOP
+v_asterisk:=v_asterisk||'*';
+END LOOP;
+END;
+/
+
+
+
+
+14. Write a PL/SQL script to display the first name, last name, department id and department
+name of employee id 100.
+
+
+DECLARE 
+FNAME VARCHAR2(20);
+LNAME VARCHAR2(20);
+DEPT_ID NUMBER;
+dept_name varchar2(20);
+BEGIN
+SELECT e.FIRST_NAME , e.LAST_NAME ,e.DEPARTMENT_ID ,d.department_name
+INTO FNAME , LNAME , DEPT_ID , dept_name 
+FROM EMPLOYEES e join departments d on e.department_id = d.department_id
+WHERE EMPLOYEE_ID = 100;
+DBMS_OUTPUT.PUT_LINE('FIRST NAME IS - ' || FNAME);
+DBMS_OUTPUT.PUT_LINE('LAST NAME IS - ' || LNAME);
+DBMS_OUTPUT.PUT_LINE('DEPT ID IS - ' || DEPT_ID);
+DBMS_OUTPUT.PUT_LINE('DEPT name IS - ' || DEPT_name);
+
+END;
+/
+
+SQL> @e:/plsql.sql
+FIRST NAME IS - Steven
+LAST NAME IS - King
+DEPT ID IS - 90
+DEPT name IS - Executive
+
+PL/SQL procedure successfully completed.
+
+
+
+15. Write a PL/SQL script to accept a date from user. Store the number of this day in a variable
+called v_day. Write a CASE statement to print the name of day.
+
+
+DECLARE 
+V_DATE DATE := TO_DATE('&V_DATE' , 'DD-MON-YYYY');
+V_DAY CHAR(1) ;
+BEGIN 
+
+V_DAY := TO_CHAR(V_DATE , 'D') ;
+CASE V_DAY 
+WHEN '1' THEN 
+DBMS_OUTPUT . PUT_LINE('THE DAY IS SUNDAY');
+WHEN '2' THEN 
+DBMS_OUTPUT . PUT_LINE('THE DAY IS MONDAY');
+WHEN '3' THEN 
+DBMS_OUTPUT . PUT_LINE('THE DAY IS TUEDAY');
+WHEN '4' THEN 
+DBMS_OUTPUT . PUT_LINE('THE DAY IS WEDNESDAY');
+WHEN '5' THEN 
+DBMS_OUTPUT . PUT_LINE('THE DAY IS THURSDAY');
+WHEN '6' THEN 
+DBMS_OUTPUT . PUT_LINE('THE DAY ISFRIDAY');
+WHEN '7' THEN 
+DBMS_OUTPUT . PUT_LINE('THE DAY IS SATURDAY');
+END CASE;
+END;
+/
+SQL> @ E:/PLSQL.SQL
+Enter value for v_date: 28 JUN 2022
+old   2: V_DATE DATE := TO_DATE('&V_DATE' , 'DD-MON-YYYY');
+new   2: V_DATE DATE := TO_DATE('28 JUN 2022' , 'DD-MON-YYYY');
+THE DAY IS TUEDAY
+
+PL/SQL procedure successfully completed.

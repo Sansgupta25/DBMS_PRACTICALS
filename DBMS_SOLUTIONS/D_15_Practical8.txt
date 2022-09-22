@@ -1,0 +1,323 @@
+Name:- Sanskriti Gupta
+Roll no :- 15 
+Batch :- D1
+
+PRACTICAL – 08
+
+Aim : Execution of stored procedures and functions using PL/SQL on the database table for the
+underlying database.
+
+1. Create a record datatype based on first_name, last_name, and salary of hr.employees table.
+Display the details for employee_id 100.
+
+DECLARE
+TYPE R_EMP 
+IS RECORD 
+(
+EMP_ID EMP_COPY.EMPLOYEE_ID%TYPE,
+LNAME EMP_COPY.LAST_NAME%TYPE,
+SALARY EMP_COPY.SALARY%TYPE
+);
+R_EMP1 R_EMP ;
+BEGIN 
+SELECT EMPLOYEE_ID , LAST_NAME ,SALARY 
+INTO R_EMP1 
+FROM EMP_COPY 
+WHERE EMPLOYEE_ID = 100 ; 
+DBMS_OUTPUT.PUT_LINE(R_EMP1.EMP_ID || ' WITH SALARY  ' || R_EMP1.SALARY);
+END ;
+/
+
+SQL> @d:/plsql.sql
+100 WITH SALARY  54000
+
+PL/SQL procedure successfully completed.
+
+
+
+2. Modify the above code and create two record type variables. Make changes in salary of one
+and print the difference in salaries.
+
+DECLARE
+TYPE R_EMP 
+IS RECORD 
+(
+EMP_ID EMP_COPY.EMPLOYEE_ID%TYPE,
+LNAME EMP_COPY.LAST_NAME%TYPE,
+SALARY EMP_COPY.SALARY%TYPE
+);
+
+R_EMP1  R_EMP ; r_emp2 R_EMP;
+BEGIN 
+SELECT EMPLOYEE_ID , LAST_NAME ,SALARY 
+INTO R_EMP1 
+FROM EMP_COPY 
+WHERE EMPLOYEE_ID = 100 ; 
+R_EMP2 := R_emp1;
+R_EMP2.SALARY := 1000;
+
+DBMS_OUTPUT.PUT_LINE('emp id - ' ||R_EMP2.EMP_ID || ' WITH SALARY  ' || R_EMP2.SALARY);
+
+
+END ;
+/
+
+SQL> @E:/plsql.sql
+emp id - 100 WITH SALARY  1000
+
+PL/SQL procedure successfully completed.
+
+
+3. Write a procedure to find minimum of two given numbers and print the smallest.
+
+DECLARE 
+A NUMBER ;
+B NUMBER ;
+C NUMBER ; 
+PROCEDURE P_GREATER(X IN NUMBER , Y IN NUMBER , Z OUT NUMBER) IS
+BEGIN 
+IF X<Y THEN 
+Z:= X ;
+ELSE
+Z:= Y ;
+END IF ;
+END;
+BEGIN 
+A:=23;
+B:=45;
+P_GREATER(A,B,C);
+DBMS_OUTPUT.PUT_LINE('SMALLER IS ' || C);
+END;
+/
+
+
+SQL> SET SERVEROUTPUT ON;
+SQL> @"D:\plsql.sql";
+SMALLER IS 23
+
+
+4. Demonstrate the use of IN OUT mode.
+
+
+DECLARE 
+A NUMBER := &A ;
+PROCEDURE P_SQUARE(X IN OUT NUMBER) IS
+BEGIN 
+X := X*X ; 
+END;
+BEGIN
+P_SQUARE(A);
+DBMS_OUTPUT.PUT_LINE('SQUARE OF NUMBER IS  ' ||A);
+END;
+/
+
+
+SQL> @"D:\plsql.sql";
+Enter value for a: 5
+old   2: A NUMBER := &A ;
+new   2: A NUMBER := 5 ;
+SQUARE OF NUMBER IS  25
+
+5. Write a named procedure to insert records into emp_copy table.
+
+DECLARE 
+EMP_ID EMP_COPY.EMPLOYEE_ID%TYPE :=&emp_id;
+FNAME EMP_COPY.FIRST_NAME%TYPE :='&Fname';
+SALARY EMP_COPY.SALARY%TYPE:=&salary ;
+
+PROCEDURE P_EMP(x in EMP_COPY.EMPLOYEE_ID%TYPE ,Y  IN EMP_COPY.FIRST_NAME%TYPE, Z IN EMP_COPY.SALARY%TYPE) IS
+BEGIN 
+insert into emp_copy values(X , Y ,Z );
+END;
+BEGIN
+P_EMP(EMP_ID , FNAME , SALARY );
+DBMS_OUTPUT.PUT_LINE('COMPLETED');
+END;
+/
+
+
+SQL> @"D:\plsql.sql";
+Enter value for emp_id: 206
+old   2: EMP_ID EMP_COPY.EMPLOYEE_ID%TYPE :=&emp_id;
+new   2: EMP_ID EMP_COPY.EMPLOYEE_ID%TYPE :=206;
+Enter value for fname: SANSKRITI
+old   3: FNAME EMP_COPY.FIRST_NAME%TYPE :='&Fname';
+new   3: FNAME EMP_COPY.FIRST_NAME%TYPE :='SANSKRITI';
+Enter value for salary: 45000
+old   4: SALARY EMP_COPY.SALARY%TYPE:=&salary ;
+new   4: SALARY EMP_COPY.SALARY%TYPE:=45000 ;
+COMPLETED
+
+PL/SQL procedure successfully completed.
+
+SQL> SELECT * FROM EMP_COPY;
+
+
+EMPLOYEE_ID FIRST_NAME               SALARY
+----------- -------------------- ----------
+        202 Pat                        6000
+        203 Susan                      6500
+        204 Hermann                   10000
+        205 Shelley                   12008
+        206 William                    8300
+        202 Y                         10000
+        205 Y                         20000
+        206 SANSKRITI                 45000
+        101 Neena                     17000
+        201 Michael                   13000
+
+109 rows selected.
+
+
+
+
+6. Write a procedure that accepts an employee id and prints out the employee’s first name, last
+name, and salary.
+
+DECLARE 
+EMP_ID EMP_COPY.EMPLOYEE_ID%TYPE :=&emp_id;
+LNAME EMP_COPY.LAST_NAME%TYPE;
+SALARY EMP_COPY.SALARY%TYPE;
+
+
+PROCEDURE P_EMP(x in EMP_COPY.EMPLOYEE_ID%TYPE) IS
+BEGIN 
+select EMPloyee_ID ,Last_NAME ,SALARY into emp_id , lname ,salary from emp_copy where employee_id = emp_id ;
+END;
+BEGIN
+P_EMP(EMP_ID  );
+DBMS_OUTPUT.PUT_LINE('emp id is - ' || emp_id);
+DBMS_OUTPUT.PUT_LINE('last name is - ' || lname);
+DBMS_OUTPUT.PUT_LINE('salary is - ' || salary);
+
+DBMS_OUTPUT.PUT_LINE('COMPLETED');
+END;
+/
+
+SQL> @E:/plsql.sql
+Enter value for emp_id: 100
+old   2: EMP_ID EMP_COPY.EMPLOYEE_ID%TYPE :=&emp_id;
+new   2: EMP_ID EMP_COPY.EMPLOYEE_ID%TYPE :=100;
+emp id is - 100
+last name is - King
+salary is - 24000
+COMPLETED
+
+PL/SQL procedure successfully completed.
+
+
+7. Write a function to return the department id of a given employee.
+
+create or replace FUNCTION f_dept_number
+RETURN number  IS
+emp_id number;
+deptnum number;
+BEGIN
+SELECT department_id INTO deptnum from employees where employee_id =&empid;
+RETURN deptnum;
+END ;
+/
+
+declare 
+fname varchar2(20);
+deptno number ;
+begin
+deptno:= f_dept_number;
+dbms_output.put_line('dept num is - ' || deptno);
+end;
+/
+
+SQL> @e:/plsql.sql
+dept num is - 90
+
+PL/SQL procedure successfully completed.
+
+
+8. Write a function that returns the salary as per the formula salary*12 + commission_pct of a
+given employee.
+
+CREATE FUNCTION ANNUAL_sal
+RETURN NUMBER 
+IS 
+EMP_Salary employees.salary%type;
+EmpComission employees.salary%type;
+AnnualSalary employees.salary%type;
+BEGIN
+AnnualSalary:=EMP_SALARY*12+EMPCOMISSION;
+RETURN AnnualSalary;
+END;
+/
+
+DECLARE
+fname varchar2(20);
+ANNUAL_SAL NUMBER ; 
+BEGIN
+ANNUAL_SAL := ANNUAL_sal;
+select first_name , salary into fname , annual_sal from employees where employee_id = 100;
+DBMS_OUTPUT.PUT_LINE('ANNUAL SALARY IS ' ||ANNUAL_SAL);
+END;
+/
+
+SQL> @e:/plsql.sql
+ANNUAL SALARY IS 24000
+
+PL/SQL procedure successfully completed.
+
+9. Write a function that prints the total number of employees in the organization.
+
+CREATE OR REPLACE FUNCTION F_EMP_COPY_COUNT
+RETURN  NUMBER IS 
+EMP_COUNT NUMBER ;
+BEGIN 
+SELECT COUNT(*) INTO EMP_COUNT
+FROM EMP_COPY;
+RETURN EMP_COUNT;
+END;
+/
+
+SQL> @d:/plsql.sql;
+
+Function created.
+
+DECLARE
+CNT NUMBER ;
+BEGIN 
+CNT := F_EMP_COUNT ;
+DBMS_OUTPUT.PUT_LINE('tOTAL NUMBER OF EMPLOYEES IS - '   || CNT);
+END; 
+/
+
+
+
+TOTAL NUMBER OF EMPLOYEES IS - 109
+
+PL/SQL procedure successfully completed.
+
+10. Write a recursive function to find factorial of a number.
+
+DECLARE 
+A NUMBER; 
+RESULT NUMBER; 
+FUNCTION factorial(x number) 
+RETURN int  
+IS
+Z NUMBER ; 
+BEGIN 
+IF X = 0 THEN 
+Z:= 1;
+ELSE
+Z:= x * factorial(x - 1); 
+END IF ;
+RETURN Z ;
+END;
+BEGIN 
+A:=6;
+RESULT := FACTORIAL(A) ;
+DBMS_OUTPUT.PUT_LINE('FACTORIAL OF NUM  IS ' || RESULT);
+END;
+/
+
+SQL> @d:/plsql.sql;
+FACTORIAL OF NUM  IS 720
+
+PL/SQL procedure successfully completed.

@@ -1,0 +1,593 @@
+NAME :- SANSKRITI GUPTA
+ROLL NO :- 15 
+BATCH :- D1 
+
+
+PRACTICAL NO 9 
+
+AIM:- Demonstration to cursor types and execution of cursor on database for retrieving the data from the tables in the database.
+
+
+1. Write a program in PL/SQL to find the number of rows effected by the use of SQL%ROWCOUNT attributes of an implicit cursor.
+
+declare
+TOTAL_ROWS NUMBER;
+BEGIN 
+UPDATE EMP_COPY
+SET SALARY =SALARY + 10000 ;
+IF SQL%NOTFOUND THEN 
+DBMS_OUTPUT.PUT_LINE('NO ROWS UPDATED');
+ELSE
+TOTAL_ROWS := SQL%ROWCOUNT ; 
+DBMS_OUTPUT.PUT_LINE('TOTAL_ROWS - '||TOTAL_ROWS);
+END IF ; 
+END;
+/
+
+SQL> @d:/plsql.sql
+TOTAL_ROWS - 110
+
+PL/SQL procedure successfully completed.
+
+
+2. Write a program in PL/SQL to show the uses of SQL%FOUND to determine if a DELETE
+statement affected any rows.
+
+
+declare
+TOTAL_ROWS NUMBER;
+EMP_ID EMP_COPY.EMPLOYEE_ID%TYPE := 144 ; 
+BEGIN 
+DELETE FROM EMP_COPY 
+WHERE EMPLOYEE_ID = EMP_ID;
+IF SQL%NOTFOUND THEN 
+DBMS_OUTPUT.PUT_LINE('NO ROWS UPDATED');
+ELSE
+TOTAL_ROWS := SQL%ROWCOUNT ; 
+DBMS_OUTPUT.PUT_LINE('TOTAL_ROWS DELETED ARE - '||TOTAL_ROWS);
+END IF ; 
+END;
+/
+
+SQL> @d:/plsql.sql
+TOTAL_ROWS DELETED ARE - 1
+
+PL/SQL procedure successfully completed.
+
+
+3. Write a program in PL/SQL to show the uses of SQL%NOTFOUND to determine if a
+UPDATE statement affected any rows.
+
+
+declare
+TOTAL_ROWS NUMBER;
+EMP_ID EMP_COPY.EMPLOYEE_ID%TYPE := 208 ; 
+BEGIN 
+UPDATE EMP_COPY SET SALARY = 15000 
+WHERE EMPLOYEE_ID = EMP_ID;
+IF SQL%NOTFOUND THEN 
+DBMS_OUTPUT.PUT_LINE('NO ROWS UPDATED');
+ELSE
+TOTAL_ROWS := SQL%ROWCOUNT ; 
+DBMS_OUTPUT.PUT_LINE('TOTAL_ROWS UPDATED ARE - '||TOTAL_ROWS);
+END IF ; 
+END;
+/
+
+
+
+SQL> @d:/plsql.sql;
+TOTAL_ROWS UPDATED ARE - 1
+
+PL/SQL procedure successfully completed.
+
+
+
+4. Write a program in PL/SQL to create a table-based record using the %ROWTYPE attribute.
+
+DECLARE
+vr_employee employees%ROWTYPE;
+z_emp_id NUMBER:=&employee_id;
+BEGIN
+SELECT *
+INTO   vr_employee
+FROM   employees
+WHERE  employee_id = z_emp_id;
+dbms_output.Put_line (vr_employee.first_name ||' ' ||vr_employee.last_name ||' has an ID of '||z_emp_id);
+EXCEPTION
+WHEN no_data_found THEN
+Raise_application_error(-20001, 'The Employee ' || 'is not in the database');
+END; 
+/
+
+SQL> @d:/plsql.sql;
+Enter value for employee_id: 205
+old   3:        z_emp_id NUMBER:=&employee_id;
+new   3:        z_emp_id NUMBER:=205;
+Shelley Higgins has an ID of 205
+
+PL/SQL procedure successfully completed.
+
+SQL> @d:/plsql.sql;
+Enter value for employee_id: 301
+old   3:        z_emp_id NUMBER:=&employee_id;
+new   3:        z_emp_id NUMBER:=301;
+DECLARE
+*
+ERROR at line 1:
+ORA-20001: The Employee is not in the database
+ORA-06512: at line 16
+
+
+5. Write a program in PL/SQL to display a table based detail information for the employee of ID 144 from the employees table.
+
+DECLARE
+    vr_employee employees%ROWTYPE;
+	z_emp_id NUMBER:=&employee_id;
+BEGIN
+    SELECT *
+    INTO   vr_employee
+    FROM   employees
+    WHERE  employee_id = z_emp_id;
+
+    dbms_output.Put_line (vr_employee.first_name ||' '||vr_employee.last_name ||' has an ID of '||z_emp_id);
+EXCEPTION
+    WHEN no_data_found THEN
+      Raise_application_error(-20001, 'The Employee '|| 'is not in the database');
+END; 
+/
+
+
+SQL> @d:/plsql.sql;
+Enter value for employee_id: 144
+old   3:        z_emp_id NUMBER:=&employee_id;
+new   3:        z_emp_id NUMBER:=144;
+Peter Vargas has an ID of 144
+
+PL/SQL procedure successfully completed.
+
+SQL>
+
+6. Write a program in PL/SQL to FETCH multiple records and more than one columns from the same table.
+
+DECLARE
+EMP_ID EMP_COPY.EMPLOYEE_ID%TYPE;
+V_FNAME EMP_COPY.LAST_NAME%TYPE;
+V_SALARY EMP_COPY.SALARY%TYPE;
+CURSOR C_EMP IS SELECT EMPLOYEE_ID , LAST_NAME , SALARY FROM EMP_COPY ; 
+BEGIN 
+OPEN C_EMP ;
+LOOP
+FETCH C_EMP INTO EMP_ID , V_FNAME,V_SALARY ;
+DBMS_OUTPUT.PUT_LINE('EMP ID - ' || EMP_ID || ' LAST NAME - ' ||V_FNAME || 'SALARY - ' ||V_SALARY );
+EXIT WHEN C_EMP%NOTFOUND;
+END LOOP; 
+CLOSE C_EMP;
+END ;
+/
+
+SQL> @d:/plsql.sql
+EMP ID - 100LAST NAME - KingSALARY - 54000
+EMP ID - 101LAST NAME - KochharSALARY - 47000
+EMP ID - 102LAST NAME - De HaanSALARY - 47000
+EMP ID - 103LAST NAME - HunoldSALARY - 39000
+.
+.
+.
+PL/SQL procedure successfully completed.
+
+
+7. Write a program in PL/SQL to FETCH multiple records and more than one columns from different tables.
+
+DECLARE
+CURSOR cur_emp_name IS
+ SELECT first_name,last_name, department_name
+FROM   employees e, departments d
+WHERE  d.department_id = e.department_id;
+ v_emp_rec cur_emp_name%ROWTYPE;
+BEGIN
+ OPEN cur_emp_name;
+LOOP
+FETCH cur_emp_name INTO v_emp_rec;
+ exit WHEN cur_emp_name%NOTFOUND;
+ dbms_output.Put_line('Name:'|| v_emp_rec.first_name || '  '||v_emp_rec.last_name || '   ::   department: '|| v_emp_rec.department_name);
+END LOOP;
+CLOSE cur_emp_name;
+END; 
+ /
+
+
+SQL> @d:/plsql.sql;
+Name:  Jennifer  Whalen   ::   department: Administration
+Name:  Pat  Fay   ::   department: Marketing
+Name:  Michael  Hartstein   ::   department: Marketing
+Name:  Sigal  Tobias   ::   department: Purchasing
+Name:  Karen  Colmenares   ::   department: Purchasing
+Name:  Shelli  Baida   ::   department: Purchasing
+Name:  Den  Raphaely   ::   department: Purchasing
+Name:  Alexander  Khoo   ::   department: Purchasing
+Name:  Guy  Himuro   ::   department: Purchasing
+Name:  Susan  Mavris   ::   department: Human Resources
+Name:  Kevin  Feeney   ::   department: Shipping
+Name:  Jean  Fleaur   ::   department: Shipping
+Name:  Adam  Fripp   ::   department: Shipping
+Name:  Timothy  Gates   ::   department: Shipping
+Name:  Ki  Gee   ::   department: Shipping
+Name:  Girard  Geoni   ::   department: Shipping
+Name:  Douglas  Grant   ::   department: Shipping
+Name:  Vance  Jones   ::   department: Shipping
+Name:  Payam  Kaufling   ::   department: Shipping
+Name:  Renske  Ladwig   ::   department: Shipping
+Name:  Britney  Everett   ::   department: Shipping
+Name:  Jennifer  Dilly   ::   department: Shipping
+Name:  Julia  Dellinger   ::   department: Shipping
+Name:  Curtis  Davies   ::   department: Shipping
+Name:  Kelly  Chung   ::   department: Shipping
+Name:  Anthony  Cabrio   ::   department: Shipping
+Name:  Alexis  Bull   ::   department: Shipping
+Name:  Laura  Bissot   ::   department: Shipping
+Name:  Sarah  Bell   ::   department: Shipping
+Name:  Mozhe  Atkinson   ::   department: Shipping
+Name:  James  Landry   ::   department: Shipping
+Name:  Matthew  Weiss   ::   department: Shipping
+Name:  Alana  Walsh   ::   department: Shipping
+Name:  Shanta  Vollman   ::   department: Shipping
+Name:  Peter  Vargas   ::   department: Shipping
+Name:  Winston  Taylor   ::   department: Shipping
+Name:  Jason  Mallin   ::   department: Shipping
+Name:  Steven  Markle   ::   department: Shipping
+Name:  James  Marlow   ::   department: Shipping
+Name:  Randall  Matos   ::   department: Shipping
+Name:  Samuel  McCain   ::   department: Shipping
+Name:  Irene  Mikkilineni   ::   department: Shipping
+Name:  Kevin  Mourgos   ::   department: Shipping
+Name:  Julia  Nayer   ::   department: Shipping
+Name:  Donald  OConnell   ::   department: Shipping
+Name:  TJ  Olson   ::   department: Shipping
+Name:  Joshua  Patel   ::   department: Shipping
+Name:  Randall  Perkins   ::   department: Shipping
+Name:  Hazel  Philtanker   ::   department: Shipping
+Name:  Trenna  Rajs   ::   department: Shipping
+Name:  Michael  Rogers   ::   department: Shipping
+Name:  Nandita  Sarchand   ::   department: Shipping
+Name:  John  Seo   ::   department: Shipping
+Name:  Stephen  Stiles   ::   department: Shipping
+Name:  Martha  Sullivan   ::   department: Shipping
+Name:  David  Austin   ::   department: IT
+Name:  Valli  Pataballa   ::   department: IT
+Name:  Bruce  Ernst   ::   department: IT
+Name:  Diana  Lorentz   ::   department: IT
+Name:  Alexander  Hunold   ::   department: IT
+Name:  Hermann  Baer   ::   department: Public Relations
+Name:  Ellen  Abel   ::   department: Sales
+Name:  Sundar  Ande   ::   department: Sales
+Name:  Amit  Banda   ::   department: Sales
+Name:  Elizabeth  Bates   ::   department: Sales
+Name:  David  Bernstein   ::   department: Sales
+Name:  Harrison  Bloom   ::   department: Sales
+Name:  Gerald  Cambrault   ::   department: Sales
+Name:  Nanette  Cambrault   ::   department: Sales
+Name:  Louise  Doran   ::   department: Sales
+Name:  Alberto  Errazuriz   ::   department: Sales
+Name:  Tayler  Fox   ::   department: Sales
+Name:  Danielle  Greene   ::   department: Sales
+Name:  Peter  Hall   ::   department: Sales
+Name:  Alyssa  Hutton   ::   department: Sales
+Name:  Charles  Johnson   ::   department: Sales
+Name:  Janette  King   ::   department: Sales
+Name:  Sundita  Kumar   ::   department: Sales
+Name:  David  Lee   ::   department: Sales
+Name:  Jack  Livingston   ::   department: Sales
+Name:  Mattea  Marvins   ::   department: Sales
+Name:  Allan  McEwen   ::   department: Sales
+Name:  Christopher  Olsen   ::   department: Sales
+Name:  Lisa  Ozer   ::   department: Sales
+Name:  Karen  Partners   ::   department: Sales
+Name:  John  Russell   ::   department: Sales
+Name:  Sarath  Sewall   ::   department: Sales
+Name:  Lindsey  Smith   ::   department: Sales
+Name:  William  Smith   ::   department: Sales
+Name:  Patrick  Sully   ::   department: Sales
+Name:  Jonathon  Taylor   ::   department: Sales
+Name:  Peter  Tucker   ::   department: Sales
+Name:  Oliver  Tuvault   ::   department: Sales
+Name:  Clara  Vishney   ::   department: Sales
+Name:  Eleni  Zlotkey   ::   department: Sales
+Name:  Neena  Kochhar   ::   department: Executive
+Name:  Steven  King   ::   department: Executive
+Name:  Lex  De Haan   ::   department: Executive
+Name:  Luis  Popp   ::   department: Finance
+Name:  Jose Manuel  Urman   ::   department: Finance
+Name:  John  Chen   ::   department: Finance
+Name:  Daniel  Faviet   ::   department: Finance
+Name:  Ismael  Sciarra   ::   department: Finance
+Name:  Nancy  Greenberg   ::   department: Finance
+Name:  William  Gietz   ::   department: Accounting
+Name:  Shelley  Higgins   ::   department: Accounting
+
+PL/SQL procedure successfully completed.
+
+8.  Write a program in PL/SQL to FETCH records with nested Cursors using Cursor FOR Loops.
+
+DECLARE
+  emp_dept_id departments.department_id%TYPE;
+ CURSOR cur_dept IS
+  SELECT * 
+  FROM departments
+  WHERE manager_id IS NOT NULL
+  ORDER BY department_name;
+ CURSOR cur_emp IS
+  SELECT * 
+  FROM employees
+  WHERE department_id = emp_dept_id;
+  
+BEGIN
+    FOR r_dept IN cur_dept
+    LOOP
+      emp_dept_id := r_dept.department_id;
+      DBMS_OUTPUT.PUT_LINE('----------------------------------');
+      DBMS_OUTPUT.PUT_LINE('Department Name : '||r_dept.department_name);
+      DBMS_OUTPUT.PUT_LINE('----------------------------------');
+           FOR r_emp IN cur_emp 
+           LOOP
+             DBMS_OUTPUT.PUT_LINE('Employee: '||r_emp.last_name);
+           END LOOP;   
+    END LOOP;
+END;
+ /
+
+
+PL/SQL procedure successfully completed.
+
+SQL> @d:/plsql.sql;
+----------------------------------
+Department Name : Accounting
+----------------------------------
+Employee: Higgins
+Employee: Gietz
+----------------------------------
+Department Name : Administration
+----------------------------------
+Employee: Whalen
+----------------------------------
+Department Name : Executive
+----------------------------------
+Employee: King
+Employee: Kochhar
+Employee: De Haan
+----------------------------------
+Department Name : Finance
+----------------------------------
+Employee: Greenberg
+Employee: Faviet
+Employee: Chen
+Employee: Sciarra
+Employee: Urman
+Employee: Popp
+----------------------------------
+Department Name : Human Resources
+----------------------------------
+Employee: Mavris
+----------------------------------
+Department Name : IT
+----------------------------------
+Employee: Hunold
+Employee: Ernst
+Employee: Austin
+Employee: Pataballa
+Employee: Lorentz
+----------------------------------
+Department Name : Marketing
+----------------------------------
+Employee: Hartstein
+Employee: Fay
+----------------------------------
+Department Name : Public Relations
+----------------------------------
+Employee: Baer
+----------------------------------
+Department Name : Purchasing
+----------------------------------
+Employee: Raphaely
+Employee: Khoo
+Employee: Baida
+Employee: Tobias
+Employee: Himuro
+Employee: Colmenares
+----------------------------------
+Department Name : Sales
+----------------------------------
+Employee: Russell
+Employee: Partners
+Employee: Errazuriz
+Employee: Cambrault
+Employee: Zlotkey
+Employee: Tucker
+Employee: Bernstein
+Employee: Hall
+Employee: Olsen
+Employee: Cambrault
+Employee: Tuvault
+Employee: King
+Employee: Sully
+Employee: McEwen
+Employee: Smith
+Employee: Doran
+Employee: Sewall
+Employee: Vishney
+Employee: Greene
+Employee: Marvins
+Employee: Lee
+Employee: Ande
+Employee: Banda
+Employee: Ozer
+Employee: Bloom
+Employee: Fox
+Employee: Smith
+Employee: Bates
+Employee: Kumar
+Employee: Abel
+Employee: Hutton
+Employee: Taylor
+Employee: Livingston
+Employee: Johnson
+----------------------------------
+Department Name : Shipping
+----------------------------------
+Employee: Weiss
+Employee: Fripp
+Employee: Kaufling
+Employee: Vollman
+Employee: Mourgos
+Employee: Nayer
+Employee: Mikkilineni
+Employee: Landry
+Employee: Markle
+Employee: Bissot
+Employee: Atkinson
+Employee: Marlow
+Employee: Olson
+Employee: Mallin
+Employee: Rogers
+Employee: Gee
+Employee: Philtanker
+Employee: Ladwig
+Employee: Stiles
+Employee: Seo
+Employee: Patel
+Employee: Rajs
+Employee: Davies
+Employee: Matos
+Employee: Vargas
+Employee: Taylor
+Employee: Fleaur
+Employee: Sullivan
+Employee: Geoni
+Employee: Sarchand
+Employee: Bull
+Employee: Dellinger
+Employee: Cabrio
+Employee: Chung
+Employee: Dilly
+Employee: Gates
+Employee: Perkins
+Employee: Bell
+Employee: Everett
+Employee: McCain
+Employee: Jones
+Employee: Walsh
+Employee: Feeney
+Employee: OConnell
+Employee: Grant
+
+PL/SQL procedure successfully completed.
+
+SQL>
+
+9. Write a program in PL/SQL to print a list of managers and the name of the departments.
+
+DECLARE
+CURSOR cur_mgr IS
+SELECT first_name,last_name, department_name
+FROM employees e
+INNER JOIN departments d ON d.manager_id = e.employee_id;
+ 
+v_mgr cur_mgr%ROWTYPE;
+BEGIN
+OPEN cur_mgr;
+LOOP
+FETCH cur_mgr INTO v_mgr;
+EXIT WHEN cur_mgr%NOTFOUND;
+DBMS_OUTPUT.PUT_LINE(v_mgr.department_name || ' :: ' || v_mgr.first_name || ' ' || v_mgr.last_name);
+END LOOP;
+CLOSE cur_mgr;
+END;
+/
+
+SQL> @d:/plsql.sql;
+Executive :: Steven King
+IT :: Alexander Hunold
+Finance :: Nancy Greenberg
+Purchasing :: Den Raphaely
+Shipping :: Adam Fripp
+Sales :: John Russell
+Administration :: Jennifer Whalen
+Marketing :: Michael Hartstein
+Human Resources :: Susan Mavris
+Public Relations :: Hermann Baer
+Accounting :: Shelley Higgins
+
+PL/SQL procedure successfully completed.
+
+
+10. Write a program in PL/SQL to create a cursor displays the name and salary of each employee in the EMPLOYEES table whose salary is less than that specified by a passed-in parameter value.
+
+
+DECLARE
+var_record employees%ROWTYPE;
+CURSOR cur_test (max_sal NUMBER) IS
+SELECT * FROM employees WHERE salary < max_sal;
+BEGIN
+OPEN cur_test(5800);
+LOOP
+FETCH cur_test INTO var_record;
+EXIT WHEN cur_test%NOTFOUND;
+DBMS_OUTPUT.PUT_LINE('Name: ' || var_record.first_name || chr(9)||' salary: ' || var_record.salary);
+END LOOP;
+CLOSE cur_test;
+END;
+/
+
+
+SQL> @d:/plsql.sql;
+Name: David      salary: 4800
+Name: Valli      salary: 4800
+Name: Diana      salary: 4200
+Name: Alexander  salary: 3100
+Name: Shelli     salary: 2900
+Name: Sigal      salary: 2800
+Name: Guy        salary: 2600
+Name: Karen      salary: 2500
+Name: Julia      salary: 3200
+Name: Irene      salary: 2700
+Name: James      salary: 2400
+Name: Steven     salary: 2200
+Name: Laura      salary: 3300
+Name: Mozhe      salary: 2800
+Name: James      salary: 2500
+Name: TJ         salary: 2100
+Name: Jason      salary: 3300
+Name: Michael    salary: 2900
+Name: Ki         salary: 2400
+Name: Hazel      salary: 2200
+Name: Renske     salary: 3600
+Name: Stephen    salary: 3200
+Name: John       salary: 2700
+Name: Joshua     salary: 2500
+Name: Trenna     salary: 3500
+Name: Curtis     salary: 3100
+Name: Randall    salary: 2600
+Name: Peter      salary: 2500
+Name: Winston    salary: 3200
+Name: Jean       salary: 3100
+Name: Martha     salary: 2500
+Name: Girard     salary: 2800
+Name: Nandita    salary: 4200
+Name: Alexis     salary: 4100
+Name: Julia      salary: 3400
+Name: Anthony    salary: 3000
+Name: Kelly      salary: 3800
+Name: Jennifer   salary: 3600
+Name: Timothy    salary: 2900
+Name: Randall    salary: 2500
+Name: Sarah      salary: 4000
+Name: Britney    salary: 3900
+Name: Samuel     salary: 3200
+Name: Vance      salary: 2800
+Name: Alana      salary: 3100
+Name: Kevin      salary: 3000
+Name: Donald     salary: 2600
+Name: Douglas    salary: 2600
+Name: Jennifer   salary: 4400
+
+PL/SQL procedure successfully completed.
